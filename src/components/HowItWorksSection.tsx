@@ -53,7 +53,7 @@ const HowItWorksSection = () => {
     {
       number: 4,
       title: 'Secure Payment',
-      description: 'Fund the escrow account to secure the professional's services for the specified duration.'
+      description: 'Fund the escrow account to secure the professional\'s services for the specified duration.'
     },
     {
       number: 5,
@@ -153,4 +153,3 @@ const HowItWorksSection = () => {
 };
 
 export default HowItWorksSection;
-
