@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -14,24 +14,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 176 100% 34%;
-    --primary-foreground: 180 50% 99%;
+    --primary: 217 92% 51%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 230 90% 62%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 214 95% 93%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 176 90% 96%;
-    --accent-foreground: 178 80% 23%;
+    --accent: 217 92% 95%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 180 5% 93%;
+    --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 176 100% 34%;
+    --ring: 217 92% 51%;
 
     --radius: 0.8rem;
 
@@ -49,39 +49,39 @@
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 240 10% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 240 10% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 176 77% 32%;
+    --primary: 217 92% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 232 82% 80%;
+    --secondary: 210 90% 80%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 10% 20%;
+    --muted-foreground: 240 10% 80%;
 
-    --accent: 180 50% 20%;
+    --accent: 217 92% 20%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 180 59% 45%;
-    
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 217 92% 60%;
+
+    --sidebar-background: 240 10% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217 92% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 240 10% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 240 10% 15%;
+    --sidebar-ring: 217 92% 60%;
   }
 }
 
@@ -91,7 +91,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased dark:bg-background dark:text-foreground;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
@@ -102,23 +102,27 @@
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  p {
+    @apply text-base sm:text-lg leading-relaxed;
   }
 
   .glass {
-    @apply bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-20 shadow-lg;
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
   }
 
   .glass-card {
-    @apply bg-white/30 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/5 backdrop-blur-lg dark:bg-white/5 dark:backdrop-blur-lg border border-white/10 shadow-xl;
   }
 
   .card-hover {
@@ -126,15 +130,15 @@
   }
 
   .section-container {
-    @apply container mx-auto px-4 py-16 md:py-24;
+    @apply container mx-auto px-5 sm:px-6 md:px-8 py-12 md:py-20;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-2;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold mb-2;
   }
 
   .section-subtitle {
-    @apply text-base md:text-lg text-muted-foreground mb-10;
+    @apply text-sm sm:text-base md:text-lg text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto;
   }
 
   /* Custom scrollbar */
@@ -156,4 +160,9 @@
 
   /* Import fonts */
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+}
+
+/* Dark mode toggle */
+html.dark {
+  color-scheme: dark;
 }

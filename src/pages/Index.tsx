@@ -1,11 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FeatureSection from '@/components/FeatureSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import { Button } from '@/components/ui/button';
-import { Shield, Heart, Users, Star, DollarSign } from 'lucide-react';
+import { Shield, Heart, Users, Star, DollarSign, Moon, Sun } from 'lucide-react';
+
+// Set dark mode by default
+const setDarkMode = () => {
+  document.documentElement.classList.add('dark');
+  localStorage.theme = 'dark';
+};
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -31,7 +37,7 @@ const TestimonialsSection = () => {
 
   return (
     <section id="testimonials" className="section-container bg-accent/30">
-      <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
         <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
           <Star className="h-4 w-4 mr-2" />
           <span>Client Testimonials</span>
@@ -42,11 +48,11 @@ const TestimonialsSection = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {testimonials.map((testimonial, index) => (
           <div 
             key={index} 
-            className="bg-background rounded-xl p-8 shadow-lg card-hover animate-fade-in"
+            className="bg-card rounded-xl p-6 md:p-8 shadow-lg card-hover animate-fade-in"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="flex gap-1 mb-4">
@@ -54,10 +60,10 @@ const TestimonialsSection = () => {
                 <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
               ))}
               {[...Array(5 - testimonial.rating)].map((_, i) => (
-                <Star key={i + testimonial.rating} className="h-5 w-5 text-gray-300" />
+                <Star key={i + testimonial.rating} className="h-5 w-5 text-gray-400 dark:text-gray-600" />
               ))}
             </div>
-            <p className="text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
+            <p className="text-base sm:text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
             <div>
               <p className="font-semibold">{testimonial.author}</p>
               <p className="text-sm text-muted-foreground">{testimonial.position}</p>
@@ -71,25 +77,25 @@ const TestimonialsSection = () => {
 
 const CTASection = () => {
   return (
-    <section id="cta" className="py-24 relative overflow-hidden">
+    <section id="cta" className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10"></div>
       </div>
       
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto bg-background rounded-2xl p-10 shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div className="container mx-auto px-5 sm:px-6 md:px-8">
+        <div className="max-w-4xl mx-auto bg-card rounded-2xl p-6 md:p-10 shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-4">Ready to Transform Healthcare Staffing?</h2>
-              <p className="text-muted-foreground mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Transform Healthcare Staffing?</h2>
+              <p className="text-base md:text-lg text-muted-foreground mb-6">
                 Join moonlighting.ph today and experience a new way to connect healthcare professionals with the facilities and patients who need them.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg">
+                <Button className="rounded-full px-6 py-5 sm:px-8 sm:py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-base sm:text-lg">
                   Find a Professional
                 </Button>
-                <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg">
+                <Button variant="outline" className="rounded-full px-6 py-5 sm:px-8 sm:py-6 font-semibold text-base sm:text-lg">
                   Join as a Professional
                 </Button>
               </div>
@@ -97,20 +103,20 @@ const CTASection = () => {
             
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-accent rounded-lg p-4 text-center">
-                <DollarSign className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h3 className="font-semibold">Secure Payments</h3>
+                <DollarSign className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
+                <h3 className="text-sm md:text-base font-semibold">Secure Payments</h3>
               </div>
               <div className="bg-accent rounded-lg p-4 text-center">
-                <Shield className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h3 className="font-semibold">Verified Professionals</h3>
+                <Shield className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
+                <h3 className="text-sm md:text-base font-semibold">Verified Professionals</h3>
               </div>
               <div className="bg-accent rounded-lg p-4 text-center">
-                <Users className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h3 className="font-semibold">Diverse Specialists</h3>
+                <Users className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
+                <h3 className="text-sm md:text-base font-semibold">Diverse Specialists</h3>
               </div>
               <div className="bg-accent rounded-lg p-4 text-center">
-                <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h3 className="font-semibold">Quality Care</h3>
+                <Heart className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
+                <h3 className="text-sm md:text-base font-semibold">Quality Care</h3>
               </div>
             </div>
           </div>
@@ -122,15 +128,15 @@ const CTASection = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 dark:bg-gray-900 pt-16 pb-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+    <footer className="bg-card pt-12 md:pt-16 pb-8">
+      <div className="container mx-auto px-5 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-4">
               <Heart className="h-6 w-6 text-primary mr-2" />
               <span className="text-xl font-display font-bold">moonlighting.ph</span>
             </div>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-sm md:text-base text-muted-foreground mb-4">
               Connecting healthcare professionals with those who need them.
             </p>
             <div className="flex space-x-4">
@@ -160,56 +166,23 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Hospitals</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Clinics</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Households</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">For Healthcare Professionals</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Hospitals</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Clinics</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Households</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Healthcare Professionals</a></li>
             </ul>
           </div>
           
           <div>
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Press</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Careers</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Press</a></li>
             </ul>
           </div>
           
           <div>
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Dispute Resolution</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
-          <p className="text-sm text-muted-foreground text-center">
-            &copy; {new Date().getFullYear()} moonlighting.ph. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-const Index = () => {
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      <HeroSection />
-      <FeatureSection />
-      <HowItWorksSection />
-      <TestimonialsSection />
-      <CTASection />
-      <Footer />
-    </div>
-  );
-};
-
-export default Index;
+            <ul
