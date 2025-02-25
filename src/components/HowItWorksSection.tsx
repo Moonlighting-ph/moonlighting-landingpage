@@ -126,24 +126,31 @@ const HowItWorksSection = () => {
 
         <div>
           <div className="flex items-center mb-8">
-            <Stethoscope
+            <Stethoscope className="h-6 w-6 text-secondary mr-3" />
+            <h3 className="text-2xl font-semibold">For Healthcare Professionals</h3>
+          </div>
+          <div className="space-y-8">
+            {professionalSteps.map((step, index) => (
+              <StepCard
+                key={index}
+                number={step.number}
+                title={step.title}
+                description={step.description}
+                isClient={false}
+                index={index}
+              />
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Button variant="outline" className="rounded-full px-8">
+              Join as a Professional
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-### What's next?
-- **Refine & Customize**: Tweak the design, animations, and layouts via prompts or visual edits.
-- **Master Prompting**: Use clear, detailed, and iterative prompts for better outcomes.
-- **Expand with Backend**: Connect Supabase to add user authentication, secure payment processing (escrow system), and data storage for healthcare professionals and clients.
-- **GitHub Sync**: Transfer your project's code to GitHub for two-way sync of edits.
-- **Debug with Ease**: Activate our experimental “chat mode” to troubleshoot issues quickly.
-- **Add project knowledge**: Set key context or custom instructions you want to include in every edit in this project.
+export default HowItWorksSection;
 
-<lov-actions>
-<lov-knowledge>
-</lov-actions>
-
-<lov-actions>
-<lov-message-prompt message="Tell me more about Supabase">Explore Supabase</lov-message-prompt>
-</lov-actions>
-
-<lov-actions>
-<lov-link url="https://docs.lovable.dev/">Visit docs</lov-link>
-</lov-actions>
