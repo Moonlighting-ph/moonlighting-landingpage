@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/80 dark:bg-navy-950/80 backdrop-blur-md py-3 shadow-md'
+          ? 'bg-background/80 backdrop-blur-md py-3 shadow-md'
           : 'bg-transparent py-5'
       }`}
     >
@@ -36,8 +36,8 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#services" className="text-sm font-medium hover:text-primary transition-colors">
-            Services
+          <a href="/client" className="text-sm font-medium hover:text-primary transition-colors">
+            For Clients
           </a>
           <a href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
             How It Works
@@ -70,14 +70,14 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-navy-950 shadow-lg animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a 
-              href="#services" 
+              href="/client" 
               className="text-base font-medium py-2 hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Services
+              For Clients
             </a>
             <a 
               href="#how-it-works" 

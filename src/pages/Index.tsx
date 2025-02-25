@@ -84,14 +84,14 @@ const CTASection = () => {
       
       <div className="container mx-auto px-5 sm:px-6 md:px-8">
         <div className="max-w-4xl mx-auto bg-card rounded-2xl p-6 md:p-10 shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-start">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Transform Healthcare Staffing?</h2>
               <p className="text-base md:text-lg text-muted-foreground mb-6">
                 Join moonlighting.ph today and experience a new way to connect healthcare professionals with the facilities and patients who need them.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-0">
                 <Button className="rounded-full px-6 py-5 sm:px-8 sm:py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-base sm:text-lg">
                   Find a Professional
                 </Button>
