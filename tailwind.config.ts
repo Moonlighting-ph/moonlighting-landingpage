@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,37 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				teal: {
+					50: '#f0fdfa',
+					100: '#ccfbf1',
+					200: '#99f6e4',
+					300: '#5eead4',
+					400: '#2dd4bf',
+					500: '#14b8a6',
+					600: '#0d9488',
+					700: '#0f766e',
+					800: '#115e59',
+					900: '#134e4a',
+					950: '#042f2e',
+				},
+				navy: {
+					50: '#f0f5ff',
+					100: '#e0eaff',
+					200: '#c7d7fe',
+					300: '#a4bcfc',
+					400: '#819bf9',
+					500: '#6378f1',
+					600: '#4a56e3',
+					700: '#3a42c5',
+					800: '#33399f',
+					900: '#2c347d',
+					950: '#1e214a',
 				}
+			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				display: ['Poppins', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +115,53 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				'fade-in': {
+					from: {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-in-right': {
+					from: {
+						opacity: '0',
+						transform: 'translateX(10px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'fade-in-left': {
+					from: {
+						opacity: '0',
+						transform: 'translateX(-10px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+					},
+					'50%': {
+						transform: 'translateY(-10px)',
+					}
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.6s ease-out',
+				'fade-in-right': 'fade-in-right 0.6s ease-out',
+				'fade-in-left': 'fade-in-left 0.6s ease-out',
+				'float': 'float 6s ease-in-out infinite',
 			}
 		}
 	},
