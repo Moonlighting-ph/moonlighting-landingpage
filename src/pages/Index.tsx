@@ -185,4 +185,42 @@ const Footer = () => {
           
           <div>
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
-            <ul
+            <ul className="space-y-2">
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Dispute Resolution</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
+          <p className="text-sm text-muted-foreground text-center">
+            &copy; {new Date().getFullYear()} moonlighting.ph. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+const Index = () => {
+  // Enable dark mode when the component mounts
+  useEffect(() => {
+    setDarkMode();
+  }, []);
+
+  return (
+    <div className="min-h-screen">
+      <Navbar />
+      <HeroSection />
+      <FeatureSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <CTASection />
+      <Footer />
+    </div>
+  );
+};
+
+export default Index;
