@@ -30,7 +30,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen pt-20 overflow-hidden">
+    <section className="relative min-h-screen pt-20 pb-32 overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
@@ -64,7 +64,7 @@ const HeroSection = () => {
           <Link to="/client">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical provider</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
             </Button>
           </Link>
         </div>
@@ -114,7 +114,7 @@ const FeatureSection = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">Varied Opportunities</h3>
             <p className="text-muted-foreground">
-              Access a wide range of opportunities across different healthcare settings and specialties
+              Access a wide range of opportunities across different healthcare settings
             </p>
             <div className="w-full h-32 mt-4 rounded-lg overflow-hidden">
               <img 
@@ -131,7 +131,7 @@ const FeatureSection = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">Professional Growth</h3>
             <p className="text-muted-foreground">
-              Expand your skills and experience by working in diverse healthcare environments
+              Expand your skills by working in diverse healthcare environments
             </p>
             <div className="w-full h-32 mt-4 rounded-lg overflow-hidden">
               <img 
@@ -148,7 +148,7 @@ const FeatureSection = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">Financial Freedom</h3>
             <p className="text-muted-foreground">
-              Supplement your income and achieve financial goals with additional work opportunities
+              Supplement your income with additional work opportunities
             </p>
             <div className="w-full h-32 mt-4 rounded-lg overflow-hidden">
               <img 
@@ -209,10 +209,10 @@ const HowItWorksSection = () => {
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {step.icon}
               </div>
-              <span className="absolute top-20 text-5xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors">
+              <div className="absolute top-20 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary shadow-inner group-hover:scale-110 transition-all">
                 {index + 1}
-              </span>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 mt-4">{step.title}</h3>
               <p className="text-muted-foreground">{step.description}</p>
             </div>
           ))}
@@ -307,9 +307,9 @@ const CTASection = () => {
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto bg-primary/5 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Take Control of Your Career?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Philippine Hospitals Need Your Skills</h2>
             <p className="text-xl text-muted-foreground">
-              Join our waitlist today to be notified when we launch and get early access to healthcare opportunities
+              Help solve critical staffing shortages while supplementing your income. Moonlighting.ph seamlessly connects you with medical providers across the country.
             </p>
           </div>
           
@@ -321,7 +321,7 @@ const CTASection = () => {
             <Link to="/client">
               <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
                 <span>I'm a medical provider</span>
-                <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
               </Button>
             </Link>
           </div>
@@ -342,7 +342,7 @@ const Footer = () => {
               <span className="text-xl font-display font-bold">moonlighting.ph</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground mb-4">
-              Connecting healthcare professionals with facilities that need them.
+              Connecting healthcare professionals with medical providers that need them.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">

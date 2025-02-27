@@ -10,7 +10,7 @@ const ClientHero = () => {
   // Text options for the animated cycler
   const facilities = [
     "Hospital", "Clinic", "Care Home", "Medical Center",
-    "Rehabilitation Center", "Emergency Room", "Dental Clinic", "Wellness Center"
+    "Rehab Center", "Emergency Room", "Dental Clinic", "Wellness Center"
   ];
   
   const locations = [
@@ -24,7 +24,7 @@ const ClientHero = () => {
   ];
 
   return (
-    <section className="pt-32 pb-20 relative overflow-hidden">
+    <section className="pt-32 pb-32 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
@@ -35,7 +35,7 @@ const ClientHero = () => {
           <div>
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6 animate-fade-in">
               <Building className="h-4 w-4 mr-2" />
-              <span>For Healthcare Facilities</span>
+              <span>For Medical Providers</span>
             </div>
             
             <div className="animate-fade-in" style={{ animationDelay: '100ms' }}>
@@ -47,7 +47,7 @@ const ClientHero = () => {
             </div>
             
             <p className="text-xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
-              Access a network of verified medical professionals for your hospital, clinic, or home care needs. Get matched with the right professionals quickly and efficiently.
+              Access a network of pre-vetted, on-demand medical professionals for your hospital, clinic, or home care needs. Get matched with the right professionals quickly.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '300ms' }}>
@@ -58,7 +58,7 @@ const ClientHero = () => {
               <Link to="/">
                 <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
                   <span>I'm a medical professional</span>
-                  <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                  <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                 </Button>
               </Link>
             </div>
@@ -67,25 +67,25 @@ const ClientHero = () => {
             <div className="space-y-6">
               <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <Shield className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold mb-2">Verified Professionals</h3>
-                <p className="text-muted-foreground">All healthcare workers are thoroughly vetted and verified.</p>
+                <h3 className="text-lg font-semibold mb-2">Pre-vetted Pros</h3>
+                <p className="text-muted-foreground">All healthcare workers are thoroughly vetted.</p>
               </div>
               <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <Clock className="h-8 w-8 text-primary mb-3 group-hover:rotate-12 transition-transform" />
                 <h3 className="text-lg font-semibold mb-2">Quick Staffing</h3>
-                <p className="text-muted-foreground">Fill in staffing gaps within hours, not days or weeks.</p>
+                <p className="text-muted-foreground">Fill staffing gaps within hours, not days.</p>
               </div>
             </div>
             <div className="space-y-6 mt-12">
               <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <DollarSign className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold mb-2">Cost-Effective</h3>
-                <p className="text-muted-foreground">Reduce recruitment costs with transparent pricing.</p>
+                <p className="text-muted-foreground">Reduce costs with transparent pricing.</p>
               </div>
               <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
                 <Check className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold mb-2">Quality Assurance</h3>
-                <p className="text-muted-foreground">Access to skilled, rated healthcare professionals.</p>
+                <h3 className="text-lg font-semibold mb-2">Quality Care</h3>
+                <p className="text-muted-foreground">Access skilled, rated healthcare pros.</p>
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@ const ProviderFeatures = () => {
       
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Purpose-Built for Healthcare Facilities</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Purpose-Built for Medical Providers</h2>
           <p className="text-xl text-muted-foreground">
             Our platform helps hospitals, clinics, and care facilities find the right healthcare professionals quickly and efficiently.
           </p>
@@ -116,7 +116,7 @@ const ProviderFeatures = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">For Hospitals</h3>
             <p className="text-muted-foreground">
-              Fill staffing gaps during peak seasons, manage unexpected absences, and maintain quality care for patients with on-demand staff.
+              Fill staffing gaps during peak times and maintain quality care with on-demand staff.
             </p>
             <div className="w-full h-32 mt-4 rounded-lg overflow-hidden">
               <img 
@@ -133,12 +133,12 @@ const ProviderFeatures = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">For Clinics</h3>
             <p className="text-muted-foreground">
-              Access specialized healthcare professionals for your clinic's specific needs without the overhead of full-time hiring.
+              Access specialized healthcare professionals without the overhead of full-time hiring.
             </p>
             <div className="w-full h-32 mt-4 rounded-lg overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1516549655669-8289983d0f9b?q=80&w=400" 
-                alt="Medical clinic reception" 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400" 
+                alt="Medical professional at clinic" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
@@ -150,7 +150,7 @@ const ProviderFeatures = () => {
             </div>
             <h3 className="text-xl font-semibold mb-2">For Home Care</h3>
             <p className="text-muted-foreground">
-              Connect with qualified caregivers, nurses, and other healthcare professionals for in-home patient care.
+              Connect with qualified caregivers, nurses, and other professionals for in-home patient care.
             </p>
             <div className="w-full h-32 mt-4 rounded-lg overflow-hidden">
               <img 
@@ -211,10 +211,10 @@ const StepsSection = () => {
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {step.icon}
               </div>
-              <span className="absolute top-20 text-5xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors">
+              <div className="absolute top-20 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary shadow-inner group-hover:scale-110 transition-all">
                 {index + 1}
-              </span>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 mt-4">{step.title}</h3>
               <p className="text-muted-foreground">{step.description}</p>
             </div>
           ))}
@@ -233,9 +233,9 @@ const ProviderCTA = () => {
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto bg-primary/5 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Healthcare Staffing?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Seamlessly Connect with On-Demand Medical Professionals</h2>
             <p className="text-xl text-muted-foreground">
-              Join moonlighting.ph today and experience a new way to connect with qualified healthcare professionals.
+              Moonlighting.ph helps understaffed hospitals connect with pre-vetted, on-demand medical professionals.
             </p>
           </div>
           
@@ -246,7 +246,7 @@ const ProviderCTA = () => {
             </Button>
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>Learn More</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
             </Button>
           </div>
         </div>
@@ -266,7 +266,7 @@ const ClientFooter = () => {
               <span className="text-xl font-display font-bold">moonlighting.ph</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground mb-4">
-              Connecting healthcare professionals with facilities that need them.
+              Connecting healthcare professionals with medical providers that need them.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
@@ -293,7 +293,7 @@ const ClientFooter = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">For Healthcare Facilities</h3>
+            <h3 className="text-lg font-semibold mb-4">For Medical Providers</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">How It Works</a></li>
               <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Healthcare Staffing</a></li>

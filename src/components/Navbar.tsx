@@ -39,9 +39,10 @@ const Navbar = () => {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="rounded-full px-6">
+          {/* Sign In button hidden for now */}
+          {/* <Button variant="outline" className="rounded-full px-6">
             Sign In
-          </Button>
+          </Button> */}
           {isClientPage ? (
             <Link to="/">
               <Button className="rounded-full px-6 bg-primary hover:bg-primary/90 text-white">
@@ -70,9 +71,10 @@ const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <div className="flex flex-col space-y-2 pt-2">
-              <Button variant="outline" className="w-full">
+              {/* Sign In button hidden for now */}
+              {/* <Button variant="outline" className="w-full">
                 Sign In
-              </Button>
+              </Button> */}
               {isClientPage ? (
                 <Link to="/">
                   <Button className="w-full bg-primary hover:bg-primary/90 text-white">
