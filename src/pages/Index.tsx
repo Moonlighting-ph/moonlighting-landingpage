@@ -2,8 +2,9 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
-import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart } from 'lucide-react';
+import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AnimatedTextCycler from '@/components/AnimatedTextCycler';
 
 // Set dark mode by default
 const setDarkMode = () => {
@@ -12,9 +13,25 @@ const setDarkMode = () => {
 };
 
 const HeroSection = () => {
+  // Text options for the animated cycler
+  const professions = [
+    "Nurse", "Doctor", "Pediatrician", "Surgeon",
+    "Anesthesiologist", "Cardiologist", "Radiologist", "Therapist"
+  ];
+  
+  const locations = [
+    "Manila", "Cebu", "Davao", "Quezon City",
+    "Makati", "Taguig", "Pasig", "Baguio"
+  ];
+  
+  const schedules = [
+    "Weekend", "Night Shift", "Day Shift", "On-Call",
+    "Flexible", "Part-Time", "Full-Time", "24-Hour"
+  ];
+
   return (
     <section className="relative min-h-screen pt-20 overflow-hidden">
-      {/* Background elements */}
+      {/* Background effects */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
@@ -26,17 +43,23 @@ const HeroSection = () => {
           <span>For Healthcare Professionals</span>
         </div>
         
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight max-w-4xl mb-6 animate-fade-in" style={{ animationDelay: '100ms' }}>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Find Reliever Jobs</span> in Healthcare Facilities
-        </h1>
-        
-        <p className="text-xl text-center text-muted-foreground max-w-2xl mb-10 animate-fade-in" style={{ animationDelay: '200ms' }}>
-          Connect with hospitals, clinics, and care facilities that need your expertise. Take control of your schedule and supplement your income.
-        </p>
+        <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <AnimatedTextCycler 
+            textGroups={[professions, locations, schedules]}
+            staticTexts={["I'm a", "in", "looking for", "work"]}
+            className="mb-6 text-center"
+          />
+          
+          <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto mt-6">
+            Connect with hospitals, clinics, and care facilities that need your expertise. 
+            Take control of your schedule and supplement your income.
+          </p>
+        </div>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg">
-            Join Waitlist
+          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg group">
+            <span>Join Waitlist</span>
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Button>
           <Link to="/client">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg">
@@ -81,7 +104,7 @@ const FeatureSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-card rounded-xl p-6 shadow-lg">
+          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <Briefcase className="h-10 w-10 text-primary mb-4" />
             <h3 className="text-xl font-semibold mb-2">Varied Opportunities</h3>
             <p className="text-muted-foreground">
@@ -89,7 +112,7 @@ const FeatureSection = () => {
             </p>
           </div>
           
-          <div className="bg-card rounded-xl p-6 shadow-lg">
+          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <GraduationCap className="h-10 w-10 text-primary mb-4" />
             <h3 className="text-xl font-semibold mb-2">Professional Growth</h3>
             <p className="text-muted-foreground">
@@ -97,7 +120,7 @@ const FeatureSection = () => {
             </p>
           </div>
           
-          <div className="bg-card rounded-xl p-6 shadow-lg">
+          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <DollarSign className="h-10 w-10 text-primary mb-4" />
             <h3 className="text-xl font-semibold mb-2">Financial Freedom</h3>
             <p className="text-muted-foreground">
@@ -150,7 +173,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="bg-card rounded-xl p-6 md:p-8 shadow-lg card-hover animate-fade-in"
+              className="bg-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex gap-1 mb-4">
@@ -178,7 +201,7 @@ const CTASection = () => {
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-5 sm:px-6 md:px-8">
-        <div className="max-w-4xl mx-auto bg-card rounded-2xl p-6 md:p-10 shadow-xl">
+        <div className="max-w-4xl mx-auto bg-primary/5 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Take Control of Your Career?</h2>
             <p className="text-xl text-muted-foreground">
@@ -187,8 +210,9 @@ const CTASection = () => {
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg">
-              Join Waitlist
+            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg group">
+              <span>Join Waitlist</span>
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Link to="/client">
               <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg">
@@ -209,7 +233,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-4">
-              <Heart className="h-6 w-6 text-primary mr-2" />
+              <Moon className="h-6 w-6 text-primary mr-2" />
               <span className="text-xl font-display font-bold">moonlighting.ph</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground mb-4">
