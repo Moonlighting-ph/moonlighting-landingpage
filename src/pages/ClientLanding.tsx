@@ -9,6 +9,12 @@ import ServiceHighlights from '@/components/ServiceHighlights';
 import JobListingsPreview from '@/components/JobListingsPreview';
 import PageTransition from '@/components/PageTransition';
 
+// Set dark mode by default
+const setDarkMode = () => {
+  document.documentElement.classList.add('dark');
+  localStorage.theme = 'dark';
+};
+
 const ClientHero = () => {
   // Text options for the animated cycler
   const facilities = [
@@ -26,6 +32,70 @@ const ClientHero = () => {
     "Therapists", "Specialists", "RadTech", "Pediatricians"
   ];
 
+  return (
+    <section className="relative min-h-screen pt-20 pb-32 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 pt-16 md:pt-20 flex flex-col items-center">
+        <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6 animate-fade-in">
+          <Stethoscope className="h-4 w-4 mr-2" />
+          <span>For Healthcare Professionals</span>
+        </div>
+        
+        <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <AnimatedTextCycler 
+            textGroups={[facilities, locations, professionals]}
+            staticTexts={["I'm a", "in", "looking for", "work"]}
+            className="mb-6 text-center"
+          />
+          
+          <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto mt-6">
+          Access a network of pre-vetted, on-demand medical professionals for your hospital, clinic, or home care needs.
+          Get matched with the right professionals quickly.
+          </p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg group">
+            <span>Join Waitlist</span>
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+          <Link to="/">
+            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
+              <span>I'm a medical professional</span>
+              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+            </Button>
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Pre-vetted Pros</h3>
+            <p className="text-muted-foreground">All healthcare workers are thoroughly vetted</p>
+          </div>
+
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Quick Staffing</h3>
+            <p className="text-muted-foreground">Fill staffing gaps within hours, not days</p>
+          </div>
+
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Quality Care</h3>
+            <p className="text-muted-foreground">Access skilled, rated healthcare pros</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  /*
   return (
     <section className="pt-32 pb-32 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -96,6 +166,7 @@ const ClientHero = () => {
       </div>
     </section>
   );
+  */
 };
 
 // New Service Highlights for Medical Providers
@@ -333,7 +404,7 @@ const ProviderCTA = () => {
             </Button>
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>Learn More</span>
-              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
             </Button>
           </div>
         </div>
@@ -420,4 +491,23 @@ const ClientFooter = () => {
   );
 };
 
-export default ClientFooter;
+const ClientLanding = () => {
+  
+  // Enable dark mode when the component mounts
+    useEffect(() => {
+      setDarkMode();
+    }, []);
+
+  return (
+    <>
+      <Navbar />
+      <ClientHero />
+      <ProviderFeatures />
+      <StepsSection />
+      <ProviderCTA />
+      <ClientFooter />
+    </>
+  );
+};
+
+export default ClientLanding;

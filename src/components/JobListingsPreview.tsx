@@ -84,7 +84,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
           <Button asChild variant="outline" className="rounded-full px-6 py-6 font-semibold text-lg group">
             <a href={viewAllLink}>
               <span>View All Listings</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
             </a>
           </Button>
         </div>

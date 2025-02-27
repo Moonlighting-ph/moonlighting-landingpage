@@ -67,27 +67,27 @@ const HeroSection = () => {
           <Link to="/client">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical provider</span>
-              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
             </Button>
           </Link>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <Clock className="h-10 w-10 text-primary mb-4 group-hover:rotate-12 transition-transform" />
-            <h3 className="text-xl font-semibold mb-2">Flexible Schedule</h3>
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Flexible Schedule</h3>
             <p className="text-muted-foreground">Choose when and where you work based on your availability</p>
           </div>
-          
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <DollarSign className="h-10 w-10 text-primary mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-semibold mb-2">Competitive Pay</h3>
+
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Competitive Pay</h3>
             <p className="text-muted-foreground">Earn competitive rates for your expertise and qualifications</p>
           </div>
-          
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <Shield className="h-10 w-10 text-primary mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xl font-semibold mb-2">Secure Process</h3>
+
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Secure Process</h3>
             <p className="text-muted-foreground">Our platform ensures you get paid promptly for your services</p>
           </div>
         </div>
@@ -408,7 +408,7 @@ const CTASection = () => {
             <Link to="/client">
               <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
                 <span>I'm a medical provider</span>
-                <ArrowRight className="ml-2 h-5 w-5 text-white opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                <ArrowRight className="ml-2 h-5 w-5 text-white opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
               </Button>
             </Link>
           </div>
