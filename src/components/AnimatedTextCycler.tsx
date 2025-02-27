@@ -55,9 +55,9 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
           {i < textGroups.length && (
             <span 
               className={`relative mx-2 inline-block rounded-full px-4 py-1 ${
-                i === 0 ? 'bg-primary/20 text-primary' : 
-                i === 1 ? 'bg-secondary/20 text-secondary' : 
-                'bg-accent/20 text-accent'
+                i === 0 ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400' : 
+                i === 1 ? 'bg-secondary/20 text-secondary dark:text-secondary' : 
+                'bg-sky-500/20 text-sky-600 dark:text-sky-400'
               } transition-all duration-300 ${isAnimating[i] ? 'opacity-0 transform translate-y-2' : 'opacity-100 transform translate-y-0'}`}
             >
               {textGroups[i][currentIndices[i]]}

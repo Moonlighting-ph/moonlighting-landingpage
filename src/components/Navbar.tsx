@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Moon, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isClientPage = location.pathname === '/client';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,8 +32,8 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <Moon className="h-6 w-6 text-primary mr-2" />
+        <Link to="/" className="flex items-center group">
+          <Moon className="h-6 w-6 text-primary mr-2 group-hover:rotate-12 transition-transform duration-300" />
           <span className="text-xl font-display font-bold">moonlighting.ph</span>
         </Link>
 
@@ -40,11 +42,19 @@ const Navbar = () => {
           <Button variant="outline" className="rounded-full px-6">
             Sign In
           </Button>
-          <Link to="/client">
-            <Button className="rounded-full px-6 bg-primary hover:bg-primary/90 text-white">
-              I'm a medical provider
-            </Button>
-          </Link>
+          {isClientPage ? (
+            <Link to="/">
+              <Button className="rounded-full px-6 bg-primary hover:bg-primary/90 text-white">
+                I'm a medical professional
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/client">
+              <Button className="rounded-full px-6 bg-primary hover:bg-primary/90 text-white">
+                I'm a medical provider
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -63,11 +73,19 @@ const Navbar = () => {
               <Button variant="outline" className="w-full">
                 Sign In
               </Button>
-              <Link to="/client">
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white">
-                  I'm a medical provider
-                </Button>
-              </Link>
+              {isClientPage ? (
+                <Link to="/">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                    I'm a medical professional
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/client">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                    I'm a medical provider
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
