@@ -29,7 +29,7 @@ const ClientHero = () => {
   
   const professionals = [
     "Nurses", "Doctors", "MedTech", "Surgeons",
-    "Therapists", "Specialists", "RadTech", "Pedia"
+    "Therapists", "Specialists", "RadTechs", "Pedias"
   ];
 
   return (
@@ -49,7 +49,7 @@ const ClientHero = () => {
         <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <AnimatedTextCycler 
             textGroups={[facilities, locations, professionals]}
-            staticTexts={["I'm a", "in", "looking for a", "nearby"]}
+            staticTexts={["I'm a", "in", "looking for", "nearby"]}
             className="mb-6 text-center"
           />
           
