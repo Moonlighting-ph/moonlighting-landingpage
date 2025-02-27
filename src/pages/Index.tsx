@@ -1,11 +1,9 @@
 
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import HeroSection from '@/components/HeroSection';
-import FeatureSection from '@/components/FeatureSection';
-import HowItWorksSection from '@/components/HowItWorksSection';
 import { Button } from '@/components/ui/button';
-import { Shield, Heart, Users, Star, DollarSign, Moon, Sun } from 'lucide-react';
+import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Set dark mode by default
 const setDarkMode = () => {
@@ -13,63 +11,164 @@ const setDarkMode = () => {
   localStorage.theme = 'dark';
 };
 
+const HeroSection = () => {
+  return (
+    <section className="relative min-h-screen pt-20 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 pt-16 md:pt-20 flex flex-col items-center">
+        <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6 animate-fade-in">
+          <Stethoscope className="h-4 w-4 mr-2" />
+          <span>For Healthcare Professionals</span>
+        </div>
+        
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight max-w-4xl mb-6 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Find Reliever Jobs</span> in Healthcare Facilities
+        </h1>
+        
+        <p className="text-xl text-center text-muted-foreground max-w-2xl mb-10 animate-fade-in" style={{ animationDelay: '200ms' }}>
+          Connect with hospitals, clinics, and care facilities that need your expertise. Take control of your schedule and supplement your income.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg">
+            Join Waitlist
+          </Button>
+          <Link to="/client">
+            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg">
+              I'm a medical provider
+            </Button>
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <div className="glass-card rounded-xl p-6 card-hover">
+            <Clock className="h-10 w-10 text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Flexible Schedule</h3>
+            <p className="text-muted-foreground">Choose when and where you work based on your availability</p>
+          </div>
+          
+          <div className="glass-card rounded-xl p-6 card-hover">
+            <DollarSign className="h-10 w-10 text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Competitive Pay</h3>
+            <p className="text-muted-foreground">Earn competitive rates for your expertise and qualifications</p>
+          </div>
+          
+          <div className="glass-card rounded-xl p-6 card-hover">
+            <Shield className="h-10 w-10 text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Secure Process</h3>
+            <p className="text-muted-foreground">Our platform ensures you get paid promptly for your services</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FeatureSection = () => {
+  return (
+    <section className="py-16 md:py-24 bg-accent/30">
+      <div className="container mx-auto px-5 sm:px-6 md:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Benefits for Healthcare Professionals</h2>
+          <p className="text-xl text-muted-foreground">
+            Join thousands of healthcare professionals who use our platform to find flexible work opportunities
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="bg-card rounded-xl p-6 shadow-lg">
+            <Briefcase className="h-10 w-10 text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Varied Opportunities</h3>
+            <p className="text-muted-foreground">
+              Access a wide range of opportunities across different healthcare settings and specialties
+            </p>
+          </div>
+          
+          <div className="bg-card rounded-xl p-6 shadow-lg">
+            <GraduationCap className="h-10 w-10 text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Professional Growth</h3>
+            <p className="text-muted-foreground">
+              Expand your skills and experience by working in diverse healthcare environments
+            </p>
+          </div>
+          
+          <div className="bg-card rounded-xl p-6 shadow-lg">
+            <DollarSign className="h-10 w-10 text-primary mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Financial Freedom</h3>
+            <p className="text-muted-foreground">
+              Supplement your income and achieve financial goals with additional work opportunities
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      content: "As a hospital administrator, finding qualified staff during peak seasons was always challenging. Moonlighting.ph has transformed our staffing process with verified professionals available on short notice.",
-      author: "Dr. Maria Santos",
-      position: "Chief of Medical Services, Metro General Hospital",
-      rating: 5
-    },
-    {
-      content: "The verification process is thorough and gives me confidence that I'm hiring qualified professionals. The escrow payment system ensures trust on both sides.",
-      author: "James Rodriguez",
-      position: "Clinic Manager, Rodriguez Family Clinic",
-      rating: 5
-    },
-    {
       content: "As a nurse, Moonlighting.ph has allowed me to supplement my income while maintaining a flexible schedule. The platform is intuitive and connecting with clients is seamless.",
       author: "Nurse Anna Lim",
-      position: "Registered Nurse, Freelance Professional",
+      position: "Registered Nurse",
+      rating: 5
+    },
+    {
+      content: "I've been able to work in different healthcare settings through Moonlighting.ph, which has greatly expanded my clinical experience. The verification process was smooth, and finding opportunities is easy.",
+      author: "Dr. Marco Reyes",
+      position: "General Practitioner",
+      rating: 5
+    },
+    {
+      content: "After my regular shifts at the hospital, I wanted to earn extra income. This platform has made it possible to find short-term assignments that fit perfectly around my schedule.",
+      author: "John Santos",
+      position: "Emergency Room Nurse",
       rating: 4
     }
   ];
 
   return (
-    <section id="testimonials" className="section-container bg-accent/30">
-      <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
-        <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-          <Star className="h-4 w-4 mr-2" />
-          <span>Client Testimonials</span>
-        </div>
-        <h2 className="section-title">What Our Users Say</h2>
-        <p className="section-subtitle">
-          Join hundreds of satisfied healthcare facilities and professionals already using our platform
-        </p>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-        {testimonials.map((testimonial, index) => (
-          <div 
-            key={index} 
-            className="bg-card rounded-xl p-6 md:p-8 shadow-lg card-hover animate-fade-in"
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <div className="flex gap-1 mb-4">
-              {[...Array(testimonial.rating)].map((_, i) => (
-                <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-              ))}
-              {[...Array(5 - testimonial.rating)].map((_, i) => (
-                <Star key={i + testimonial.rating} className="h-5 w-5 text-gray-400 dark:text-gray-600" />
-              ))}
-            </div>
-            <p className="text-base sm:text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
-            <div>
-              <p className="font-semibold">{testimonial.author}</p>
-              <p className="text-sm text-muted-foreground">{testimonial.position}</p>
-            </div>
+    <section className="py-16 md:py-24 bg-background">
+      <div className="container mx-auto px-5 sm:px-6 md:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            <Star className="h-4 w-4 mr-2" />
+            <span>Professional Stories</span>
           </div>
-        ))}
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Healthcare Professionals Say</h2>
+          <p className="text-xl text-muted-foreground">
+            Join hundreds of healthcare professionals already using our platform
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {testimonials.map((testimonial, index) => (
+            <div 
+              key={index} 
+              className="bg-card rounded-xl p-6 md:p-8 shadow-lg card-hover animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex gap-1 mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                ))}
+                {[...Array(5 - testimonial.rating)].map((_, i) => (
+                  <Star key={i + testimonial.rating} className="h-5 w-5 text-gray-400 dark:text-gray-600" />
+                ))}
+              </div>
+              <p className="text-base sm:text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
+              <div>
+                <p className="font-semibold">{testimonial.author}</p>
+                <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -77,48 +176,25 @@ const TestimonialsSection = () => {
 
 const CTASection = () => {
   return (
-    <section id="cta" className="py-16 md:py-24 relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10"></div>
-      </div>
-      
+    <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-5 sm:px-6 md:px-8">
         <div className="max-w-4xl mx-auto bg-card rounded-2xl p-6 md:p-10 shadow-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-start">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Transform Healthcare Staffing?</h2>
-              <p className="text-base md:text-lg text-muted-foreground mb-6">
-                Join moonlighting.ph today and experience a new way to connect healthcare professionals with the facilities and patients who need them.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8 lg:mb-0">
-                <Button className="rounded-full px-6 py-5 sm:px-8 sm:py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-base sm:text-lg">
-                  Find a Professional
-                </Button>
-                <Button variant="outline" className="rounded-full px-6 py-5 sm:px-8 sm:py-6 font-semibold text-base sm:text-lg">
-                  Join as a Professional
-                </Button>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-accent rounded-lg p-4 text-center">
-                <DollarSign className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
-                <h3 className="text-sm md:text-base font-semibold">Secure Payments</h3>
-              </div>
-              <div className="bg-accent rounded-lg p-4 text-center">
-                <Shield className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
-                <h3 className="text-sm md:text-base font-semibold">Verified Professionals</h3>
-              </div>
-              <div className="bg-accent rounded-lg p-4 text-center">
-                <Users className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
-                <h3 className="text-sm md:text-base font-semibold">Diverse Specialists</h3>
-              </div>
-              <div className="bg-accent rounded-lg p-4 text-center">
-                <Heart className="h-6 w-6 md:h-8 md:w-8 text-primary mx-auto mb-2" />
-                <h3 className="text-sm md:text-base font-semibold">Quality Care</h3>
-              </div>
-            </div>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Take Control of Your Career?</h2>
+            <p className="text-xl text-muted-foreground">
+              Join our waitlist today to be notified when we launch and get early access to healthcare opportunities
+            </p>
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-6 justify-center">
+            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg">
+              Join Waitlist
+            </Button>
+            <Link to="/client">
+              <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg">
+                I'm a medical provider
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -137,7 +213,7 @@ const Footer = () => {
               <span className="text-xl font-display font-bold">moonlighting.ph</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground mb-4">
-              Connecting healthcare professionals with those who need them.
+              Connecting healthcare professionals with facilities that need them.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -164,12 +240,12 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
+            <h3 className="text-lg font-semibold mb-4">For Professionals</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Hospitals</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Clinics</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Households</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">For Healthcare Professionals</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">How It Works</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Find Opportunities</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Payment Process</a></li>
+              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors">Success Stories</a></li>
             </ul>
           </div>
           
@@ -215,7 +291,6 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <FeatureSection />
-      <HowItWorksSection />
       <TestimonialsSection />
       <CTASection />
       <Footer />
