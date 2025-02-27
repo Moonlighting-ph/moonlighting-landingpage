@@ -2,9 +2,12 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
-import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart, ArrowRight, Moon, CheckCircle, Award, MessageCircle } from 'lucide-react';
+import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart, ArrowRight, Moon, CheckCircle, Award, MessageCircle, HeartPulse, Users, ClipboardCheck, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedTextCycler from '@/components/AnimatedTextCycler';
+import ServiceHighlights from '@/components/ServiceHighlights';
+import JobListingsPreview from '@/components/JobListingsPreview';
+import PageTransition from '@/components/PageTransition';
 
 // Set dark mode by default
 const setDarkMode = () => {
@@ -222,6 +225,90 @@ const HowItWorksSection = () => {
   );
 };
 
+// New Service Highlights Section
+const servicesForProfessionals = [
+  {
+    icon: <HeartPulse className="h-8 w-8 text-primary" />,
+    title: "Healthcare Specialists",
+    description: "We connect nurses, doctors, and specialists with the medical providers who need them most"
+  },
+  {
+    icon: <Shield className="h-8 w-8 text-primary" />,
+    title: "Verified Credentials",
+    description: "Your qualifications are verified once, then shared securely with potential employers"
+  },
+  {
+    icon: <Zap className="h-8 w-8 text-primary" />,
+    title: "Quick Placements",
+    description: "Our matching algorithm helps find opportunities that fit your skills and schedule"
+  },
+  {
+    icon: <ClipboardCheck className="h-8 w-8 text-primary" />,
+    title: "Easy Onboarding",
+    description: "Simple registration process with clear instructions and support at every step"
+  },
+  {
+    icon: <Users className="h-8 w-8 text-primary" />,
+    title: "Community Support",
+    description: "Join a network of healthcare professionals for resources and career advice"
+  },
+  {
+    icon: <Award className="h-8 w-8 text-primary" />,
+    title: "Skill Development",
+    description: "Access various practices to expand your clinical experience and expertise"
+  },
+  {
+    icon: <DollarSign className="h-8 w-8 text-primary" />,
+    title: "Transparent Pay",
+    description: "Clearly defined rates based on your qualifications and the position requirements"
+  },
+  {
+    icon: <Star className="h-8 w-8 text-primary" />,
+    title: "Rating System",
+    description: "Build your professional reputation through ratings from medical providers"
+  }
+];
+
+// Sample job listings data
+const sampleJobs = [
+  {
+    id: "job1",
+    title: "ER Nurse - Weekend Shifts",
+    company: "Metro Manila Hospital",
+    logo: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=200&h=200&fit=crop",
+    location: "Makati, Metro Manila",
+    type: "Part-time",
+    description: "Seeking experienced ER nurses for weekend shifts. Competitive pay and flexible scheduling options available."
+  },
+  {
+    id: "job2",
+    title: "General Practitioner",
+    company: "Cebu Medical Center",
+    logo: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=200&h=200&fit=crop",
+    location: "Cebu City",
+    type: "On-call",
+    description: "General practitioners needed for on-call shifts at a growing medical center. Opportunities for regular work available."
+  },
+  {
+    id: "job3",
+    title: "Pediatric Specialist",
+    company: "Children's Wellness Center",
+    logo: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?q=80&w=200&h=200&fit=crop",
+    location: "Quezon City",
+    type: "Short-term contract",
+    description: "Pediatric specialists needed for 3-month coverage. Possibility of extension based on performance."
+  },
+  {
+    id: "job4",
+    title: "ICU Nurse Supervisor",
+    company: "St. Luke's Medical Center",
+    logo: "https://images.unsplash.com/photo-1516549655669-8289983d0f9b?q=80&w=200&h=200&fit=crop",
+    location: "Taguig, Metro Manila",
+    type: "Night shift",
+    description: "Experienced ICU nurses needed for supervisory role on night shifts. Leadership experience preferred."
+  }
+];
+
 const TestimonialsSection = () => {
   const testimonials = [
     {
@@ -417,10 +504,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <PageTransition />
       <Navbar />
       <HeroSection />
       <FeatureSection />
+      <ServiceHighlights 
+        title="Top-Notch Healthcare Services" 
+        subtitle="We connect quality healthcare professionals with the medical providers who need them most"
+        services={servicesForProfessionals}
+      />
       <HowItWorksSection />
+      <JobListingsPreview
+        title="Featured Opportunities"
+        subtitle="Browse our latest healthcare job listings across the Philippines"
+        listings={sampleJobs}
+        viewAllLink="#job-board"
+      />
       <TestimonialsSection />
       <CTASection />
       <Footer />
