@@ -510,7 +510,7 @@ const Index = () => {
       <FeatureSection />
       <ServiceHighlights 
         title="Top-Notch Healthcare Services" 
-        subtitle="We connect quality healthcare professionals with the medical providers who need them most"
+        subtitle="We connect pre-vetted, on-demand medical professionals with medical providers that need them."
         services={servicesForProfessionals}
       />
       <HowItWorksSection />

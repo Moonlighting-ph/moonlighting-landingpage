@@ -424,7 +424,7 @@ const ClientFooter = () => {
               <span className="text-xl font-display font-bold">moonlighting.ph</span>
             </div>
             <p className="text-sm md:text-base text-muted-foreground mb-4">
-              Connecting healthcare professionals with medical providers that need them.
+              We connect pre-vetted, on-demand medical professionals with medical providers that need them.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
