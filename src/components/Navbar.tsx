@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Moon as MoonIcon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Moon } from './ui/Moon';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -32,6 +32,10 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Determine the alternate route for the button
+  const alternateRoute = location.pathname === '/client' ? '/' : '/client';
+  const buttonText = location.pathname === '/client' ? "I'm a medical professional" : "I'm a medical provider";
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -53,20 +57,15 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/' ? 'text-primary' : 'text-foreground/80'}`}>For Healthcare Professionals</Link>
             <Link to="/client" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/client' ? 'text-primary' : 'text-foreground/80'}`}>For Medical Providers</Link>
-            <a href="#" className="text-sm font-medium transition-colors hover:text-primary text-foreground/80">About Us</a>
-            <a href="#" className="text-sm font-medium transition-colors hover:text-primary text-foreground/80">Contact</a>
           </nav>
           
           {/* Actions */}
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <div className="hidden md:block">
-              <Button variant="outline" size="sm" asChild>
-                <a href="#">Login</a>
+              <Button size="sm" asChild>
+                <Link to={alternateRoute}>{buttonText}</Link>
               </Button>
-            </div>
-            <div className="hidden md:block">
-              <Button size="sm">Get Started</Button>
             </div>
             
             {/* Mobile menu button */}
@@ -91,15 +90,10 @@ const Navbar = () => {
           <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
             <Link to="/" className={`text-sm font-medium py-2 transition-colors hover:text-primary ${location.pathname === '/' ? 'text-primary' : 'text-foreground/80'}`}>For Healthcare Professionals</Link>
             <Link to="/client" className={`text-sm font-medium py-2 transition-colors hover:text-primary ${location.pathname === '/client' ? 'text-primary' : 'text-foreground/80'}`}>For Medical Providers</Link>
-            <a href="#" className="text-sm font-medium py-2 transition-colors hover:text-primary text-foreground/80">About Us</a>
-            <a href="#" className="text-sm font-medium py-2 transition-colors hover:text-primary text-foreground/80">Contact</a>
             <hr className="border-border my-2" />
-            <div className="flex flex-col sm:flex-row gap-2">
-              <Button variant="outline" className="w-full sm:w-auto" asChild>
-                <a href="#">Login</a>
-              </Button>
-              <Button className="w-full sm:w-auto">Get Started</Button>
-            </div>
+            <Button className="w-full sm:w-auto" asChild>
+              <Link to={alternateRoute}>{buttonText}</Link>
+            </Button>
           </div>
         </div>
       )}

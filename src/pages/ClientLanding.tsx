@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
@@ -112,71 +111,61 @@ const ClientHero = () => {
   ];
 
   return (
-    <section className="pt-32 pb-32 relative overflow-hidden">
+    <section className="relative min-h-screen pt-20 pb-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
       </div>
       
-      <div className="container mx-auto px-5 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6 animate-fade-in">
-              <Building className="h-4 w-4 mr-2" />
-              <span>For Medical Providers</span>
-            </div>
-            
-            <div className="animate-fade-in" style={{ animationDelay: '100ms' }}>
-              <AnimatedTextCycler 
-                textGroups={[facilities, locations, professionals]}
-                staticTexts={["Our", "in", "needs qualified", "now"]}
-                className="mb-6"
-              />
-            </div>
-            
-            <p className="text-xl text-center text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
-              Access a network of pre-vetted, on-demand medical professionals for your hospital, clinic, or home care needs. Get matched with the right professionals quickly.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '300ms' }}>
-              <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
-                <span>Book a Demo</span>
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Link to="/">
-                <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
-                  <span>I'm a medical professional</span>
-                  <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                </Button>
-              </Link>
-            </div>
+      <div className="container mx-auto px-4 pt-16 md:pt-20 flex flex-col items-center">
+        <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6 animate-fade-in">
+          <Building className="h-4 w-4 mr-2" />
+          <span>For Medical Providers</span>
+        </div>
+        
+        <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <AnimatedTextCycler 
+            textGroups={[facilities, locations, professionals]}
+            staticTexts={["Our", "in", "needs qualified", "now"]}
+            className="mb-6 text-center"
+          />
+          
+          <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto mt-6">
+            Access a network of pre-vetted, on-demand medical professionals for your hospital, clinic, or home care needs. Get matched with the right professionals quickly.
+          </p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
+            <span>Book a Demo</span>
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+          <Link to="/">
+            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
+              <span>I'm a medical professional</span>
+              <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+            </Button>
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Shield className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Pre-vetted Pros</h3>
+            <p className="text-muted-foreground">All healthcare workers are thoroughly vetted.</p>
           </div>
-          <div className="grid grid-cols-2 gap-6 animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <div className="space-y-6">
-              <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-                <Shield className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold mb-2">Pre-vetted Pros</h3>
-                <p className="text-muted-foreground">All healthcare workers are thoroughly vetted.</p>
-              </div>
-              <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-                <Clock className="h-8 w-8 text-primary mb-3 group-hover:rotate-12 transition-transform" />
-                <h3 className="text-lg font-semibold mb-2">Quick Staffing</h3>
-                <p className="text-muted-foreground">Fill staffing gaps within hours, not days.</p>
-              </div>
-            </div>
-            <div className="space-y-6 mt-12">
-              <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-                <DollarSign className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold mb-2">Cost-Effective</h3>
-                <p className="text-muted-foreground">Reduce costs with transparent pricing.</p>
-              </div>
-              <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-                <Check className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-semibold mb-2">Quality Care</h3>
-                <p className="text-muted-foreground">Access skilled, rated healthcare pros.</p>
-              </div>
-            </div>
+
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Clock className="h-8 w-8 text-primary mb-3 group-hover:rotate-12 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Quick Staffing</h3>
+            <p className="text-muted-foreground">Fill staffing gaps within hours, not days.</p>
+          </div>
+
+          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+            <Check className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="text-lg font-semibold mb-2">Quality Care</h3>
+            <p className="text-muted-foreground">Access skilled, rated healthcare pros.</p>
           </div>
         </div>
       </div>
@@ -187,8 +176,8 @@ const ClientHero = () => {
 const ProviderFeatures = () => {
   return (
     <section className="py-16 md:py-24 bg-accent/30 relative">
-      {/* Background image */}
-      <div className="absolute inset-0 opacity-5 bg-[url('https://images.unsplash.com/photo-1631815588090-d4bfec5b3583?q=80&w=1200')] bg-cover bg-center"></div>
+      {/* Background image with higher visibility in light mode */}
+      <div className="absolute inset-0 opacity-10 dark:opacity-5 bg-[url('https://images.unsplash.com/photo-1631815588090-d4bfec5b3583?q=80&w=1200')] bg-cover bg-center"></div>
       
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
