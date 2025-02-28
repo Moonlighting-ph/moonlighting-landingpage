@@ -12,6 +12,7 @@ import Jobs from "./pages/platform/Jobs";
 import JobDetail from "./pages/platform/JobDetail";
 import HospitalProfile from "./pages/platform/HospitalProfile";
 import ProfessionalProfile from "./pages/platform/ProfessionalProfile";
+import PlatformLayout from "./components/layouts/PlatformLayout";
 
 const queryClient = new QueryClient();
 
@@ -26,12 +27,12 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/client" element={<ClientLanding />} />
           
-          {/* Platform Routes */}
-          <Route path="/platform" element={<Dashboard />} />
-          <Route path="/platform/jobs" element={<Jobs />} />
-          <Route path="/platform/job/:id" element={<JobDetail />} />
-          <Route path="/platform/hospital-profile" element={<HospitalProfile />} />
-          <Route path="/platform/professional-profile" element={<ProfessionalProfile />} />
+          {/* Platform Routes - wrapped with PlatformLayout */}
+          <Route path="/platform" element={<PlatformLayout><Dashboard /></PlatformLayout>} />
+          <Route path="/platform/jobs" element={<PlatformLayout><Jobs /></PlatformLayout>} />
+          <Route path="/platform/job/:id" element={<PlatformLayout><JobDetail /></PlatformLayout>} />
+          <Route path="/platform/hospital-profile" element={<PlatformLayout><HospitalProfile /></PlatformLayout>} />
+          <Route path="/platform/professional-profile" element={<PlatformLayout><ProfessionalProfile /></PlatformLayout>} />
           
           {/* Catch-all - must be at bottom */}
           <Route path="*" element={<NotFound />} />
