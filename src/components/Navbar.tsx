@@ -53,12 +53,6 @@ const Navbar = () => {
             <span className="font-display font-bold text-lg sm:text-xl">moonlighting.ph</span>
           </Link>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/' ? 'text-primary' : 'text-foreground/80'}`}>For Healthcare Professionals</Link>
-            <Link to="/client" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/client' ? 'text-primary' : 'text-foreground/80'}`}>For Medical Providers</Link>
-          </nav>
-          
           {/* Actions */}
           <div className="flex items-center gap-4">
             <ThemeToggle />
@@ -88,9 +82,6 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="absolute top-16 left-0 right-0 bg-background border-b md:hidden">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-            <Link to="/" className={`text-sm font-medium py-2 transition-colors hover:text-primary ${location.pathname === '/' ? 'text-primary' : 'text-foreground/80'}`}>For Healthcare Professionals</Link>
-            <Link to="/client" className={`text-sm font-medium py-2 transition-colors hover:text-primary ${location.pathname === '/client' ? 'text-primary' : 'text-foreground/80'}`}>For Medical Providers</Link>
-            <hr className="border-border my-2" />
             <Button className="w-full sm:w-auto" asChild>
               <Link to={alternateRoute}>{buttonText}</Link>
             </Button>

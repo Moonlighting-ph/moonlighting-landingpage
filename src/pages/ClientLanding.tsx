@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Shield, Heart, Users, Star, DollarSign, Clock, Check, Building, ArrowRight, UserCheck, Clock4, Clipboard, Award, FileCheck, HeartPulse, Stethoscope, Zap } from 'lucide-react';
@@ -144,7 +145,7 @@ const ClientHero = () => {
           <Link to="/">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical professional</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>
@@ -188,7 +189,7 @@ const ProviderFeatures = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 backdrop-blur-sm group">
+          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Building className="h-8 w-8 text-primary" />
             </div>
@@ -205,7 +206,7 @@ const ProviderFeatures = () => {
             </div>
           </div>
           
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 backdrop-blur-sm group">
+          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Heart className="h-8 w-8 text-primary" />
             </div>
@@ -222,7 +223,7 @@ const ProviderFeatures = () => {
             </div>
           </div>
           
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 backdrop-blur-sm group">
+          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Users className="h-8 w-8 text-primary" />
             </div>
@@ -284,14 +285,17 @@ const StepsSection = () => {
           {steps.map((step, index) => (
             <div 
               key={index} 
-              className="relative z-10 flex flex-col items-center text-center bg-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+              className="relative z-10 flex flex-col items-center text-center bg-card dark:bg-gray-800/90 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
             >
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {step.icon}
               </div>
-              <div className="absolute top-20 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary shadow-inner group-hover:scale-110 transition-all">
+              
+              {/* New step number styling */}
+              <div className="absolute -top-6 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white text-xl font-bold shadow-md group-hover:scale-110 transition-transform">
                 {index + 1}
               </div>
+              
               <h3 className="text-xl font-semibold mb-2 mt-4">{step.title}</h3>
               <p className="text-muted-foreground">{step.description}</p>
             </div>
@@ -309,7 +313,7 @@ const ProviderCTA = () => {
       <div className="absolute right-0 top-1/4 w-1/3 h-2/3 bg-[url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600')] bg-cover bg-center rounded-l-3xl opacity-20 blur-sm"></div>
       
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto bg-primary/5 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
+        <div className="max-w-4xl mx-auto bg-card dark:bg-gray-800/90 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Seamlessly Connect with On-Demand Medical Professionals</h2>
             <p className="text-xl text-muted-foreground">
@@ -324,7 +328,7 @@ const ProviderCTA = () => {
             </Button>
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>Learn More</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
         </div>

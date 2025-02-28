@@ -1,19 +1,13 @@
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
-import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart, ArrowRight, Moon, CheckCircle, Award, MessageCircle, HeartPulse, Users, ClipboardCheck, Zap } from 'lucide-react';
+import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart, ArrowRight, CheckCircle, Award, MessageCircle, HeartPulse, Users, ClipboardCheck, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedTextCycler from '@/components/AnimatedTextCycler';
 import ServiceHighlights from '@/components/ServiceHighlights';
 import JobListingsPreview from '@/components/JobListingsPreview';
 import PageTransition from '@/components/PageTransition';
-
-// Set dark mode by default
-const setDarkMode = () => {
-  document.documentElement.classList.add('dark');
-  localStorage.theme = 'dark';
-};
+import { Moon } from '@/components/ui/Moon';
 
 const HeroSection = () => {
   // Text options for the animated cycler
@@ -60,14 +54,14 @@ const HeroSection = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg group">
+          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
             <span>Join Waitlist</span>
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Button>
           <Link to="/client">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical provider</span>
-              <ArrowRight className="ml-2 h-5 w-5 text-white opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>
@@ -80,13 +74,13 @@ const HeroSection = () => {
           </div>
 
           <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <DollarSign className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Competitive Pay</h3>
             <p className="text-muted-foreground">Earn competitive rates for your expertise and qualifications</p>
           </div>
 
           <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-            <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+            <Shield className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Secure Process</h3>
             <p className="text-muted-foreground">Our platform ensures you get paid promptly for your services</p>
           </div>
@@ -100,7 +94,7 @@ const FeatureSection = () => {
   return (
     <section className="py-16 md:py-24 bg-accent/30 relative">
       {/* Background image */}
-      <div className="absolute inset-0 opacity-5 bg-[url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 opacity-10 dark:opacity-5 bg-[url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200')] bg-cover bg-center"></div>
       
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -111,7 +105,7 @@ const FeatureSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 backdrop-blur-sm group">
+          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Briefcase className="h-8 w-8 text-primary" />
             </div>
@@ -128,7 +122,7 @@ const FeatureSection = () => {
             </div>
           </div>
           
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 backdrop-blur-sm group">
+          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <GraduationCap className="h-8 w-8 text-primary" />
             </div>
@@ -145,7 +139,7 @@ const FeatureSection = () => {
             </div>
           </div>
           
-          <div className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 backdrop-blur-sm group">
+          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <DollarSign className="h-8 w-8 text-primary" />
             </div>
@@ -207,14 +201,17 @@ const HowItWorksSection = () => {
           {steps.map((step, index) => (
             <div 
               key={index} 
-              className="relative z-10 flex flex-col items-center text-center bg-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+              className="relative z-10 flex flex-col items-center text-center bg-card dark:bg-gray-800/90 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
             >
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {step.icon}
               </div>
-              <div className="absolute top-20 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary shadow-inner group-hover:scale-110 transition-all">
+              
+              {/* New step number styling */}
+              <div className="absolute -top-6 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white text-xl font-bold shadow-md group-hover:scale-110 transition-transform">
                 {index + 1}
               </div>
+              
               <h3 className="text-xl font-semibold mb-2 mt-4">{step.title}</h3>
               <p className="text-muted-foreground">{step.description}</p>
             </div>
@@ -225,89 +222,120 @@ const HowItWorksSection = () => {
   );
 };
 
-// New Service Highlights Section
 const servicesForProfessionals = [
   {
-    icon: <HeartPulse className="h-8 w-8 text-primary" />,
-    title: "Healthcare Specialists",
-    description: "We connect nurses, doctors, and specialists with the medical providers who need them most"
+    icon: <Stethoscope className="h-8 w-8 text-primary" />,
+    title: "Wide Range of Specialties",
+    description: "Opportunities for nurses, doctors, therapists, and more"
   },
   {
-    icon: <Shield className="h-8 w-8 text-primary" />,
-    title: "Verified Credentials",
-    description: "Your qualifications are verified once, then shared securely with potential employers"
-  },
-  {
-    icon: <Zap className="h-8 w-8 text-primary" />,
-    title: "Quick Placements",
-    description: "Our matching algorithm helps find opportunities that fit your skills and schedule"
-  },
-  {
-    icon: <ClipboardCheck className="h-8 w-8 text-primary" />,
-    title: "Easy Onboarding",
-    description: "Simple registration process with clear instructions and support at every step"
+    icon: <Heart className="h-8 w-8 text-primary" />,
+    title: "Flexible Schedules",
+    description: "Choose shifts that fit your lifestyle and availability"
   },
   {
     icon: <Users className="h-8 w-8 text-primary" />,
-    title: "Community Support",
-    description: "Join a network of healthcare professionals for resources and career advice"
+    title: "Diverse Work Environments",
+    description: "Work in hospitals, clinics, home care, and more"
   },
   {
-    icon: <Award className="h-8 w-8 text-primary" />,
-    title: "Skill Development",
-    description: "Access various practices to expand your clinical experience and expertise"
+    icon: <ClipboardCheck className="h-8 w-8 text-primary" />,
+    title: "Credential Verification",
+    description: "We ensure your credentials meet industry standards"
   },
   {
     icon: <DollarSign className="h-8 w-8 text-primary" />,
-    title: "Transparent Pay",
-    description: "Clearly defined rates based on your qualifications and the position requirements"
+    title: "Competitive Pay",
+    description: "Earn competitive rates for your expertise"
   },
   {
-    icon: <Star className="h-8 w-8 text-primary" />,
-    title: "Rating System",
-    description: "Build your professional reputation through ratings from medical providers"
+    icon: <Zap className="h-8 w-8 text-primary" />,
+    title: "Quick Placement",
+    description: "Get matched with opportunities quickly and efficiently"
+  },
+  {
+    icon: <MessageCircle className="h-8 w-8 text-primary" />,
+    title: "Direct Communication",
+    description: "Communicate directly with healthcare facilities"
+  },
+  {
+    icon: <Award className="h-8 w-8 text-primary" />,
+    title: "Recognition & Rewards",
+    description: "Get recognized for your hard work and dedication"
   }
 ];
 
-// Sample job listings data
 const sampleJobs = [
   {
     id: "job1",
-    title: "ER Nurse - Weekend Shifts",
-    company: "Metro Manila Hospital",
-    logo: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=200&h=200&fit=crop",
-    location: "Makati, Metro Manila",
-    type: "Part-time",
-    description: "Seeking experienced ER nurses for weekend shifts. Competitive pay and flexible scheduling options available."
+    title: "Registered Nurse - ICU",
+    company: "St. Luke's Medical Center",
+    logo: "https://images.unsplash.com/photo-1628771418338-e379984939a5?q=80&w=200&h=200&fit=crop",
+    location: "Quezon City",
+    type: "Full-time",
+    description: "Provide critical care to patients in the ICU. Monitor vital signs, administer medications, and collaborate with the healthcare team."
   },
   {
     id: "job2",
-    title: "General Practitioner",
-    company: "Cebu Medical Center",
-    logo: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=200&h=200&fit=crop",
-    location: "Cebu City",
-    type: "On-call",
-    description: "General practitioners needed for on-call shifts at a growing medical center. Opportunities for regular work available."
+    title: "Physical Therapist",
+    company: "The Medical City",
+    logo: "https://images.unsplash.com/photo-1532938314638-5b94ac63b7ca?q=80&w=200&h=200&fit=crop",
+    location: "Pasig City",
+    type: "Part-time",
+    description: "Evaluate patients' physical condition, develop treatment plans, and assist patients in regaining mobility and function."
   },
   {
     id: "job3",
-    title: "Pediatric Specialist",
-    company: "Children's Wellness Center",
-    logo: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?q=80&w=200&h=200&fit=crop",
-    location: "Quezon City",
-    type: "Short-term contract",
-    description: "Pediatric specialists needed for 3-month coverage. Possibility of extension based on performance."
+    title: "Emergency Room Physician",
+    company: "Makati Medical Center",
+    logo: "https://images.unsplash.com/photo-1505751172876-fa1923c5c522?q=80&w=200&h=200&fit=crop",
+    location: "Makati City",
+    type: "Per Diem",
+    description: "Provide immediate medical care to patients in the emergency room. Diagnose illnesses, perform procedures, and stabilize patients."
   },
   {
     id: "job4",
-    title: "ICU Nurse Supervisor",
-    company: "St. Luke's Medical Center",
-    logo: "https://images.unsplash.com/photo-1516549655669-8289983d0f9b?q=80&w=200&h=200&fit=crop",
-    location: "Taguig, Metro Manila",
-    type: "Night shift",
-    description: "Experienced ICU nurses needed for supervisory role on night shifts. Leadership experience preferred."
+    title: "Medical Technologist",
+    company: "Asian Hospital and Medical Center",
+    logo: "https://images.unsplash.com/photo-1532187863489-09f919b2513c?q=80&w=200&h=200&fit=crop",
+    location: "Muntinlupa City",
+    type: "Full-time",
+    description: "Perform laboratory tests and analyses to assist in the diagnosis, treatment, and prevention of diseases."
   }
 ];
+
+const CTASection = () => {
+  return (
+    <section className="py-16 md:py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background/0 z-0"></div>
+      <div className="absolute right-0 top-1/4 w-1/3 h-2/3 bg-[url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?q=80&w=600')] bg-cover bg-center rounded-l-3xl opacity-20 blur-sm"></div>
+      
+      <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto bg-card dark:bg-gray-800/90 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Philippine Hospitals Need Your Skills</h2>
+            <p className="text-xl text-muted-foreground">
+              Help solve critical staffing shortages while supplementing your income. Moonlighting.ph seamlessly connects you with medical providers across the country.
+            </p>
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-6 justify-center">
+            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
+              <span>Join Waitlist</span>
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Link to="/client">
+              <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
+                <span>I'm a medical provider</span>
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -352,7 +380,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="bg-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in group"
+              className="bg-card dark:bg-gray-800/90 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex items-center mb-4">
@@ -370,10 +398,10 @@ const TestimonialsSection = () => {
               </div>
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="h-5 w-5 text-yellow-500 fill-yellow-500" />
                 ))}
                 {[...Array(5 - testimonial.rating)].map((_, i) => (
-                  <Star key={i + testimonial.rating} className="h-5 w-5 text-gray-400 dark:text-gray-600" />
+                  <Star key={i + testimonial.rating} className="h-5 w-5 text-muted-foreground opacity-30" />
                 ))}
               </div>
               <p className="text-base sm:text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
@@ -385,111 +413,54 @@ const TestimonialsSection = () => {
   );
 };
 
-const CTASection = () => {
-  return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background/0 z-0"></div>
-      <div className="absolute right-0 top-1/4 w-1/3 h-2/3 bg-[url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?q=80&w=600')] bg-cover bg-center rounded-l-3xl opacity-20 blur-sm"></div>
-      
-      <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto bg-primary/5 backdrop-blur-sm border border-primary/10 rounded-2xl p-6 md:p-10 shadow-xl">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Philippine Hospitals Need Your Skills</h2>
-            <p className="text-xl text-muted-foreground">
-              Help solve critical staffing shortages while supplementing your income. Moonlighting.ph seamlessly connects you with medical providers across the country.
-            </p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg group">
-              <span>Join Waitlist</span>
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Link to="/client">
-              <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
-                <span>I'm a medical provider</span>
-                <ArrowRight className="ml-2 h-5 w-5 text-white opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Footer = () => {
   return (
-    <footer className="bg-card pt-12 md:pt-16 pb-8">
+    <footer className="bg-background py-12 md:py-16 border-t">
       <div className="container mx-auto px-5 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* About Section */}
           <div>
-            <div className="flex items-center mb-4 group">
-              <Moon className="h-6 w-6 text-primary mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              <span className="text-xl font-display font-bold">moonlighting.ph</span>
-            </div>
-            <p className="text-sm md:text-base text-muted-foreground mb-4">
-              Connecting healthcare professionals with medical providers that need them.
+            <Link to="/" className="flex items-center gap-2 group mb-4">
+              <div className="relative p-1">
+                <div className="absolute inset-0 rounded-full bg-primary opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                <Moon className="h-8 w-8 text-primary relative z-10" />
+              </div>
+              <span className="font-display font-bold text-lg sm:text-xl">moonlighting.ph</span>
+            </Link>
+            <p className="text-muted-foreground">
+              Connecting healthcare professionals with flexible work opportunities in the Philippines.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                </svg>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clipRule="evenodd" />
-                </svg>
-              </a>
-            </div>
           </div>
           
+          {/* Quick Links Section */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">For Professionals</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">How It Works</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Find Opportunities</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Payment Process</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Success Stories</a></li>
+            <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
+            <ul className="text-muted-foreground">
+              <li className="mb-2"><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li className="mb-2"><a href="#services" className="hover:text-primary transition-colors">Services</a></li>
+              <li className="mb-2"><a href="#jobs" className="hover:text-primary transition-colors">Job Listings</a></li>
+              <li><Link to="/client" className="hover:text-primary transition-colors">For Medical Providers</Link></li>
             </ul>
           </div>
           
+          {/* Contact Section */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">About Us</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Careers</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Blog</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Press</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Terms of Service</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Privacy Policy</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Cookie Policy</a></li>
-              <li><a href="#" className="text-sm md:text-base text-muted-foreground hover:text-primary transition-colors relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary/50 after:left-0 after:bottom-0 after:scale-x-0 after:origin-bottom-right hover:after:scale-x-100 hover:after:origin-bottom-left after:transition-transform after:duration-300">Dispute Resolution</a></li>
-            </ul>
+            <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
+            <p className="text-muted-foreground">
+              Email: <a href="mailto:info@moonlighting.ph" className="hover:text-primary transition-colors">info@moonlighting.ph</a>
+            </p>
+            <p className="text-muted-foreground">
+              Phone: <a href="tel:+639123456789" className="hover:text-primary transition-colors">+63 912 345 6789</a>
+            </p>
+            <p className="text-muted-foreground">
+              Address: 123 Main Street, Metro Manila, Philippines
+            </p>
           </div>
         </div>
         
-        <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
-          <p className="text-sm text-muted-foreground text-center">
-            &copy; {new Date().getFullYear()} moonlighting.ph. All rights reserved.
-          </p>
+        {/* Copyright */}
+        <div className="mt-12 text-center text-muted-foreground">
+          &copy; {new Date().getFullYear()} Moonlighting.ph. All rights reserved.
         </div>
       </div>
     </footer>
@@ -497,28 +468,23 @@ const Footer = () => {
 };
 
 const Index = () => {
-  // Enable dark mode when the component mounts
-  useEffect(() => {
-    setDarkMode();
-  }, []);
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <PageTransition />
       <Navbar />
       <HeroSection />
       <FeatureSection />
       <ServiceHighlights 
-        title="Top-Notch Healthcare Services" 
-        subtitle="We connect pre-vetted, on-demand medical professionals with medical providers that need them."
+        title="Services for Healthcare Professionals" 
+        subtitle="We help you find moonlighting opportunities that match your skills and schedule"
         services={servicesForProfessionals}
       />
       <HowItWorksSection />
       <JobListingsPreview
-        title="Featured Opportunities"
-        subtitle="Browse our latest healthcare job listings across the Philippines"
+        title="Recent Job Opportunities"
+        subtitle="Browse through the latest healthcare positions available on our platform"
         listings={sampleJobs}
-        viewAllLink="#job-board"
+        viewAllLink="#jobs"
       />
       <TestimonialsSection />
       <CTASection />
