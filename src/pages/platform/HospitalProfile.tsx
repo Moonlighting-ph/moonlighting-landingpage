@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { 
   Building, MapPin, Phone, Mail, Globe, Edit, Upload, 
-  Check, Star, Users, Shield, Award, FileText, Clock, X, Plus
+  Check, Star, Users, Shield, Award, FileText, Clock, X, Plus, DollarSign
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
