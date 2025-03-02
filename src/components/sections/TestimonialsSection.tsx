@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { MessageCircle, Star } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -27,10 +28,16 @@ const TestimonialsSection = () => {
     }
   ];
 
+  const titleRef = useScrollAnimation<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px',
+    animationClass: 'opacity-0 animate-fade-in'
+  });
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-5 sm:px-6 md:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16" ref={titleRef}>
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
             <MessageCircle className="h-4 w-4 mr-2" />
             <span>Professional Stories</span>
@@ -42,36 +49,44 @@ const TestimonialsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index} 
-              className="bg-card dark:bg-gray-800/90 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in group"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary/20 group-hover:border-primary transition-colors">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.author} 
-                    className="w-full h-full object-cover"
-                  />
+          {testimonials.map((testimonial, index) => {
+            const testimonialRef = useScrollAnimation<HTMLDivElement>({
+              threshold: 0.1,
+              rootMargin: '0px 0px -100px 0px',
+              animationClass: `opacity-0 animate-fade-in delay-${index * 200}`
+            });
+            
+            return (
+              <div 
+                key={index} 
+                ref={testimonialRef}
+                className="bg-card dark:bg-gray-800/90 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-primary/20 group-hover:border-primary transition-colors">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.author} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-semibold">{testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+                  ))}
+                  {[...Array(5 - testimonial.rating)].map((_, i) => (
+                    <Star key={i + testimonial.rating} className="h-5 w-5 text-muted-foreground opacity-30" />
+                  ))}
                 </div>
+                <p className="text-base sm:text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
               </div>
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-500 fill-yellow-500" />
-                ))}
-                {[...Array(5 - testimonial.rating)].map((_, i) => (
-                  <Star key={i + testimonial.rating} className="h-5 w-5 text-muted-foreground opacity-30" />
-                ))}
-              </div>
-              <p className="text-base sm:text-lg mb-6 italic">&ldquo;{testimonial.content}&rdquo;</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

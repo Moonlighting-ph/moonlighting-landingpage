@@ -29,7 +29,12 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
   viewAllLink,
   forClients = false
 }) => {
-  const titleRef = useScrollAnimation<HTMLDivElement>();
+  const titleRef = useScrollAnimation<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px',
+    animationClass: 'opacity-0 animate-fade-in'
+  });
+  
   const ctaRef = useScrollAnimation<HTMLDivElement>({
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px',

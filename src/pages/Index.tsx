@@ -27,7 +27,13 @@ const Index = () => {
     // Check again after a short delay to catch any late-loading elements
     const timeoutId = setTimeout(checkVisibility, 100);
     
-    return () => clearTimeout(timeoutId);
+    // Check periodically for when user scrolls
+    const intervalId = setInterval(checkVisibility, 1000);
+    
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
   }, []);
   
   return (
@@ -36,32 +42,19 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <FeatureSection />
-      
-      {/* Hide ServiceHighlights section */}
-      <div className="hidden">
-        <ServiceHighlights 
-          title="Services for Healthcare Professionals" 
-          subtitle="We help you find moonlighting opportunities that match your skills and schedule"
-          services={servicesForProfessionals}
-        />
-      </div>
-      
+      <ServiceHighlights 
+        title="Services for Healthcare Professionals" 
+        subtitle="We help you find moonlighting opportunities that match your skills and schedule"
+        services={servicesForProfessionals}
+      />
       <HowItWorksSection />
-      
-      {/* Hide job listings section with CSS instead of removing */}
-      <div className="hidden">
-        <JobListingsPreview
-          title="Recent Job Opportunities"
-          subtitle="Browse through the latest healthcare positions available on our platform"
-          listings={sampleJobs}
-          viewAllLink="#jobs"
-        />
-      </div>
-      
-      {/* Hide testimonials section with CSS instead of removing */}
-      <div className="hidden">
-        <TestimonialsSection />
-      </div>
+      <JobListingsPreview
+        title="Recent Job Opportunities"
+        subtitle="Browse through the latest healthcare positions available on our platform"
+        listings={sampleJobs}
+        viewAllLink="#jobs"
+      />
+      <TestimonialsSection />
       <CTASection />
       <FooterSection />
     </div>
