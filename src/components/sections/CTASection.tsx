@@ -6,7 +6,6 @@ import WaitlistModal from '@/components/WaitlistModal';
 
 const CTASection = () => {
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
-  const [showDemoModal, setShowDemoModal] = useState(false);
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
@@ -47,17 +46,11 @@ const CTASection = () => {
         </div>
       </div>
       
-      {/* Modals */}
+      {/* Modal */}
       <WaitlistModal 
         open={showWaitlistModal} 
         onOpenChange={setShowWaitlistModal}
         type="waitlist"
-      />
-      
-      <WaitlistModal 
-        open={showDemoModal} 
-        onOpenChange={setShowDemoModal}
-        type="demo"
       />
     </section>
   );

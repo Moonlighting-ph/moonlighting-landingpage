@@ -58,7 +58,7 @@
 
 /* Animated text cycler spacing */
 .text-cycler-container span + span {
-  @apply mx-3;
+  @apply mx-5;
 }
 
 /* Make sure all arrows are fully visible */
@@ -83,22 +83,36 @@
 
 /* Animated text cycler spacing improvements */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
-  @apply my-2 mx-2;
+  @apply my-4 mx-3;
 }
 
 /* Ensure proper spacing between animated elements */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block + span {
-  @apply mx-3;
+  @apply mx-5;
 }
 
 /* Prevent animated text cycler elements from overlapping */
 .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
-  @apply my-1 md:my-2;
+  @apply my-3 md:my-4;
 }
 
 /* Ensure animated text cycler spacing on mobile */
 @media (max-width: 768px) {
   .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
-    @apply w-full;
+    @apply w-full my-4;
   }
+  
+  .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
+    @apply my-6 mx-3;
+  }
+}
+
+/* Add more vertical spacing between text cycler rows */
+.hero-text-container > div {
+  @apply mb-8;
+}
+
+/* Increase line height for better text separation */
+.text-4xl.md\:text-5xl.lg\:text-6xl {
+  @apply leading-relaxed md:leading-loose;
 }
