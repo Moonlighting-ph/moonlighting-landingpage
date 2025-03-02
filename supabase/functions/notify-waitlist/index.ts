@@ -1,6 +1,7 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
+import { Resend } from "npm:resend@2.0.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,7 +9,7 @@ const corsHeaders = {
 };
 
 interface Registration {
-  id: number;
+  id: string;
   created_at: string;
   name: string;
   email: string;
@@ -30,6 +31,8 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
+
+    const resend = new Resend(Deno.env.get("RESEND_API_KEY") ?? "");
     
     // Get new registrations that haven't been notified yet
     const { data: newRegistrations, error } = await supabaseAdmin
@@ -55,30 +58,25 @@ serve(async (req) => {
     const notifications = [];
     
     for (const registration of newRegistrations as Registration[]) {
-      // Send email notification using Email API
-      const emailRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "Moonlighting Waitlist <onboarding@resend.dev>",
+      // Send email notification using Resend API
+      try {
+        const emailRes = await resend.emails.send({
+          from: "Moonlighting.ph <onboarding@resend.dev>",
           to: ["cess.ventures209@gmail.com"],
           subject: `New Waitlist Registration: ${registration.name}`,
           html: `
-          <h1>New Waitlist Registration</h1>
-          <p><strong>Name:</strong> ${registration.name}</p>
-          <p><strong>Email:</strong> ${registration.email}</p>
-          <p><strong>Phone:</strong> ${registration.phone || 'Not provided'}</p>
-          <p><strong>Type:</strong> ${registration.type}</p>
-          <p><strong>Message:</strong> ${registration.message || 'None'}</p>
-          <p><strong>Registered at:</strong> ${new Date(registration.created_at).toLocaleString()}</p>
+            <h1>New Waitlist Registration</h1>
+            <p><strong>Name:</strong> ${registration.name}</p>
+            <p><strong>Email:</strong> ${registration.email}</p>
+            <p><strong>Phone:</strong> ${registration.phone || 'Not provided'}</p>
+            <p><strong>Type:</strong> ${registration.type}</p>
+            <p><strong>Message:</strong> ${registration.message || 'None'}</p>
+            <p><strong>Registered at:</strong> ${new Date(registration.created_at).toLocaleString()}</p>
           `,
-        }),
-      });
-      
-      if (emailRes.ok) {
+        });
+        
+        console.log("Email sent successfully:", emailRes);
+        
         // Update the registration as notified
         const { error: updateError } = await supabaseAdmin
           .from("registrations")
@@ -94,13 +92,13 @@ serve(async (req) => {
           email: registration.email,
           success: true,
         });
-      } else {
-        const errorData = await emailRes.json();
+      } catch (emailError) {
+        console.error("Error sending email:", emailError);
         notifications.push({
           id: registration.id,
           email: registration.email,
           success: false,
-          error: errorData,
+          error: emailError.message,
         });
       }
     }

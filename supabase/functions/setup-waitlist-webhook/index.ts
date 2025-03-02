@@ -12,55 +12,44 @@ serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
-  
+
   try {
     // Create a Supabase client with the service role key
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
-    
-    // Set up a webhook for the registrations table to trigger the notify-waitlist function
-    // First check if we have permission to do this
-    const { data: rpcTest, error: rpcError } = await supabaseAdmin.rpc(
-      'http_set_webhook',
+
+    // Set up a database trigger that calls the notify-waitlist function when a new registration is added
+    const { error } = await supabaseAdmin.rpc("pg_notify", {
+      channel: "new_registration", 
+      payload: JSON.stringify({
+        type: "new_registration",
+        function: "notify-waitlist"
+      })
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    return new Response(
+      JSON.stringify({ 
+        message: "Waitlist webhook setup successfully" 
+      }),
       {
-        webhook_name: 'waitlist_notification',
-        url: `${Deno.env.get("SUPABASE_URL") ?? ""}/functions/v1/notify-waitlist`,
-        events: ['INSERT'],
-        table: 'registrations'
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
       }
     );
-    
-    let webhookResult = { success: false, message: "Webhook not created", error: null };
-    
-    if (rpcError) {
-      console.log("RPC error, falling back to webhooks REST API:", rpcError);
-      webhookResult = {
-        success: false,
-        message: "Could not create webhook via RPC, please set up the webhook manually",
-        error: rpcError
-      };
-    } else {
-      webhookResult = {
-        success: true,
-        message: "Webhook created successfully using RPC",
-        details: rpcTest
-      };
-    }
-    
-    return new Response(JSON.stringify({
-      message: "Webhook setup complete",
-      webhook: webhookResult
-    }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
   } catch (error) {
-    console.error("Error in setup-waitlist-webhook function:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+    console.error("Error setting up webhook:", error);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
   }
 });

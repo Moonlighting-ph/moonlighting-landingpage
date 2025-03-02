@@ -1,3 +1,4 @@
+
 @layer base {
   .glass {
     @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
@@ -57,7 +58,7 @@
 
 /* Animated text cycler spacing */
 .text-cycler-container span + span {
-  @apply mx-5;
+  @apply mx-3;
 }
 
 /* Make sure all arrows are fully visible */
@@ -80,48 +81,48 @@
   @apply dark:text-gray-300 text-gray-800 font-medium;
 }
 
-/* Animated text cycler spacing improvements */
+/* Fixed sizing for animated text pill containers */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
-  @apply my-3 mx-2;
+  @apply my-1 mx-2;
 }
 
-/* Ensure proper spacing between animated elements */
+/* Consistent spacing between all animated elements */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block + span {
-  @apply mx-3;
+  @apply mx-2;
 }
 
 /* Prevent animated text cycler elements from overlapping */
 .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
-  @apply my-2 md:my-3;
+  @apply my-1;
 }
 
 /* Ensure animated text cycler spacing on mobile */
 @media (max-width: 768px) {
   .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
-    @apply w-full my-3;
+    @apply w-full my-2;
   }
   
   .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
-    @apply my-3 mx-2;
+    @apply my-1 mx-2;
   }
 }
 
 /* Add balanced vertical spacing between text cycler rows */
 .hero-text-container > div {
-  @apply mb-5;
+  @apply mb-3;
 }
 
-/* Balanced line height for text separation */
+/* Balanced line height for text separation - reduce spacing */
 .text-4xl.md\:text-5xl.lg\:text-6xl {
-  @apply leading-relaxed;
+  @apply leading-snug;
 }
 
 /* Fix the width of the hero section content */
 .hero-text-container {
-  @apply max-w-3xl mx-auto;
+  @apply max-w-2xl mx-auto;
 }
 
-/* Make circular pills consistent in size and padding */
+/* Make all circular pills consistent in size and padding */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block span {
-  @apply px-4 py-1 inline-flex items-center justify-center;
+  @apply px-3 py-1 text-base inline-flex items-center justify-center;
 }

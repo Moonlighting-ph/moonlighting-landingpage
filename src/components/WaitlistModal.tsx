@@ -36,12 +36,21 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
             phone, 
             message, 
             type,
-            notified: false // Add notified field to track notification status
+            notified: false // This will trigger the edge function to send the notification email
           }
         ]);
 
       if (error) {
         throw error;
+      }
+      
+      // Trigger edge function to send notification email
+      try {
+        await supabase.functions.invoke('notify-waitlist');
+      } catch (functionError) {
+        console.error('Error triggering notification:', functionError);
+        // We don't throw this error as we still want to show success to the user
+        // The edge function will automatically run on a schedule as a backup
       }
       
       // Success message
