@@ -32,11 +32,16 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       console.log("Submitting form with data:", { name, email, phone, profession, type });
       
       // Check if email already exists in registrations table
-      const { data: existingRegistration } = await supabase
+      const { data: existingRegistration, error: searchError } = await supabase
         .from('registrations')
         .select('email')
-        .eq('email', email)
+        .eq('email', email.trim().toLowerCase())
         .maybeSingle();
+      
+      if (searchError) {
+        console.error('Error checking for existing email:', searchError);
+        throw searchError;
+      }
       
       if (existingRegistration) {
         console.log('Email already exists in registrations:', existingRegistration);
@@ -51,7 +56,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
         .insert([
           { 
             name, 
-            email, 
+            email: email.trim().toLowerCase(), 
             phone, 
             profession,
             type
@@ -67,7 +72,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       try {
         console.log("Invoking notify-waitlist function");
         const { error: functionError, data } = await supabase.functions.invoke('notify-waitlist', {
-          body: { email, name, type, phone, profession }
+          body: { email: email.trim().toLowerCase(), name, type, phone, profession }
         });
         
         console.log("Function response:", data);
