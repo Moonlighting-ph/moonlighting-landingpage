@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { AlertCircle } from 'lucide-react';
 
 interface WaitlistModalProps {
   open: boolean;
@@ -20,13 +21,29 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
   const [phone, setPhone] = useState('');
   const [profession, setProfession] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setEmailError('');
 
     try {
       console.log("Submitting form with data:", { name, email, phone, profession, type });
+      
+      // Check if email already exists in registrations table
+      const { data: existingRegistration } = await supabase
+        .from('registrations')
+        .select('email')
+        .eq('email', email)
+        .maybeSingle();
+      
+      if (existingRegistration) {
+        console.log('Email already exists in registrations:', existingRegistration);
+        setEmailError('This email is already waitlisted. Check your email inbox for your credentials.');
+        setIsSubmitting(false);
+        return;
+      }
       
       // Submit data to Supabase
       const { error } = await supabase
@@ -140,11 +157,20 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
                   id="email" 
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError(''); // Clear error when email changes
+                  }}
                   placeholder="your.email@example.com"
                   required
-                  className="rounded-xl"
+                  className={`rounded-xl ${emailError ? 'border-destructive' : ''}`}
                 />
+                {emailError && (
+                  <div className="flex items-center gap-2 mt-1 text-destructive text-sm">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>{emailError}</span>
+                  </div>
+                )}
               </div>
               
               <div className="space-y-2">
