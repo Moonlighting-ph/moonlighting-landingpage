@@ -232,30 +232,9 @@ html.dark {
   @apply dark:text-gray-300 text-gray-800 font-medium;
 }
 
-/* Fix for AnimatedTextCycler visibility */
-[data-cycler-middle-element] {
-  @apply bg-secondary/70 text-gray-900 dark:text-white px-4 py-1 rounded-full font-medium relative z-10;
-}
-
-[data-cycler-first-element],
-[data-cycler-last-element],
-[data-cycler-static-text] {
-  @apply text-gray-900 dark:text-white font-medium relative z-10;
-}
-
-/* Make sure animated text elements are more prominent */
-.text-cycler-container span {
-  @apply text-2xl md:text-3xl lg:text-4xl font-bold relative z-10;
-}
-
 /* Ensure proper spacing between text elements */
 .text-cycler-container span + span {
   @apply mx-2;
-}
-
-/* Create more prominence for the changing texts */
-[data-cycler-middle-element] {
-  @apply shadow-sm border border-secondary/30;
 }
 
 /* Make sure all arrows are fully visible */

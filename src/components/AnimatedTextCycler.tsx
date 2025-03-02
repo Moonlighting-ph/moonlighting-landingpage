@@ -41,13 +41,13 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
 
   // Apply custom styles or default styles
   const middleElementClass = customStyles.middleElementClass || 
-    "relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/20 text-secondary dark:text-secondary transition-all duration-300 opacity-100 transform translate-y-0";
+    "relative inline-block rounded-full px-4 py-1 bg-secondary/70 text-secondary-foreground font-semibold shadow-sm border border-secondary/30";
   
   const firstElementClass = customStyles.firstElementClass || 
-    "relative mx-2 inline-block font-semibold";
+    "relative inline-block font-semibold";
   
   const lastElementClass = customStyles.lastElementClass || 
-    "relative mx-2 inline-block";
+    "relative inline-block";
 
   return (
     <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
@@ -56,7 +56,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className="relative mx-2 inline-block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
         <span 
           className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          data-cycler-first-element
+          aria-hidden="true"
         >
           {textGroups[0][currentIndices[0]]}
         </span>
@@ -64,10 +64,10 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       
       <span className={firstElementClass}>{staticTexts[1]}</span>
       
-      <span className={middleElementClass}>
+      <span className="relative inline-block">
         <span 
-          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          data-cycler-middle-element
+          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${middleElementClass}`}
+          aria-hidden="true"
         >
           {textGroups[1][currentIndices[1]]}
         </span>
@@ -78,7 +78,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className="relative mx-2 inline-block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
         <span 
           className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          data-cycler-last-element
+          aria-hidden="true"
         >
           {textGroups[2][currentIndices[2]]}
         </span>
