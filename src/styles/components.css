@@ -83,17 +83,18 @@
 
 /* Enhanced pill circles with larger sizing and text */
 .hero-text-container .relative.inline-block span {
-  @apply px-8 py-4 text-4xl md:text-5xl lg:text-6xl min-w-[200px] font-semibold;
+  @apply px-8 py-4 min-w-[200px] font-semibold;
+  font-size: inherit;
 }
 
-/* Fixed spacing for animated text pill containers */
+/* Fixed spacing for animated text pill containers - using direct CSS properties instead of @apply */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
-  @apply my-1 mx-3;
+  margin: 0.25rem 0.75rem;
 }
 
-/* Consistent spacing between all animated elements */
+/* Consistent spacing between all animated elements - using direct CSS properties instead of @apply */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block + span {
-  @apply mx-3;
+  margin: 0 0.75rem;
 }
 
 /* Prevent animated text cycler elements from overlapping */
@@ -107,13 +108,16 @@
     @apply w-full my-2;
   }
   
+  /* Using direct CSS properties instead of @apply for the problematic selectors */
   .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
-    @apply my-1 mx-3;
+    margin: 0.25rem 0.75rem;
   }
   
   /* Enhanced mobile circle pill size */
   .hero-text-container .relative.inline-block span {
-    @apply px-6 py-3 text-3xl min-w-[180px];
+    padding: 0.75rem 1.5rem;
+    min-width: 180px;
+    font-size: 1.875rem; /* text-3xl equivalent */
   }
 }
 
