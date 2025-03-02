@@ -56,9 +56,9 @@
   }
 }
 
-/* Ensure AnimatedTextCycler is visible in both light and dark mode */
+/* Animated text cycler spacing */
 .text-cycler-container span + span {
-  @apply mx-2;
+  @apply mx-3;
 }
 
 /* Make sure all arrows are fully visible */
@@ -81,12 +81,24 @@
   @apply dark:text-gray-300 text-gray-800 font-medium;
 }
 
-/* Animated text cycler spacing */
+/* Animated text cycler spacing improvements */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
-  @apply my-1 mx-1;
+  @apply my-2 mx-2;
 }
 
 /* Ensure proper spacing between animated elements */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block + span {
-  @apply mx-2;
+  @apply mx-3;
+}
+
+/* Prevent animated text cycler elements from overlapping */
+.flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
+  @apply my-1 md:my-2;
+}
+
+/* Ensure animated text cycler spacing on mobile */
+@media (max-width: 768px) {
+  .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
+    @apply w-full;
+  }
 }

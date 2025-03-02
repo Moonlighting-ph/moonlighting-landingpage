@@ -30,14 +30,19 @@ const CTASection = () => {
               <span>Join Waitlist</span>
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 opacity-100" />
             </Button>
-            <Button 
-              variant="outline" 
-              className="rounded-full px-8 py-6 font-semibold text-lg group"
-              onClick={() => setShowDemoModal(true)}
+            <a 
+              href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
+              target="_blank" 
+              rel="noopener noreferrer"
             >
-              <span>Book a Demo</span>
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform opacity-100" />
-            </Button>
+              <Button 
+                variant="outline" 
+                className="rounded-full px-8 py-6 font-semibold text-lg group"
+              >
+                <span>Book a Demo</span>
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform opacity-100" />
+              </Button>
+            </a>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface WaitlistModalProps {
   open: boolean;
@@ -25,11 +26,22 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
     setIsSubmitting(true);
 
     try {
-      // For development without Supabase, we'll simulate a successful submission
-      // In production, you would uncomment the Supabase code and provide proper credentials
-      
-      // Simulating API delay
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // Submit data to Supabase
+      const { error } = await supabase
+        .from('registrations')
+        .insert([
+          { 
+            name, 
+            email, 
+            phone, 
+            message, 
+            type
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
       
       // Success message
       toast({
@@ -71,69 +83,84 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
           </DialogDescription>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-6 py-4">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input 
-                id="name" 
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your full name"
-                required
-                className="rounded-xl"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your.email@example.com"
-                required
-                className="rounded-xl"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone Number</Label>
-              <Input 
-                id="phone" 
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="+63 XXX XXX XXXX"
-                className="rounded-xl"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="message">Message (Optional)</Label>
-              <Textarea 
-                id="message" 
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder={type === 'waitlist' 
-                  ? "Tell us about yourself and why you're interested in joining..."
-                  : "What specific features or aspects are you interested in learning more about?"}
-                className="resize-none rounded-xl min-h-[100px]"
-              />
-            </div>
-          </div>
-          
-          <DialogFooter>
-            <Button 
-              type="submit" 
-              className="w-full rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg"
-              disabled={isSubmitting}
+        {type === 'demo' ? (
+          <div className="py-4">
+            <a 
+              href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block w-full"
             >
-              {isSubmitting ? "Submitting..." : type === 'waitlist' ? "Join Waitlist" : "Request Demo"}
-            </Button>
-          </DialogFooter>
-        </form>
+              <Button 
+                className="w-full rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg"
+              >
+                Book via Calendly
+              </Button>
+            </a>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6 py-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input 
+                  id="name" 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your full name"
+                  required
+                  className="rounded-xl"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input 
+                  id="email" 
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your.email@example.com"
+                  required
+                  className="rounded-xl"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input 
+                  id="phone" 
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+63 XXX XXX XXXX"
+                  className="rounded-xl"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="message">Message (Optional)</Label>
+                <Textarea 
+                  id="message" 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Tell us about yourself and why you're interested in joining..."
+                  className="resize-none rounded-xl min-h-[100px]"
+                />
+              </div>
+            </div>
+            
+            <DialogFooter>
+              <Button 
+                type="submit" 
+                className="w-full rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Join Waitlist"}
+              </Button>
+            </DialogFooter>
+          </form>
+        )}
       </DialogContent>
     </Dialog>
   );

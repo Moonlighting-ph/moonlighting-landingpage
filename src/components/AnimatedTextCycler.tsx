@@ -52,41 +52,47 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     "text-gray-900 dark:text-white";
 
   return (
-    <div className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
-      <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
-      
-      {/* First animated text (professions) */}
-      <span className="relative inline-block mx-1">
-        <span 
-          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${professionClass}`}
-        >
-          {textGroups[0][currentIndices[0]]}
-        </span>
-      </span>{' '}
-      
-      <span className={firstElementClass}>{staticTexts[1]}</span>{' '}
-      
-      {/* Second animated text (locations) */}
-      <span className="relative inline-block mx-1">
-        <span 
-          className={`inline-block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${locationClass}`}
-        >
-          {textGroups[1][currentIndices[1]]}
-        </span>
-      </span>{' '}
-      
-      <span className={lastElementClass}>{staticTexts[2]}</span>{' '}
-      
-      {/* Third animated text (schedules) */}
-      <span className="relative inline-block mx-1">
-        <span 
-          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${scheduleClass}`}
-        >
-          {textGroups[2][currentIndices[2]]}
-        </span>
-      </span>{' '}
-      
-      <span className={lastElementClass}>{staticTexts[3]}</span>
+    <div className={`flex flex-col md:flex-row flex-wrap gap-2 text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
+      <div className="flex items-center flex-wrap">
+        <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
+        
+        {/* First animated text (professions) */}
+        <span className="relative inline-block mx-2 my-2">
+          <span 
+            className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${professionClass}`}
+          >
+            {textGroups[0][currentIndices[0]]}
+          </span>
+        </span>{' '}
+      </div>
+
+      <div className="flex items-center flex-wrap">
+        <span className={firstElementClass}>{staticTexts[1]}</span>{' '}
+        
+        {/* Second animated text (locations) */}
+        <span className="relative inline-block mx-2 my-2">
+          <span 
+            className={`inline-block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${locationClass}`}
+          >
+            {textGroups[1][currentIndices[1]]}
+          </span>
+        </span>{' '}
+      </div>
+
+      <div className="flex items-center flex-wrap">
+        <span className={lastElementClass}>{staticTexts[2]}</span>{' '}
+        
+        {/* Third animated text (schedules) */}
+        <span className="relative inline-block mx-2 my-2">
+          <span 
+            className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${scheduleClass}`}
+          >
+            {textGroups[2][currentIndices[2]]}
+          </span>
+        </span>{' '}
+        
+        <span className={lastElementClass}>{staticTexts[3]}</span>
+      </div>
     </div>
   );
 }
