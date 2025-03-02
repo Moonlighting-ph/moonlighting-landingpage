@@ -42,9 +42,9 @@ const ClientHero = () => {
               staticTexts={["Our", "in", "needs qualified", "now"]}
               className="font-bold text-2xl md:text-3xl lg:text-4xl"
               customStyles={{
-                containerClass: "text-cycler-container p-2",
-                staticTextClass: "text-gray-900 dark:text-white",
-                middleElementClass: "px-4 py-1 bg-secondary/70 text-gray-900 dark:text-white font-bold rounded-full border border-secondary/30 shadow-sm"
+                middleElementClass: "px-4 py-1 bg-secondary/70 text-gray-900 dark:text-white font-bold rounded-full border border-secondary/30 shadow-sm",
+                firstElementClass: "text-gray-900 dark:text-white",
+                lastElementClass: "text-gray-900 dark:text-white"
               }}
             />
           </div>
