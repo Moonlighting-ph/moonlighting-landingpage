@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,12 +15,16 @@ interface WaitlistFormProps {
   }) => Promise<void>;
   isSubmitting: boolean;
   emailError: string;
+  onEmailBlur: (email: string) => Promise<void>;
+  onEmailChange: () => void;
 }
 
 const WaitlistForm: React.FC<WaitlistFormProps> = ({ 
   onSubmit, 
   isSubmitting,
-  emailError 
+  emailError,
+  onEmailBlur,
+  onEmailChange
 }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,6 +39,17 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
       phone,
       profession
     });
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    onEmailChange(); // Clear any existing error when the user types
+  };
+
+  const handleEmailBlur = async () => {
+    if (email) {
+      await onEmailBlur(email);
+    }
   };
 
   return (
@@ -58,9 +73,8 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
             id="email" 
             type="email"
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
             placeholder="your.email@example.com"
             required
             className={`rounded-xl ${emailError ? 'border-destructive' : ''}`}

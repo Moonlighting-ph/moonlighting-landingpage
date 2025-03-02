@@ -19,8 +19,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
 
   const handleFormSubmit = async (formData: Omit<WaitlistFormData, 'type'>) => {
     setIsSubmitting(true);
-    setEmailError('');
-
+    
     try {
       console.log("Submitting form with data:", { ...formData, type });
       
@@ -45,6 +44,33 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
     }
   };
 
+  const handleEmailBlur = async (email: string) => {
+    if (!email) return;
+    
+    try {
+      const { exists, error } = await waitlistService.checkExistingEmail(email);
+      
+      if (error) {
+        console.error('Error checking email:', error);
+        return;
+      }
+      
+      if (exists) {
+        setEmailError('This email is already waitlisted. Check your email inbox for your credentials.');
+      } else {
+        setEmailError('');
+      }
+    } catch (error) {
+      console.error('Error checking email on blur:', error);
+    }
+  };
+
+  const handleEmailChange = () => {
+    if (emailError) {
+      setEmailError('');
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[525px] rounded-2xl p-8 bg-card/95 backdrop-blur-md border border-primary/10 shadow-xl">
@@ -56,6 +82,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
               onSubmit={handleFormSubmit}
               isSubmitting={isSubmitting}
               emailError={emailError}
+              onEmailBlur={handleEmailBlur}
+              onEmailChange={handleEmailChange}
             />
           )}
         </ModalContent>
