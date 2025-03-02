@@ -51,6 +51,11 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
                     src={job.logo} 
                     alt={`${job.company} logo`} 
                     className="w-full h-full object-contain p-2"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=120"; // Fallback image
+                      target.classList.add("error-img");
+                    }}
                   />
                 </div>
                 <div className="flex-1">
@@ -60,7 +65,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
               </div>
               
               <div className="flex flex-wrap gap-3 mb-3">
-                <span className="inline-flex items-center text-sm location-text">
+                <span className="inline-flex items-center text-sm text-gray-800 dark:text-gray-300 font-medium">
                   <MapPin className="h-4 w-4 mr-1 opacity-100" />
                   {job.location}
                 </span>
