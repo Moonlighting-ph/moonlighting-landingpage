@@ -52,46 +52,43 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
   const gradientTextClass = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-semibold";
 
   return (
-    <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
-      <span className={firstElementClass}>{staticTexts[0]}</span>
+    <div className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
+      <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
       
       {/* First animated text (professions) */}
-      <span className={`relative mx-2 inline-block ${gradientTextClass}`}>
+      <span className={`relative inline-block ${gradientTextClass}`}>
         <span 
-          className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          aria-hidden="true"
+          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         >
           {textGroups[0][currentIndices[0]]}
         </span>
-      </span>
+      </span>{' '}
       
-      <span className={firstElementClass}>{staticTexts[1]}</span>
+      <span className={firstElementClass}>{staticTexts[1]}</span>{' '}
       
       {/* Second animated text (locations) */}
-      <span className="relative mx-2 inline-block">
+      <span className="relative inline-block">
         <span 
           className={`inline-block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${middleElementClass}`}
-          aria-hidden="true"
         >
           {textGroups[1][currentIndices[1]]}
         </span>
-      </span>
+      </span>{' '}
       
-      <span className={lastElementClass}>{staticTexts[2]}</span>
+      <span className={lastElementClass}>{staticTexts[2]}</span>{' '}
       
       {/* Third animated text (schedules) */}
-      <span className={`relative mx-2 inline-block ${gradientTextClass}`}>
+      <span className={`relative inline-block ${gradientTextClass}`}>
         <span 
-          className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          aria-hidden="true"
+          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         >
           {textGroups[2][currentIndices[2]]}
         </span>
-      </span>
+      </span>{' '}
       
       <span className={lastElementClass}>{staticTexts[3]}</span>
-    </h1>
+    </div>
   );
-};
+}
 
 export default AnimatedTextCycler;
