@@ -109,13 +109,15 @@ const ClientLanding = () => {
         forClients={true}
       />
       <StepsSection />
-      <JobListingsPreview
-        title="Available Healthcare Professionals"
-        subtitle="Browse our network of pre-vetted, on-demand medical professionals"
-        listings={sampleProfessionals}
-        viewAllLink="#professionals"
-        forClients={true}
-      />
+      <div className="hidden">
+        <JobListingsPreview
+          title="Available Healthcare Professionals"
+          subtitle="Browse our network of pre-vetted, on-demand medical professionals"
+          listings={sampleProfessionals}
+          viewAllLink="#professionals"
+          forClients={true}
+        />
+      </div>
       <ProviderCTA />
       <ClientFooter />
     </div>

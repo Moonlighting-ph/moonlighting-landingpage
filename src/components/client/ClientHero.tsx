@@ -18,7 +18,7 @@ const ClientHero = () => {
   
   const professionals = [
     "Nurses", "Doctors", "Surgeons", "Therapists",
-    "Specialists", "Anesthesiologists", "Radiologists", "Pediatricians"
+    "Specialists", "MedTechs", "Radiologists", "Pediatricians"
   ];
 
   return (
@@ -36,7 +36,7 @@ const ClientHero = () => {
           <span>For Medical Providers</span>
         </div>
         
-        <div className="text-center max-w-3xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
+        <div className="text-center max-w-4xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <div className="mb-10 text-center relative z-10">
             <AnimatedTextCycler 
               textGroups={[facilities, locations, professionals]}

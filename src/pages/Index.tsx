@@ -46,7 +46,6 @@ const Index = () => {
       <div className="hidden">
         <TestimonialsSection />
       </div>
-      
       <CTASection />
       <FooterSection />
     </div>

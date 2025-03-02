@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope } from 'lucide-react';
@@ -9,8 +8,8 @@ import WaitlistModal from '@/components/WaitlistModal';
 const HeroSection = () => {
   // Text options for the animated cycler
   const professions = [
-    "Nurse", "Doctor", "Pediatrician", "Surgeon",
-    "Anesthesiologist", "Cardiologist", "Radiologist", "Therapist"
+    "Nurse", "Doctor", "Pedia", "Surgeon",
+    "MedTech", "Cardiologist", "Radiologist", "Therapist"
   ];
   
   const locations = [
@@ -40,7 +39,7 @@ const HeroSection = () => {
           <span>For Healthcare Professionals</span>
         </div>
         
-        <div className="text-center max-w-3xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
+        <div className="text-center max-w-4xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <div className="mb-10 text-center relative z-10">
             <AnimatedTextCycler 
               textGroups={[professions, locations, schedules]}
