@@ -35,7 +35,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
             email, 
             phone, 
             message, 
-            type
+            type,
+            notified: false // Add notified field to track notification status
           }
         ]);
 
