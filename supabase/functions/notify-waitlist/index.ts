@@ -1,484 +1,338 @@
 
-import { serve } from "https://deno.land/std@0.200.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.33.1";
 import { Resend } from "npm:resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
-const supabaseUrl = Deno.env.get("SUPABASE_URL") as string;
-const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") as string;
+// Generate a random password
+function generateTemporaryPassword(length = 10) {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
+}
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-interface WaitlistRequest {
-  email: string;
-  name: string;
-  type: string;
-  phone?: string;
-  profession?: string;
-}
-
-const handler = async (req: Request): Promise<Response> => {
-  console.log("notify-waitlist function invoked");
-  
+serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
-    console.log("Handling CORS preflight request");
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { email, name, type, phone, profession }: WaitlistRequest = await req.json();
-    
-    console.log("Received notification request:", { email, name, type, phone, profession });
+    const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
+    const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
+
+    if (!supabaseUrl || !supabaseKey || !resendApiKey) {
+      throw new Error("Required environment variables are missing");
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const resend = new Resend(resendApiKey);
+
+    // Parse request body
+    const { email, name, type, phone, profession } = await req.json();
+    console.log("Request payload:", { email, name, type, phone, profession });
 
     if (!email || !name || !type) {
-      console.error("Missing required fields");
-      return new Response(
-        JSON.stringify({ error: "Missing required fields" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
-      );
+      throw new Error("Missing required fields");
     }
 
-    // Create a Supabase client
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    
-    // Email content for waitlist
-    let emailHtml = "";
-    let emailSubject = "";
-    
-    if (type === "waitlist") {
-      emailSubject = "Welcome to the Moonlighting.ph Waitlist!";
-      emailHtml = `
+    // Generate a temporary password
+    const temporaryPassword = generateTemporaryPassword();
+
+    // Store credentials in the waitlist_credentials table
+    const { error: credentialsError } = await supabase
+      .from('waitlist_credentials')
+      .insert([
+        { 
+          email, 
+          password: temporaryPassword,
+          name,
+          profession
+        }
+      ]);
+
+    if (credentialsError) {
+      console.error('Error storing credentials:', credentialsError);
+      // Continue with the process even if storing credentials fails
+      // We'll still send the email notification
+    }
+
+    // Format the profession for display
+    const formattedProfession = profession ? profession.charAt(0).toUpperCase() + profession.slice(1) : "Not specified";
+
+    // Send email to user
+    const { data: userEmailData, error: userEmailError } = await resend.emails.send({
+      from: "Moonlighting.ph <onboarding@resend.dev>",
+      to: [email],
+      subject: "Welcome to Moonlighting.ph Waitlist!",
+      html: `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
         <head>
-          <meta charset="utf-8">
+          <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Welcome to Moonlighting.ph!</title>
+          <title>Welcome to Moonlighting.ph</title>
           <style>
             body {
               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              margin: 0;
-              padding: 0;
-              background-color: #f9fafb;
-              color: #111827;
               line-height: 1.6;
-            }
-            .container {
+              color: #333;
               max-width: 600px;
               margin: 0 auto;
-              padding: 40px 20px;
+              padding: 20px;
+            }
+            .container {
+              background-color: #ffffff;
+              border-radius: 10px;
+              padding: 30px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
             .header {
               text-align: center;
               margin-bottom: 30px;
             }
             .logo {
+              max-width: 150px;
               margin-bottom: 20px;
             }
-            .logo img {
-              height: 50px;
-            }
             h1 {
-              color: #2563eb;
-              font-size: 28px;
-              margin-bottom: 15px;
-              font-weight: 700;
-            }
-            .card {
-              background-color: white;
-              border-radius: 16px;
-              padding: 40px;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-              margin-bottom: 30px;
-            }
-            .highlight {
-              background-color: #f0f9ff;
-              border-left: 4px solid #2563eb;
-              padding: 15px;
-              margin: 20px 0;
-              border-radius: 0 8px 8px 0;
-            }
-            .button {
-              display: inline-block;
-              background-color: #2563eb;
-              color: white;
-              text-decoration: none;
-              padding: 12px 30px;
-              border-radius: 50px;
-              font-weight: 600;
-              margin: 20px 0;
-              text-align: center;
-            }
-            .footer {
-              text-align: center;
-              color: #6b7280;
-              font-size: 14px;
-              margin-top: 30px;
-            }
-            .social {
-              margin: 20px 0;
-            }
-            .social a {
-              display: inline-block;
-              margin: 0 10px;
-              text-decoration: none;
-            }
-            .badge {
-              display: inline-block;
-              background-color: #e0e7ff;
               color: #4f46e5;
-              padding: 5px 12px;
-              border-radius: 50px;
-              font-size: 14px;
-              font-weight: 500;
-              margin-right: 10px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <div class="logo">
-                <!-- Logo would go here -->
-                <h2 style="color: #2563eb; margin: 0;">Moonlighting.ph</h2>
-              </div>
-            </div>
-            
-            <div class="card">
-              <h1>Welcome to Moonlighting.ph!</h1>
-              <p>Hello ${name},</p>
-              <p>Thank you for joining our waitlist. We're excited to have you as a <span class="badge">${profession || 'healthcare professional'}</span> interested in our platform.</p>
-              
-              <div class="highlight">
-                <p><strong>Moonlighting.ph</strong> is building a platform to help healthcare professionals like you find the perfect moonlighting opportunities that match your skills and schedule.</p>
-              </div>
-              
-              <p>We're working hard to create an exceptional experience for healthcare professionals in the Philippines. Here's what you can look forward to:</p>
-              
-              <ul>
-                <li>Access to a wide range of moonlighting opportunities</li>
-                <li>Flexible scheduling that works with your existing commitments</li>
-                <li>Competitive compensation rates</li>
-                <li>Simple application and onboarding process</li>
-                <li>Dedicated support team</li>
-              </ul>
-              
-              <p>We'll keep you updated as we get closer to launch, and you'll be among the first to know when we're ready to go live.</p>
-              
-              <a href="https://moonlighting.ph" class="button">Visit Our Website</a>
-              
-              <p>If you have any questions in the meantime, feel free to reply to this email.</p>
-              
-              <p>Best regards,<br>The Moonlighting.ph Team</p>
-            </div>
-            
-            <div class="footer">
-              <p>© 2025 Moonlighting.ph. All rights reserved.</p>
-              <p>Philippines</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `;
-    } else if (type === "demo") {
-      emailSubject = "Your Moonlighting.ph Demo Request";
-      emailHtml = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Demo Request Received</title>
-          <style>
-            body {
-              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              margin: 0;
-              padding: 0;
-              background-color: #f9fafb;
-              color: #111827;
-              line-height: 1.6;
-            }
-            .container {
-              max-width: 600px;
-              margin: 0 auto;
-              padding: 40px 20px;
-            }
-            .header {
-              text-align: center;
-              margin-bottom: 30px;
-            }
-            .logo {
-              margin-bottom: 20px;
-            }
-            .logo img {
-              height: 50px;
-            }
-            h1 {
-              color: #2563eb;
-              font-size: 28px;
               margin-bottom: 15px;
-              font-weight: 700;
+              font-size: 24px;
             }
-            .card {
-              background-color: white;
-              border-radius: 16px;
-              padding: 40px;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            .content {
               margin-bottom: 30px;
+            }
+            .credentials {
+              background-color: #f3f4f6;
+              border-radius: 8px;
+              padding: 20px;
+              margin: 20px 0;
+              border-left: 4px solid #4f46e5;
+            }
+            .credentials p {
+              margin: 5px 0;
+              font-size: 15px;
             }
             .highlight {
-              background-color: #f0f9ff;
-              border-left: 4px solid #2563eb;
-              padding: 15px;
-              margin: 20px 0;
-              border-radius: 0 8px 8px 0;
-            }
-            .button {
-              display: inline-block;
-              background-color: #2563eb;
-              color: white;
-              text-decoration: none;
-              padding: 12px 30px;
-              border-radius: 50px;
-              font-weight: 600;
-              margin: 20px 0;
-              text-align: center;
+              font-weight: bold;
+              color: #4f46e5;
             }
             .footer {
               text-align: center;
-              color: #6b7280;
               font-size: 14px;
+              color: #6b7280;
               margin-top: 30px;
+              padding-top: 20px;
+              border-top: 1px solid #e5e7eb;
             }
-            .social {
-              margin: 20px 0;
-            }
-            .social a {
+            .button {
               display: inline-block;
-              margin: 0 10px;
+              background-color: #4f46e5;
+              color: white;
+              padding: 12px 24px;
               text-decoration: none;
-            }
-            .calendar {
+              border-radius: 5px;
+              font-weight: bold;
+              margin: 20px 0;
               text-align: center;
-              margin: 30px 0;
             }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <div class="logo">
-                <!-- Logo would go here -->
-                <h2 style="color: #2563eb; margin: 0;">Moonlighting.ph</h2>
-              </div>
+              <h1>Welcome to Moonlighting.ph!</h1>
             </div>
-            
-            <div class="card">
-              <h1>Demo Request Received</h1>
-              <p>Hello ${name},</p>
-              <p>Thank you for your interest in Moonlighting.ph. We've received your request for a demo.</p>
+            <div class="content">
+              <p>Dear ${name},</p>
+              <p>Thank you for joining our waitlist! We're excited to have you as one of our first members.</p>
+              <p>Moonlighting.ph is designed to help medical professionals like you find opportunities that match your skills and availability across the Philippines.</p>
               
-              <div class="highlight">
-                <p>Our team will reach out to you shortly to schedule a personalized demonstration of our platform.</p>
+              <p>Your profile information:</p>
+              <div class="credentials">
+                <p><span class="highlight">Name:</span> ${name}</p>
+                <p><span class="highlight">Email:</span> ${email}</p>
+                <p><span class="highlight">Profession:</span> ${formattedProfession}</p>
+                ${phone ? `<p><span class="highlight">Phone:</span> ${phone}</p>` : ''}
+                <p><span class="highlight">Your temporary login credentials:</span></p>
+                <p>Username: ${email}</p>
+                <p>Password: ${temporaryPassword}</p>
+                <p><small>Please keep these credentials safe. You'll need them to log in once we launch.</small></p>
               </div>
               
-              <div class="calendar">
-                <p><strong>Want to skip the wait?</strong></p>
-                <a href="https://calendly.com/cessventures/product-demo-moonlighting-ph" class="button">Book via Calendly Now</a>
-              </div>
+              <p>We're working hard to launch soon! We'll notify you as soon as the platform is ready for you to explore.</p>
               
-              <p>During the demo, we'll show you:</p>
-              
-              <ul>
-                <li>How our platform connects healthcare providers with facilities</li>
-                <li>The process for finding and applying to shifts</li>
-                <li>Features designed specifically for ${profession || 'healthcare professionals'}</li>
-                <li>How we ensure a smooth experience for all parties</li>
-              </ul>
-              
-              <p>If you have any questions in the meantime, feel free to reply to this email.</p>
-              
-              <p>Best regards,<br>The Moonlighting.ph Team</p>
+              <p>If you have any questions or feedback in the meantime, please don't hesitate to reply to this email.</p>
             </div>
-            
             <div class="footer">
-              <p>© 2025 Moonlighting.ph. All rights reserved.</p>
+              <p>© 2024 Moonlighting.ph. All rights reserved.</p>
               <p>Philippines</p>
             </div>
           </div>
         </body>
         </html>
-      `;
+      `,
+    });
+
+    if (userEmailError) {
+      console.error("Error sending user email:", userEmailError);
+      throw userEmailError;
     }
 
-    console.log("Preparing to send email to:", email);
-    console.log("Email subject:", emailSubject);
+    // Send notification to admin
+    const { data: adminEmailData, error: adminEmailError } = await resend.emails.send({
+      from: "Moonlighting.ph <onboarding@resend.dev>",
+      to: ["cess.ventures209@gmail.com"],
+      subject: `New Waitlist Registration: ${name}`,
+      html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>New Waitlist Registration</title>
+          <style>
+            body {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              line-height: 1.6;
+              color: #333;
+              max-width: 600px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+            .container {
+              background-color: #ffffff;
+              border-radius: 10px;
+              padding: 30px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .header {
+              margin-bottom: 30px;
+              border-bottom: 1px solid #e5e7eb;
+              padding-bottom: 15px;
+            }
+            h1 {
+              color: #4f46e5;
+              margin-bottom: 5px;
+              font-size: 24px;
+            }
+            .subtitle {
+              color: #6b7280;
+              font-size: 16px;
+              margin-top: 0;
+            }
+            .registration-details {
+              background-color: #f3f4f6;
+              border-radius: 8px;
+              padding: 20px;
+              margin: 20px 0;
+            }
+            .registration-details p {
+              margin: 10px 0;
+              font-size: 15px;
+            }
+            .label {
+              font-weight: bold;
+              min-width: 120px;
+              display: inline-block;
+            }
+            .footer {
+              text-align: center;
+              font-size: 14px;
+              color: #6b7280;
+              margin-top: 30px;
+              padding-top: 20px;
+              border-top: 1px solid #e5e7eb;
+            }
+            .button {
+              display: inline-block;
+              background-color: #4f46e5;
+              color: white;
+              padding: 12px 24px;
+              text-decoration: none;
+              border-radius: 5px;
+              font-weight: bold;
+              margin: 20px 0;
+              text-align: center;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>New Waitlist Registration</h1>
+              <p class="subtitle">A new user has joined the Moonlighting.ph waitlist</p>
+            </div>
+            
+            <div class="registration-details">
+              <p><span class="label">Name:</span> ${name}</p>
+              <p><span class="label">Email:</span> ${email}</p>
+              <p><span class="label">Profession:</span> ${formattedProfession}</p>
+              ${phone ? `<p><span class="label">Phone:</span> ${phone}</p>` : ''}
+              <p><span class="label">Registration Type:</span> ${type}</p>
+              <p><span class="label">Timestamp:</span> ${new Date().toLocaleString()}</p>
+              <p><span class="label">Temporary Password:</span> ${temporaryPassword}</p>
+            </div>
+            
+            <p>You can reply directly to this email to contact ${name}.</p>
+            
+            <div class="footer">
+              <p>© 2024 Moonlighting.ph Admin Notification</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+      reply_to: email,
+    });
 
-    // Send confirmation email to user
-    try {
-      const emailResponse = await resend.emails.send({
-        from: "Moonlighting.ph <hello@moonlighting.ph>",
-        to: [email],
-        subject: emailSubject,
-        html: emailHtml,
-      });
-      
-      console.log("Email sent successfully to user:", emailResponse);
-      
-      // Send notification to specified admin email
-      try {
-        const adminResponse = await resend.emails.send({
-          from: "Moonlighting.ph <hello@moonlighting.ph>",
-          to: ["cess.ventures209@gmail.com"], // Admin email
-          subject: `New ${type} registration: ${name}`,
-          html: `
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>New Registration</title>
-              <style>
-                body {
-                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                  margin: 0;
-                  padding: 0;
-                  background-color: #f9fafb;
-                  color: #111827;
-                  line-height: 1.6;
-                }
-                .container {
-                  max-width: 600px;
-                  margin: 0 auto;
-                  padding: 40px 20px;
-                }
-                h1 {
-                  color: #2563eb;
-                  font-size: 24px;
-                  margin-bottom: 15px;
-                  font-weight: 600;
-                }
-                .card {
-                  background-color: white;
-                  border-radius: 16px;
-                  padding: 30px;
-                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-                }
-                .info-item {
-                  margin-bottom: 15px;
-                  padding-bottom: 15px;
-                  border-bottom: 1px solid #e5e7eb;
-                }
-                .info-item:last-child {
-                  border-bottom: none;
-                }
-                .label {
-                  font-weight: 600;
-                  color: #4b5563;
-                  display: block;
-                  margin-bottom: 5px;
-                }
-                .value {
-                  font-size: 16px;
-                }
-                .tag {
-                  display: inline-block;
-                  background-color: #e0e7ff;
-                  color: #4f46e5;
-                  padding: 4px 10px;
-                  border-radius: 50px;
-                  font-size: 14px;
-                  font-weight: 500;
-                }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <div class="card">
-                  <h1>New ${type === 'waitlist' ? 'Waitlist' : 'Demo'} Registration</h1>
-                  
-                  <div class="info-item">
-                    <span class="label">Name</span>
-                    <div class="value">${name}</div>
-                  </div>
-                  
-                  <div class="info-item">
-                    <span class="label">Email</span>
-                    <div class="value">${email}</div>
-                  </div>
-                  
-                  <div class="info-item">
-                    <span class="label">Phone</span>
-                    <div class="value">${phone || 'Not provided'}</div>
-                  </div>
-                  
-                  <div class="info-item">
-                    <span class="label">Profession</span>
-                    <div class="value">
-                      <span class="tag">${profession || 'Not specified'}</span>
-                    </div>
-                  </div>
-                  
-                  <div class="info-item">
-                    <span class="label">Registration Type</span>
-                    <div class="value">
-                      <span class="tag">${type}</span>
-                    </div>
-                  </div>
-                  
-                  <div class="info-item">
-                    <span class="label">Time of Registration</span>
-                    <div class="value">${new Date().toLocaleString()}</div>
-                  </div>
-                </div>
-              </div>
-            </body>
-            </html>
-          `,
-        });
-        
-        console.log("Admin notification sent to cess.ventures209@gmail.com:", adminResponse);
-      } catch (adminEmailError) {
-        console.error("Error sending admin notification:", adminEmailError);
-      }
-      
-      return new Response(
-        JSON.stringify({ success: true, message: "Notification sent successfully" }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
-      );
-    } catch (emailError: any) {
-      console.error("Error sending email:", emailError);
-      console.error("Error details:", JSON.stringify(emailError, null, 2));
-      
-      return new Response(
-        JSON.stringify({ 
-          error: "Failed to send email notification",
-          details: emailError.message,
-          code: emailError.statusCode
-        }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
-      );
+    if (adminEmailError) {
+      console.error("Error sending admin email:", adminEmailError);
+      throw adminEmailError;
     }
-  } catch (error: any) {
-    console.error("Error in notify-waitlist function:", error);
+
+    console.log("Emails sent successfully:", { userEmailData, adminEmailData });
+
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        success: true, 
+        message: "Notification sent successfully",
+        userEmail: userEmailData,
+        adminEmail: adminEmailData
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Error in notify-waitlist function:", error);
+    
+    return new Response(
+      JSON.stringify({ 
+        success: false, 
+        error: error.message || "An unknown error occurred" 
+      }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders
+        }
       }
     );
   }
-};
-
-serve(handler);
+});
