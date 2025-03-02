@@ -42,7 +42,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
           {listings.map((job, index) => (
             <div 
               key={job.id}
-              className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-primary/5 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group animate-fade-in"
+              className="apple-card rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex items-start mb-4">
@@ -60,12 +60,12 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
               </div>
               
               <div className="flex flex-wrap gap-3 mb-3">
-                <span className="inline-flex items-center text-sm text-muted-foreground">
-                  <MapPin className="h-4 w-4 mr-1" />
+                <span className="inline-flex items-center text-sm location-text">
+                  <MapPin className="h-4 w-4 mr-1 opacity-100" />
                   {job.location}
                 </span>
                 <span className="inline-flex items-center text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4 mr-1" />
+                  <Clock className="h-4 w-4 mr-1 opacity-100" />
                   {job.type}
                 </span>
               </div>
@@ -74,7 +74,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
               
               <a href={`#${job.id}`} className="inline-flex items-center text-primary hover:text-primary/80 transition-colors font-medium group">
                 Read More
-                <ArrowRight className="ml-1 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-1 h-4 w-4 opacity-100 transform transition-transform group-hover:translate-x-1" />
               </a>
             </div>
           ))}
@@ -84,7 +84,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
           <Button asChild variant="outline" className="rounded-full px-6 py-6 font-semibold text-lg group">
             <a href={viewAllLink}>
               <span>View All Listings</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-100 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              <ArrowRight className="ml-2 h-5 w-5 opacity-100 group-hover:translate-x-1 transition-all" />
             </a>
           </Button>
         </div>

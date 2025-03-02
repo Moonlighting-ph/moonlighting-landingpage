@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,6 @@ import JobListingsPreview from '@/components/JobListingsPreview';
 import PageTransition from '@/components/PageTransition';
 import { Moon } from '@/components/ui/Moon';
 
-// New Service Highlights for Medical Providers
 const servicesForProviders = [
   {
     icon: <Building className="h-8 w-8 text-primary" />,
@@ -54,7 +52,6 @@ const servicesForProviders = [
   }
 ];
 
-// Sample professionals data for medical providers
 const sampleProfessionals = [
   {
     id: "pro1",
@@ -95,7 +92,6 @@ const sampleProfessionals = [
 ];
 
 const ClientHero = () => {
-  // Text options for the animated cycler
   const facilities = [
     "Hospital", "Clinic", "Care Home", "Medical Center",
     "Rehab Center", "Emergency Room", "Dental Clinic", "Wellness Center"
@@ -113,7 +109,6 @@ const ClientHero = () => {
 
   return (
     <section className="relative min-h-screen pt-20 pb-32 overflow-hidden">
-      {/* Background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
@@ -140,30 +135,30 @@ const ClientHero = () => {
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
           <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
             <span>Book a Demo</span>
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 h-5 w-5 opacity-100 transition-transform group-hover:translate-x-1" />
           </Button>
           <Link to="/">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical professional</span>
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 h-5 w-5 opacity-100 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <div className="apple-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
             <Shield className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Pre-vetted Pros</h3>
             <p className="text-muted-foreground">All healthcare workers are thoroughly vetted.</p>
           </div>
 
-          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <div className="apple-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
             <Clock className="h-8 w-8 text-primary mb-3 group-hover:rotate-12 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Quick Staffing</h3>
             <p className="text-muted-foreground">Fill staffing gaps within hours, not days.</p>
           </div>
 
-          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <div className="apple-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
             <Check className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Quality Care</h3>
             <p className="text-muted-foreground">Access skilled, rated healthcare pros.</p>
@@ -177,7 +172,6 @@ const ClientHero = () => {
 const ProviderFeatures = () => {
   return (
     <section className="py-16 md:py-24 bg-accent/30 relative">
-      {/* Background image with higher visibility in light mode */}
       <div className="absolute inset-0 opacity-10 dark:opacity-5 bg-[url('https://images.unsplash.com/photo-1631815588090-d4bfec5b3583?q=80&w=1200')] bg-cover bg-center"></div>
       
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
@@ -189,7 +183,7 @@ const ProviderFeatures = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
+          <div className="apple-card hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Building className="h-8 w-8 text-primary" />
             </div>
@@ -206,7 +200,7 @@ const ProviderFeatures = () => {
             </div>
           </div>
           
-          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
+          <div className="apple-card hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Heart className="h-8 w-8 text-primary" />
             </div>
@@ -223,7 +217,7 @@ const ProviderFeatures = () => {
             </div>
           </div>
           
-          <div className="bg-card dark:bg-gray-800/90 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:bg-card/80 dark:hover:bg-gray-800 backdrop-blur-sm group">
+          <div className="apple-card hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group">
             <div className="mb-4 bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <Users className="h-8 w-8 text-primary" />
             </div>
@@ -279,20 +273,18 @@ const StepsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connecting line */}
           <div className="hidden md:block absolute h-0.5 bg-primary/30 top-24 left-[20%] right-[20%] z-0"></div>
           
           {steps.map((step, index) => (
             <div 
               key={index} 
-              className="relative z-10 flex flex-col items-center text-center bg-card dark:bg-gray-800/90 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+              className="relative z-10 flex flex-col items-center text-center apple-card shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
             >
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {step.icon}
               </div>
               
-              {/* New step number styling */}
-              <div className="absolute -top-6 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white text-xl font-bold shadow-md group-hover:scale-110 transition-transform">
+              <div className="step-number group-hover:scale-110 transition-transform">
                 {index + 1}
               </div>
               
@@ -363,7 +355,7 @@ const ClientFooter = () => {
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clipRule="evenodd" />
                 </svg>
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-200">

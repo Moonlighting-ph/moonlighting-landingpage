@@ -95,10 +95,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "San Francisco", "Helvetica Neue", sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold tracking-tight;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "San Francisco", "Helvetica Neue", sans-serif;
   }
 
   h1 {
@@ -122,7 +124,7 @@
   }
 
   .glass-card {
-    @apply bg-white/5 backdrop-blur-lg dark:bg-white/5 dark:backdrop-blur-lg border border-white/10 shadow-xl;
+    @apply bg-white dark:bg-white/5 backdrop-blur-lg border border-gray-100 dark:border-white/10 shadow-xl;
   }
 
   .card-hover {
@@ -139,6 +141,20 @@
 
   .section-subtitle {
     @apply text-sm sm:text-base md:text-lg text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto;
+  }
+
+  /* Location text - darker in light mode */
+  .location-text {
+    @apply text-gray-800 dark:text-gray-300 font-medium;
+  }
+
+  /* Apple UI inspired components */
+  .apple-card {
+    @apply bg-white dark:bg-gray-800/90 rounded-3xl p-6 shadow-md border border-gray-100 dark:border-gray-700;
+  }
+  
+  .apple-button {
+    @apply rounded-full px-6 py-3 font-medium text-base bg-primary text-white transition-all duration-300 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
   }
 
   /* Custom scrollbar */
@@ -163,6 +179,10 @@
 }
 
 /* Dark mode toggle */
+html {
+  color-scheme: light;
+}
+
 html.dark {
   color-scheme: dark;
 }
@@ -208,7 +228,17 @@ html.dark {
   @apply dark:text-gray-300 text-gray-700;
 }
 
-/* Ensure location text is visible in light mode */
+/* Ensure location text is darker in light mode */
 .text-xs.text-muted-foreground {
-  @apply dark:text-gray-300 text-gray-700 font-medium;
+  @apply dark:text-gray-300 text-gray-800 font-medium;
+}
+
+/* Make sure all arrows are fully visible */
+[class*="group-hover:translate-x"] {
+  @apply opacity-100;
+}
+
+/* Numbers styling for How It Works section */
+.step-number {
+  @apply absolute -top-5 -left-5 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white text-xl font-bold shadow-lg z-20;
 }

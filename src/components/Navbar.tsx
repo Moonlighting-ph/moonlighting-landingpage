@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <div className="hidden md:block">
-              <Button size="sm" asChild>
+              <Button size="sm" asChild className="apple-button opacity-100">
                 <Link to={alternateRoute}>{buttonText}</Link>
               </Button>
             </div>
@@ -82,7 +82,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="absolute top-16 left-0 right-0 bg-background border-b md:hidden">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-            <Button className="w-full sm:w-auto" asChild>
+            <Button className="w-full sm:w-auto apple-button opacity-100" asChild>
               <Link to={alternateRoute}>{buttonText}</Link>
             </Button>
           </div>
