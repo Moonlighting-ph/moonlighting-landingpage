@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, GraduationCap, Heart, ArrowRight, CheckCircle, Award, MessageCircle, HeartPulse, Users, ClipboardCheck, Zap } from 'lucide-react';
@@ -8,6 +8,7 @@ import ServiceHighlights from '@/components/ServiceHighlights';
 import JobListingsPreview from '@/components/JobListingsPreview';
 import PageTransition from '@/components/PageTransition';
 import { Moon } from '@/components/ui/Moon';
+import WaitlistModal from '@/components/WaitlistModal';
 
 const HeroSection = () => {
   // Text options for the animated cycler
@@ -25,6 +26,8 @@ const HeroSection = () => {
     "Weekend", "Night Shift", "Day Shift", "On-Call",
     "Flexible", "Part-Time", "Full-Time", "24-Hour"
   ];
+
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
 
   return (
     <section className="relative min-h-screen pt-20 pb-32 overflow-hidden">
@@ -45,6 +48,10 @@ const HeroSection = () => {
             textGroups={[professions, locations, schedules]}
             staticTexts={["I'm a", "in", "looking for", "work"]}
             className="mb-6 text-center"
+            customStyles={{
+              // Make location text much darker for better visibility in light mode
+              middleElementClass: "relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/50 text-gray-800 dark:text-secondary font-medium transition-all duration-300 opacity-100 transform translate-y-0"
+            }}
           />
           
           <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto mt-6">
@@ -54,14 +61,17 @@ const HeroSection = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
+          <Button 
+            className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group"
+            onClick={() => setShowWaitlistModal(true)}
+          >
             <span>Join Waitlist</span>
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 opacity-100" />
           </Button>
           <Link to="/client">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical provider</span>
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform opacity-100" />
             </Button>
           </Link>
         </div>
@@ -86,6 +96,13 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Waitlist Modal */}
+      <WaitlistModal 
+        open={showWaitlistModal} 
+        onOpenChange={setShowWaitlistModal}
+        type="waitlist"
+      />
     </section>
   );
 };
@@ -305,6 +322,9 @@ const sampleJobs = [
 ];
 
 const CTASection = () => {
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background/0 z-0"></div>
@@ -320,19 +340,37 @@ const CTASection = () => {
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
+            <Button 
+              className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group"
+              onClick={() => setShowWaitlistModal(true)}
+            >
               <span>Join Waitlist</span>
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 opacity-100" />
             </Button>
-            <Link to="/client">
-              <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
-                <span>I'm a medical provider</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              variant="outline" 
+              className="rounded-full px-8 py-6 font-semibold text-lg group"
+              onClick={() => setShowDemoModal(true)}
+            >
+              <span>Book a Demo</span>
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform opacity-100" />
+            </Button>
           </div>
         </div>
       </div>
+      
+      {/* Modals */}
+      <WaitlistModal 
+        open={showWaitlistModal} 
+        onOpenChange={setShowWaitlistModal}
+        type="waitlist"
+      />
+      
+      <WaitlistModal 
+        open={showDemoModal} 
+        onOpenChange={setShowDemoModal}
+        type="demo"
+      />
     </section>
   );
 };
@@ -480,12 +518,17 @@ const Index = () => {
         services={servicesForProfessionals}
       />
       <HowItWorksSection />
-      <JobListingsPreview
-        title="Recent Job Opportunities"
-        subtitle="Browse through the latest healthcare positions available on our platform"
-        listings={sampleJobs}
-        viewAllLink="#jobs"
-      />
+      
+      {/* Hide job listings section with CSS instead of removing */}
+      <div className="hidden">
+        <JobListingsPreview
+          title="Recent Job Opportunities"
+          subtitle="Browse through the latest healthcare positions available on our platform"
+          listings={sampleJobs}
+          viewAllLink="#jobs"
+        />
+      </div>
+      
       <TestimonialsSection />
       <CTASection />
       <Footer />

@@ -5,67 +5,84 @@ interface AnimatedTextCyclerProps {
   textGroups: string[][];
   staticTexts: string[];
   className?: string;
+  customStyles?: {
+    middleElementClass?: string;
+    firstElementClass?: string;
+    lastElementClass?: string;
+  };
 }
 
 const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({ 
   textGroups, 
-  staticTexts,
-  className = ""
+  staticTexts, 
+  className = "",
+  customStyles = {}
 }) => {
   const [currentIndices, setCurrentIndices] = useState<number[]>(textGroups.map(() => 0));
-  const [isAnimating, setIsAnimating] = useState<boolean[]>(textGroups.map(() => false));
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const intervals = textGroups.map((_, index) => {
-      return setInterval(() => {
-        setIsAnimating(prev => {
-          const newState = [...prev];
-          newState[index] = true;
-          return newState;
-        });
-        
-        setTimeout(() => {
-          setCurrentIndices(prev => {
-            const newIndices = [...prev];
-            newIndices[index] = (newIndices[index] + 1) % textGroups[index].length;
-            return newIndices;
-          });
-          
-          setTimeout(() => {
-            setIsAnimating(prev => {
-              const newState = [...prev];
-              newState[index] = false;
-              return newState;
-            });
-          }, 300);
-        }, 300);
-      }, 3000);
-    });
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      
+      setTimeout(() => {
+        setCurrentIndices(prevIndices => 
+          prevIndices.map((currentIndex, groupIndex) => 
+            (currentIndex + 1) % textGroups[groupIndex].length
+          )
+        );
+        setIsVisible(true);
+      }, 500); // Time to fade out before changing text
+      
+    }, 3000); // Total time for each item
 
-    return () => {
-      intervals.forEach(interval => clearInterval(interval));
-    };
+    return () => clearInterval(interval);
   }, [textGroups]);
 
+  // Apply custom styles or default styles
+  const middleElementClass = customStyles.middleElementClass || 
+    "relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/20 text-secondary dark:text-secondary transition-all duration-300 opacity-100 transform translate-y-0";
+  
+  const firstElementClass = customStyles.firstElementClass || 
+    "relative mx-2 inline-block font-semibold";
+  
+  const lastElementClass = customStyles.lastElementClass || 
+    "relative mx-2 inline-block";
+
   return (
-    <div className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${className}`}>
-      {staticTexts.map((text, i) => (
-        <React.Fragment key={`static-${i}`}>
-          <span>{text}</span>
-          {i < textGroups.length && (
-            <span 
-              className={`relative mx-2 inline-block rounded-full px-4 py-1 ${
-                i === 0 ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400' : 
-                i === 1 ? 'bg-secondary/20 text-secondary dark:text-secondary' : 
-                'bg-sky-500/20 text-sky-600 dark:text-sky-400'
-              } transition-all duration-300 ${isAnimating[i] ? 'opacity-0 transform translate-y-2' : 'opacity-100 transform translate-y-0'}`}
-            >
-              {textGroups[i][currentIndices[i]]}
-            </span>
-          )}
-        </React.Fragment>
-      ))}
-    </div>
+    <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
+      <span className={firstElementClass}>{staticTexts[0]}</span>
+      
+      <span className="relative mx-2 inline-block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+        <span 
+          className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {textGroups[0][currentIndices[0]]}
+        </span>
+      </span>
+      
+      <span className={firstElementClass}>{staticTexts[1]}</span>
+      
+      <span className={middleElementClass}>
+        <span 
+          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {textGroups[1][currentIndices[1]]}
+        </span>
+      </span>
+      
+      <span className={lastElementClass}>{staticTexts[2]}</span>
+      
+      <span className="relative mx-2 inline-block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+        <span 
+          className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {textGroups[2][currentIndices[2]]}
+        </span>
+      </span>
+      
+      <span className={lastElementClass}>{staticTexts[3]}</span>
+    </h1>
   );
 };
 
