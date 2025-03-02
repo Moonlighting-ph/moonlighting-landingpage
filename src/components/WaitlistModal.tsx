@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { AlertCircle } from 'lucide-react';
+
+import WaitlistForm from './waitlist/WaitlistForm';
+import DemoSection from './waitlist/DemoSection';
+import ModalContent from './waitlist/ModalContent';
 
 interface WaitlistModalProps {
   open: boolean;
@@ -16,26 +15,26 @@ interface WaitlistModalProps {
 }
 
 const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [profession, setProfession] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailError, setEmailError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleFormSubmit = async (formData: {
+    name: string;
+    email: string;
+    phone: string;
+    profession: string;
+  }) => {
     setIsSubmitting(true);
     setEmailError('');
 
     try {
-      console.log("Submitting form with data:", { name, email, phone, profession, type });
+      console.log("Submitting form with data:", { ...formData, type });
       
       // Check if email already exists in registrations table
       const { data: existingRegistration, error: searchError } = await supabase
         .from('registrations')
         .select('email')
-        .eq('email', email.trim().toLowerCase())
+        .eq('email', formData.email.trim().toLowerCase())
         .maybeSingle();
       
       if (searchError) {
@@ -55,10 +54,10 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
         .from('registrations')
         .insert([
           { 
-            name, 
-            email: email.trim().toLowerCase(), 
-            phone, 
-            profession,
+            name: formData.name, 
+            email: formData.email.trim().toLowerCase(), 
+            phone: formData.phone, 
+            profession: formData.profession,
             type
           }
         ]);
@@ -72,7 +71,13 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       try {
         console.log("Invoking notify-waitlist function");
         const { error: functionError, data } = await supabase.functions.invoke('notify-waitlist', {
-          body: { email: email.trim().toLowerCase(), name, type, phone, profession }
+          body: { 
+            email: formData.email.trim().toLowerCase(), 
+            name: formData.name, 
+            type, 
+            phone: formData.phone, 
+            profession: formData.profession 
+          }
         });
         
         console.log("Function response:", data);
@@ -94,11 +99,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
           : "Your demo request has been received. We'll be in touch shortly.",
       });
 
-      // Reset form and close modal
-      setName('');
-      setEmail('');
-      setPhone('');
-      setProfession('');
+      // Close modal
       onOpenChange(false);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -115,116 +116,17 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[525px] rounded-2xl p-8 bg-card/95 backdrop-blur-md border border-primary/10 shadow-xl">
-        <DialogHeader>
-          <DialogTitle className="text-2xl">
-            {type === 'waitlist' ? 'Join Our Waitlist' : 'Book a Demo'}
-          </DialogTitle>
-          <DialogDescription>
-            {type === 'waitlist' 
-              ? 'Be the first to know when we launch. Fill out the form below to join our waitlist.'
-              : 'Interested in learning more? Schedule a personalized demo with our team.'}
-          </DialogDescription>
-        </DialogHeader>
-        
-        {type === 'demo' ? (
-          <div className="py-4">
-            <a 
-              href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block w-full"
-            >
-              <Button 
-                className="w-full rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg"
-              >
-                Book via Calendly
-              </Button>
-            </a>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6 py-4">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input 
-                  id="name" 
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your full name"
-                  required
-                  className="rounded-xl"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input 
-                  id="email" 
-                  type="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setEmailError(''); // Clear error when email changes
-                  }}
-                  placeholder="your.email@example.com"
-                  required
-                  className={`rounded-xl ${emailError ? 'border-destructive' : ''}`}
-                />
-                {emailError && (
-                  <div className="flex items-center gap-2 mt-1 text-destructive text-sm">
-                    <AlertCircle className="h-4 w-4" />
-                    <span>{emailError}</span>
-                  </div>
-                )}
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input 
-                  id="phone" 
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+63 XXX XXX XXXX"
-                  className="rounded-xl"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="profession">Profession</Label>
-                <Select 
-                  value={profession} 
-                  onValueChange={setProfession}
-                  required
-                >
-                  <SelectTrigger className="rounded-xl">
-                    <SelectValue placeholder="Select your profession" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="doctor">Doctor</SelectItem>
-                    <SelectItem value="nurse">Nurse</SelectItem>
-                    <SelectItem value="medtech">Medical Technologist</SelectItem>
-                    <SelectItem value="radiologist">Radiologist</SelectItem>
-                    <SelectItem value="therapist">Therapist</SelectItem>
-                    <SelectItem value="pharmacist">Pharmacist</SelectItem>
-                    <SelectItem value="dentist">Dentist</SelectItem>
-                    <SelectItem value="other">Other Healthcare Professional</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            
-            <DialogFooter>
-              <Button 
-                type="submit" 
-                className="w-full rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Submitting..." : "Join Waitlist"}
-              </Button>
-            </DialogFooter>
-          </form>
-        )}
+        <ModalContent type={type}>
+          {type === 'demo' ? (
+            <DemoSection />
+          ) : (
+            <WaitlistForm 
+              onSubmit={handleFormSubmit}
+              isSubmitting={isSubmitting}
+              emailError={emailError}
+            />
+          )}
+        </ModalContent>
       </DialogContent>
     </Dialog>
   );
