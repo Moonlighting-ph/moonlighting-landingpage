@@ -39,8 +39,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     return () => clearInterval(interval);
   }, [textGroups]);
 
-  // Enhanced pill styles with larger font sizing to match surrounding text
-  // Using direct classes instead of dynamic text-* classes to avoid circular dependencies
+  // Using simpler pill styles with consistent 30px font size
   const baseCircleClass = "text-white rounded-full font-semibold shadow-sm inline-flex items-center justify-center";
   const professionClass = `${baseCircleClass} bg-blue-600/90 dark:bg-blue-600/90 border border-blue-400/30`;
   const locationClass = `${baseCircleClass} bg-indigo-500/90 dark:bg-indigo-500/90 border border-indigo-400/30`;
@@ -54,8 +53,8 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     "text-gray-900 dark:text-white";
 
   return (
-    <div className={`flex flex-col md:flex-row flex-wrap gap-2 text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight hero-text-container ${className}`}>
-      <div className="flex items-center flex-wrap">
+    <div className={`flex flex-col md:flex-row flex-wrap gap-2 font-bold text-center leading-tight hero-text-container justify-center ${className}`}>
+      <div className="flex items-center flex-wrap justify-center">
         <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
         
         {/* First animated text (professions) */}
@@ -68,7 +67,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
         </span>{' '}
       </div>
 
-      <div className="flex items-center flex-wrap">
+      <div className="flex items-center flex-wrap justify-center">
         <span className={firstElementClass}>{staticTexts[1]}</span>{' '}
         
         {/* Second animated text (locations) */}
@@ -81,7 +80,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
         </span>{' '}
       </div>
 
-      <div className="flex items-center flex-wrap">
+      <div className="flex items-center flex-wrap justify-center">
         <span className={lastElementClass}>{staticTexts[2]}</span>{' '}
         
         {/* Third animated text (schedules) */}

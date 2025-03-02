@@ -1,4 +1,3 @@
-
 @layer base {
   .glass {
     @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
@@ -24,21 +23,18 @@
     @apply text-sm sm:text-base md:text-lg text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto;
   }
 
-  /* Location text - darker in light mode */
   .location-text {
     @apply text-gray-800 dark:text-gray-300 font-medium;
   }
 
-  /* Apple UI inspired components */
   .apple-card {
     @apply bg-white dark:bg-gray-800/90 rounded-3xl p-6 shadow-md border border-gray-100 dark:border-gray-700;
   }
-  
+
   .apple-button {
     @apply rounded-full px-6 py-3 font-medium text-base bg-primary text-white transition-all duration-300 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -56,82 +52,74 @@
   }
 }
 
-/* Animated text cycler spacing */
 .text-cycler-container span + span {
   @apply mx-3;
 }
 
-/* Make sure all arrows are fully visible */
 [class*="group-hover:translate-x"] {
   @apply opacity-100;
 }
 
-/* Numbers styling for How It Works section */
 .step-number {
   @apply absolute -top-5 -left-5 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white text-xl font-bold shadow-lg z-20;
 }
 
-/* Strong text contrast for light mode */
 .text-muted-foreground {
   @apply dark:text-gray-300 text-gray-700;
 }
 
-/* Ensure location text is darker in light mode */
 .text-xs.text-muted-foreground {
   @apply dark:text-gray-300 text-gray-800 font-medium;
 }
 
-/* Enhanced pill circles with larger sizing and text */
 .hero-text-container .relative.inline-block span {
-  @apply px-8 py-4 min-w-[200px] font-semibold;
-  font-size: inherit;
+  padding: 8px 16px;
+  min-width: 180px;
+  font-size: 30px;
+  font-weight: 600;
 }
 
-/* Fixed spacing for animated text pill containers - using direct CSS properties instead of @apply */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
   margin: 0.25rem 0.75rem;
 }
 
-/* Consistent spacing between all animated elements - using direct CSS properties instead of @apply */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block + span {
   margin: 0 0.75rem;
 }
 
-/* Prevent animated text cycler elements from overlapping */
 .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
   @apply my-1;
 }
 
-/* Ensure animated text cycler spacing on mobile */
 @media (max-width: 768px) {
   .flex.flex-col.md\:flex-row.flex-wrap.gap-2 > div {
     @apply w-full my-2;
   }
   
-  /* Using direct CSS properties instead of @apply for the problematic selectors */
   .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
     margin: 0.25rem 0.75rem;
   }
   
-  /* Enhanced mobile circle pill size */
   .hero-text-container .relative.inline-block span {
-    padding: 0.75rem 1.5rem;
-    min-width: 180px;
-    font-size: 1.875rem; /* text-3xl equivalent */
+    padding: 6px 12px;
+    min-width: 160px;
+    font-size: 24px;
   }
 }
 
-/* Add balanced vertical spacing between text cycler rows */
 .hero-text-container > div {
   @apply mb-2;
 }
 
-/* Improved line height for better visual spacing */
 .text-4xl.md\:text-5xl.lg\:text-6xl {
-  @apply leading-tight;
+  font-size: 30px;
+  line-height: 1.2;
 }
 
-/* Fix the width of the hero section content */
 .hero-text-container {
-  @apply max-w-3xl mx-auto;
+  @apply max-w-3xl mx-auto text-center;
+}
+
+.hero-text-container .flex.items-center.flex-wrap {
+  @apply justify-center;
 }
