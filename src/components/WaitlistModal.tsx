@@ -26,6 +26,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
     setIsSubmitting(true);
 
     try {
+      console.log("Submitting form with data:", { name, email, phone, message, type });
+      
       // Submit data to Supabase
       const { error } = await supabase
         .from('registrations')
@@ -35,8 +37,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
             email, 
             phone, 
             message, 
-            type,
-            notified: false // This will trigger the edge function to send the notification email
+            type
           }
         ]);
 
@@ -45,11 +46,14 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
         throw error;
       }
       
-      // Try to trigger the edge function manually
+      // Try to trigger the edge function directly
       try {
-        const { error: functionError } = await supabase.functions.invoke('notify-waitlist', {
+        console.log("Invoking notify-waitlist function");
+        const { error: functionError, data } = await supabase.functions.invoke('notify-waitlist', {
           body: { email, name, type, phone, message }
         });
+        
+        console.log("Function response:", data);
         
         if (functionError) {
           console.error('Error invoking notification function:', functionError);

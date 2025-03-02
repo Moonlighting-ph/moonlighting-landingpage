@@ -83,7 +83,7 @@
 
 /* Enhanced pill circles with consistent sizing */
 .hero-text-container .relative.inline-block span {
-  @apply px-4 py-2 text-base md:text-lg min-w-[120px];
+  @apply px-6 py-3 text-xl md:text-2xl min-w-[160px] font-semibold;
 }
 
 /* Fixed spacing for animated text pill containers */
@@ -113,7 +113,7 @@
   
   /* Enhance mobile circle pill size */
   .hero-text-container .relative.inline-block span {
-    @apply px-4 py-2 text-base min-w-[120px];
+    @apply px-5 py-2 text-lg min-w-[140px];
   }
 }
 
