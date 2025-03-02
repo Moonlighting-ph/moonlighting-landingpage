@@ -39,26 +39,24 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     return () => clearInterval(interval);
   }, [textGroups]);
 
-  // Apply custom styles or default styles
-  const middleElementClass = customStyles.middleElementClass || 
-    "rounded-full px-4 py-1 bg-blue-600/90 dark:bg-blue-600/90 text-white font-semibold shadow-sm border border-blue-400/30";
-  
+  // Different blue-ish colors for each animated element
+  const professionClass = "bg-blue-600/90 dark:bg-blue-600/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-blue-400/30";
+  const locationClass = "bg-indigo-500/90 dark:bg-indigo-500/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-indigo-400/30";
+  const scheduleClass = "bg-cyan-600/90 dark:bg-cyan-600/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-cyan-500/30";
+
+  // Apply custom styles or default styles for static text
   const firstElementClass = customStyles.firstElementClass || 
     "text-gray-900 dark:text-white font-semibold";
   
   const lastElementClass = customStyles.lastElementClass || 
     "text-gray-900 dark:text-white";
 
-  // Specific styles for profession and schedule items
-  const professionClass = "bg-blue-800/90 dark:bg-blue-700/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-blue-700/30";
-  const scheduleClass = "bg-cyan-600/90 dark:bg-cyan-600/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-cyan-500/30";
-
   return (
     <div className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
       <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
       
       {/* First animated text (professions) */}
-      <span className="relative inline-block">
+      <span className="relative inline-block mx-1">
         <span 
           className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${professionClass}`}
         >
@@ -69,9 +67,9 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className={firstElementClass}>{staticTexts[1]}</span>{' '}
       
       {/* Second animated text (locations) */}
-      <span className="relative inline-block">
+      <span className="relative inline-block mx-1">
         <span 
-          className={`inline-block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${middleElementClass}`}
+          className={`inline-block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${locationClass}`}
         >
           {textGroups[1][currentIndices[1]]}
         </span>
@@ -80,7 +78,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className={lastElementClass}>{staticTexts[2]}</span>{' '}
       
       {/* Third animated text (schedules) */}
-      <span className="relative inline-block">
+      <span className="relative inline-block mx-1">
         <span 
           className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${scheduleClass}`}
         >

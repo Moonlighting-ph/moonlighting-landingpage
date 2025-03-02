@@ -80,3 +80,13 @@
 .text-xs.text-muted-foreground {
   @apply dark:text-gray-300 text-gray-800 font-medium;
 }
+
+/* Animated text cycler spacing */
+.text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
+  @apply my-1 mx-1;
+}
+
+/* Ensure proper spacing between animated elements */
+.text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block + span {
+  @apply mx-2;
+}
