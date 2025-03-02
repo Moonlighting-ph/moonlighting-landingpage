@@ -22,7 +22,7 @@ const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({
   services,
   forClients = false
 }) => {
-  const titleRef = useScrollAnimation();
+  const titleRef = useScrollAnimation<HTMLDivElement>();
   
   return (
     <section className="py-16 md:py-24 bg-background relative overflow-hidden">
@@ -42,7 +42,7 @@ const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {services.map((service, index) => {
             // Create a unique ref for each service item
-            const serviceRef = useScrollAnimation({
+            const serviceRef = useScrollAnimation<HTMLDivElement>({
               threshold: 0.1,
               rootMargin: '0px 0px -100px 0px',
               animationClass: `opacity-0 animate-fade-in delay-${(index % 8) * 100 + 100}`
@@ -51,7 +51,7 @@ const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({
             return (
               <div
                 key={index}
-                ref={serviceRef as React.RefObject<HTMLDivElement>}
+                ref={serviceRef}
                 className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-primary/5 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group"
               >
                 <div className={`w-14 h-14 rounded-full ${forClients ? 'bg-primary/10' : 'bg-secondary/10'} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>

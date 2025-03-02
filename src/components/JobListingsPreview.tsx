@@ -29,8 +29,8 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
   viewAllLink,
   forClients = false
 }) => {
-  const titleRef = useScrollAnimation();
-  const ctaRef = useScrollAnimation({
+  const titleRef = useScrollAnimation<HTMLDivElement>();
+  const ctaRef = useScrollAnimation<HTMLDivElement>({
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px',
     animationClass: 'opacity-0 animate-fade-in delay-400'
@@ -48,7 +48,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {listings.map((job, index) => {
-            const jobRef = useScrollAnimation({
+            const jobRef = useScrollAnimation<HTMLDivElement>({
               threshold: 0.1,
               rootMargin: '0px 0px -100px 0px',
               animationClass: `opacity-0 animate-fade-in delay-${(index % 4) * 200}`
@@ -57,7 +57,7 @@ const JobListingsPreview: React.FC<JobListingsPreviewProps> = ({
             return (
               <div 
                 key={job.id}
-                ref={jobRef as React.RefObject<HTMLDivElement>}
+                ref={jobRef}
                 className="apple-card rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1 group"
               >
                 <div className="flex items-start mb-4">

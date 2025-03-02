@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefObject } from 'react';
 
 interface UseScrollAnimationOptions {
   threshold?: number; // Value between 0 and 1 indicating how much of the element should be visible
@@ -9,13 +9,14 @@ interface UseScrollAnimationOptions {
 
 /**
  * A hook that adds animation classes to elements when they enter the viewport
+ * Generic type T extends HTMLElement to allow for different element types
  */
-export const useScrollAnimation = ({
+export const useScrollAnimation = <T extends HTMLElement>({
   threshold = 0.1,
   rootMargin = '0px',
   animationClass = 'animate-fade-in opacity-0'
-}: UseScrollAnimationOptions = {}) => {
-  const ref = useRef<HTMLElement>(null);
+}: UseScrollAnimationOptions = {}): RefObject<T> => {
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const currentRef = ref.current;
