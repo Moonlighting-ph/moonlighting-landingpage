@@ -39,8 +39,8 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     return () => clearInterval(interval);
   }, [textGroups]);
 
-  // Standardized styles for all animated elements with exactly the same dimensions and properties
-  const baseCircleClass = "text-white rounded-full px-3 py-1 font-semibold shadow-sm text-base inline-flex items-center justify-center";
+  // Enhanced pill styles with improved sizing, padding, and font size
+  const baseCircleClass = "text-white rounded-full px-4 py-2 font-semibold shadow-sm text-base md:text-lg inline-flex items-center justify-center";
   const professionClass = `${baseCircleClass} bg-blue-600/90 dark:bg-blue-600/90 border border-blue-400/30`;
   const locationClass = `${baseCircleClass} bg-indigo-500/90 dark:bg-indigo-500/90 border border-indigo-400/30`;
   const scheduleClass = `${baseCircleClass} bg-cyan-600/90 dark:bg-cyan-600/90 border border-cyan-500/30`;
@@ -53,7 +53,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     "text-gray-900 dark:text-white";
 
   return (
-    <div className={`flex flex-col md:flex-row flex-wrap gap-2 text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-snug hero-text-container ${className}`}>
+    <div className={`flex flex-col md:flex-row flex-wrap gap-2 text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight hero-text-container ${className}`}>
       <div className="flex items-center flex-wrap">
         <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
         
