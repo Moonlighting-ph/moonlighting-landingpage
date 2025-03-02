@@ -41,24 +41,26 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
 
   // Apply custom styles or default styles
   const middleElementClass = customStyles.middleElementClass || 
-    "rounded-full px-4 py-1 bg-secondary/70 text-secondary-foreground font-semibold shadow-sm border border-secondary/30";
+    "rounded-full px-4 py-1 bg-blue-600/90 dark:bg-blue-600/90 text-white font-semibold shadow-sm border border-blue-400/30";
   
   const firstElementClass = customStyles.firstElementClass || 
-    "font-semibold";
+    "text-gray-900 dark:text-white font-semibold";
   
   const lastElementClass = customStyles.lastElementClass || 
-    "";
+    "text-gray-900 dark:text-white";
 
-  const gradientTextClass = "text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-semibold";
+  // Specific styles for profession and schedule items
+  const professionClass = "bg-blue-800/90 dark:bg-blue-700/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-blue-700/30";
+  const scheduleClass = "bg-cyan-600/90 dark:bg-cyan-600/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-cyan-500/30";
 
   return (
     <div className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
       <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
       
       {/* First animated text (professions) */}
-      <span className={`relative inline-block ${gradientTextClass}`}>
+      <span className="relative inline-block">
         <span 
-          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${professionClass}`}
         >
           {textGroups[0][currentIndices[0]]}
         </span>
@@ -78,9 +80,9 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className={lastElementClass}>{staticTexts[2]}</span>{' '}
       
       {/* Third animated text (schedules) */}
-      <span className={`relative inline-block ${gradientTextClass}`}>
+      <span className="relative inline-block">
         <span 
-          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'} ${scheduleClass}`}
         >
           {textGroups[2][currentIndices[2]]}
         </span>
