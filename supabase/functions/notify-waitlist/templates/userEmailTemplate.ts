@@ -116,6 +116,13 @@ export const getUserEmailTemplate = (name: string, email: string, temporaryPassw
           <p>Hello ${name},</p>
           <p>Thank you for joining our waitlist. We're excited to have you as a <span class="badge">${formattedProfession}</span> interested in our platform.</p>
           
+          <div class="credentials">
+            <p><strong>Your temporary login credentials:</strong></p>
+            <p>Username: ${email}</p>
+            <p>Password: ${temporaryPassword}</p>
+            <p><small>Please keep these credentials safe. You'll need them to log in once we launch.</small></p>
+          </div>
+
           <div class="highlight">
             <p><strong>Moonlighting.ph</strong> is building a platform to help healthcare professionals like you find the perfect moonlighting opportunities that match your skills and schedule.</p>
           </div>
@@ -131,13 +138,6 @@ export const getUserEmailTemplate = (name: string, email: string, temporaryPassw
           </ul>
           
           <p>We'll keep you updated as we get closer to launch, and you'll be among the first to know when we're ready to go live.</p>
-          
-          <div class="credentials">
-            <p><strong>Your temporary login credentials:</strong></p>
-            <p>Username: ${email}</p>
-            <p>Password: ${temporaryPassword}</p>
-            <p><small>Please keep these credentials safe. You'll need them to log in once we launch.</small></p>
-          </div>
           
           <a href="https://moonlighting.ph" class="button">Visit Our Website</a>
           
