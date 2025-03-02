@@ -529,7 +529,11 @@ const Index = () => {
         />
       </div>
       
-      <TestimonialsSection />
+      {/* Hide testimonials section with CSS instead of removing */}
+      <div className="hidden">
+        <TestimonialsSection />
+      </div>
+      
       <CTASection />
       <Footer />
     </div>
