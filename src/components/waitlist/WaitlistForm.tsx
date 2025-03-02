@@ -30,9 +30,17 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [profession, setProfession] = useState('');
+  const [formatError, setFormatError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate email format before submission
+    if (!validateEmail(email)) {
+      setFormatError('Please enter a valid email address');
+      return;
+    }
+    
     await onSubmit({
       name,
       email,
@@ -41,16 +49,34 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
     });
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    onEmailChange(); // Clear any existing error when the user types
+    setFormatError(''); // Clear format error when typing
+    onEmailChange(); // Clear any existing backend error when the user types
   };
 
   const handleEmailBlur = async () => {
     if (email) {
+      // Check format first
+      if (!validateEmail(email)) {
+        setFormatError('Please enter a valid email address');
+        return;
+      } else {
+        setFormatError('');
+      }
+      
+      // If format is valid, check for duplicates
       await onEmailBlur(email);
     }
   };
+
+  // Display either format error or backend error
+  const displayError = formatError || emailError;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 py-4">
@@ -77,12 +103,12 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
             onBlur={handleEmailBlur}
             placeholder="your.email@example.com"
             required
-            className={`rounded-xl ${emailError ? 'border-destructive' : ''}`}
+            className={`rounded-xl ${displayError ? 'border-destructive' : ''}`}
           />
-          {emailError && (
+          {displayError && (
             <div className="flex items-center gap-2 mt-1 text-destructive text-sm">
               <AlertCircle className="h-4 w-4" />
-              <span>{emailError}</span>
+              <span>{displayError}</span>
             </div>
           )}
         </div>
@@ -126,7 +152,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({
       <Button 
         type="submit" 
         className="w-full rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !!displayError}
       >
         {isSubmitting ? "Submitting..." : "Join Waitlist"}
       </Button>
