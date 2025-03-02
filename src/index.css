@@ -233,6 +233,19 @@ html.dark {
   @apply dark:text-gray-300 text-gray-800 font-medium;
 }
 
+/* Enhanced visibility for cycler text categories in both modes */
+.text-cycler-item,
+.text-cycler-profession,
+.text-cycler-location,
+.text-cycler-schedule {
+  @apply dark:text-white text-gray-900 font-semibold;
+}
+
+/* Style for location pills */
+.location-pill {
+  @apply relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/50 text-gray-800 dark:text-secondary border border-secondary/20 font-medium transition-all duration-300 opacity-100 transform translate-y-0 shadow-sm;
+}
+
 /* Make sure all arrows are fully visible */
 [class*="group-hover:translate-x"] {
   @apply opacity-100;
