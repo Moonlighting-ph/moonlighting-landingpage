@@ -71,19 +71,6 @@ const Index = () => {
         <HowItWorksSection />
       </Reveal>
       
-      <Reveal delay={150}>
-        <JobListingsPreview
-          title="Recent Job Opportunities"
-          subtitle="Browse through the latest healthcare positions available on our platform"
-          listings={sampleJobs}
-          viewAllLink="#jobs"
-        />
-      </Reveal>
-      
-      <Reveal delay={100}>
-        <TestimonialsSection />
-      </Reveal>
-      
       <Reveal delay={200}>
         <CTASection />
       </Reveal>
