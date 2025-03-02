@@ -42,6 +42,33 @@ export type Database = {
         }
         Relationships: []
       }
+      waitlist_credentials: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          password: string
+          profession: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          password: string
+          profession?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          password?: string
+          profession?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
