@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Shield, Heart, Users, Star, DollarSign, Clock, Check, Building, ArrowRight } from 'lucide-react';
+import { Shield, Heart, Users, Star, DollarSign, Clock, Check, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedTextCycler from '@/components/AnimatedTextCycler';
 
@@ -56,15 +56,13 @@ const ClientHero = () => {
             target="_blank" 
             rel="noopener noreferrer"
           >
-            <Button className="rounded-full px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg group">
+            <Button className="rounded-full px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg">
               <span>Book a Demo</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-100 transition-transform group-hover:translate-x-1" />
             </Button>
           </a>
           <Link to="/">
-            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 group">
+            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200">
               <span>I'm a medical professional</span>
-              <ArrowRight className="ml-2 h-5 w-5 opacity-100 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>

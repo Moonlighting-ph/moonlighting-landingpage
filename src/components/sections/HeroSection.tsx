@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, ArrowRight } from 'lucide-react';
+import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedTextCycler from '@/components/AnimatedTextCycler';
 import WaitlistModal from '@/components/WaitlistModal';
@@ -57,16 +57,14 @@ const HeroSection = () => {
         
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
           <Button 
-            className="rounded-full px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg group"
+            className="rounded-full px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg"
             onClick={() => setShowWaitlistModal(true)}
           >
             <span>Join Waitlist</span>
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 opacity-100" />
           </Button>
           <Link to="/client">
-            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 group">
+            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200">
               <span>I'm a medical provider</span>
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform opacity-100" />
             </Button>
           </Link>
         </div>

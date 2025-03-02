@@ -1,3 +1,4 @@
+
 @layer base {
   .glass {
     @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
@@ -79,6 +80,7 @@
   font-weight: 600;
 }
 
+/* Fix circular dependency by using direct CSS instead of @apply */
 .text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block {
   margin: 0.25rem 0.75rem;
 }

@@ -20,11 +20,16 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <FeatureSection />
-      <ServiceHighlights 
-        title="Services for Healthcare Professionals" 
-        subtitle="We help you find moonlighting opportunities that match your skills and schedule"
-        services={servicesForProfessionals}
-      />
+      
+      {/* Hide ServiceHighlights section */}
+      <div className="hidden">
+        <ServiceHighlights 
+          title="Services for Healthcare Professionals" 
+          subtitle="We help you find moonlighting opportunities that match your skills and schedule"
+          services={servicesForProfessionals}
+        />
+      </div>
+      
       <HowItWorksSection />
       
       {/* Hide job listings section with CSS instead of removing */}

@@ -39,18 +39,18 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     return () => clearInterval(interval);
   }, [textGroups]);
 
-  // Using simpler pill styles with consistent 30px font size
-  const baseCircleClass = "text-white rounded-full font-semibold shadow-sm inline-flex items-center justify-center";
+  // Using simpler pill styles with consistent font size
+  const baseCircleClass = "text-white rounded-full font-semibold shadow-sm inline-flex items-center justify-center text-2xl";
   const professionClass = `${baseCircleClass} bg-blue-600/90 dark:bg-blue-600/90 border border-blue-400/30`;
   const locationClass = `${baseCircleClass} bg-indigo-500/90 dark:bg-indigo-500/90 border border-indigo-400/30`;
   const scheduleClass = `${baseCircleClass} bg-cyan-600/90 dark:bg-cyan-600/90 border border-cyan-500/30`;
 
   // Apply custom styles or default styles for static text
   const firstElementClass = customStyles.firstElementClass || 
-    "text-gray-900 dark:text-white font-semibold";
+    "text-gray-900 dark:text-white font-semibold text-2xl";
   
   const lastElementClass = customStyles.lastElementClass || 
-    "text-gray-900 dark:text-white";
+    "text-gray-900 dark:text-white text-2xl";
 
   return (
     <div className={`flex flex-col md:flex-row flex-wrap gap-2 font-bold text-center leading-tight hero-text-container justify-center ${className}`}>
