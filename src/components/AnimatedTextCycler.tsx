@@ -39,8 +39,8 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     return () => clearInterval(interval);
   }, [textGroups]);
 
-  // Enhanced pill styles with improved sizing, padding, and font size
-  const baseCircleClass = "text-white rounded-full px-6 py-3 font-semibold shadow-sm text-xl md:text-2xl inline-flex items-center justify-center min-w-[160px]";
+  // Enhanced pill styles with larger font sizing to match surrounding text
+  const baseCircleClass = "text-white rounded-full px-6 py-3 font-semibold shadow-sm text-4xl md:text-5xl lg:text-6xl inline-flex items-center justify-center min-w-[200px]";
   const professionClass = `${baseCircleClass} bg-blue-600/90 dark:bg-blue-600/90 border border-blue-400/30`;
   const locationClass = `${baseCircleClass} bg-indigo-500/90 dark:bg-indigo-500/90 border border-indigo-400/30`;
   const scheduleClass = `${baseCircleClass} bg-cyan-600/90 dark:bg-cyan-600/90 border border-cyan-500/30`;

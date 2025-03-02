@@ -117,9 +117,9 @@ serve(async (req) => {
       );
     }
 
-    // Send notification email to admin
+    // Send notification email to admin using Resend's default onboarding domain
     const adminEmailResult = await resend.emails.send({
-      from: "Moonlighting.ph <noreply@moonlighting.ph>",
+      from: "Moonlighting.ph <onboarding@resend.dev>",
       to: ["cess.ventures209@gmail.com"],
       subject: `New ${registration.type} Registration: ${registration.name}`,
       html: `
@@ -135,9 +135,9 @@ serve(async (req) => {
 
     console.log("Admin email sent:", adminEmailResult);
 
-    // Send confirmation email to user
+    // Send confirmation email to user using Resend's default onboarding domain
     const userEmailResult = await resend.emails.send({
-      from: "Moonlighting.ph <noreply@moonlighting.ph>",
+      from: "Moonlighting.ph <onboarding@resend.dev>",
       to: [registration.email],
       subject: registration.type === "waitlist"
         ? "Thank you for joining the Moonlighting.ph waitlist!"
