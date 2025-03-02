@@ -177,7 +177,7 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             
             <div class="footer">
-              <p>© 2024 Moonlighting.ph. All rights reserved.</p>
+              <p>© 2025 Moonlighting.ph. All rights reserved.</p>
               <p>Philippines</p>
             </div>
           </div>
@@ -306,7 +306,7 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             
             <div class="footer">
-              <p>© 2024 Moonlighting.ph. All rights reserved.</p>
+              <p>© 2025 Moonlighting.ph. All rights reserved.</p>
               <p>Philippines</p>
             </div>
           </div>
