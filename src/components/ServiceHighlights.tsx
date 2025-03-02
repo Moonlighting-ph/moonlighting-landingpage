@@ -22,7 +22,10 @@ const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({
   services,
   forClients = false
 }) => {
-  const titleRef = useScrollAnimation<HTMLDivElement>();
+  const titleRef = useScrollAnimation<HTMLDivElement>({
+    rootMargin: '0px 0px -100px 0px',
+    animationClass: 'opacity-0 animate-fade-in'
+  });
   
   return (
     <section className="py-16 md:py-24 bg-background relative overflow-hidden">
@@ -45,7 +48,7 @@ const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({
             const serviceRef = useScrollAnimation<HTMLDivElement>({
               threshold: 0.1,
               rootMargin: '0px 0px -100px 0px',
-              animationClass: `opacity-0 animate-fade-in delay-${(index % 8) * 100 + 100}`
+              animationClass: `opacity-0 animate-fade-in delay-${(index % 8) * 100 + 200}`
             });
             
             return (

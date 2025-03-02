@@ -37,7 +37,7 @@ export const useScrollAnimation = <T extends HTMLElement>({
             currentRef.classList.remove('opacity-0');
             
             // If animation class is set, wait for animation to complete before removing observer
-            const animationDuration = 800; // Based on our animation duration
+            const animationDuration = 1000; // Based on our updated animation duration
             setTimeout(() => {
               observer.unobserve(currentRef);
             }, animationDuration);
