@@ -1,4 +1,3 @@
-
 @layer base {
   .glass {
     @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-lg;
@@ -40,18 +39,18 @@
     @apply rounded-full px-6 py-3 font-medium text-base bg-primary text-white transition-all duration-300 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
   }
 
-  /* Scroll animation containers */
+  /* Scroll animation containers - Enhanced */
   .scroll-item {
-    @apply opacity-0 transform transition-all duration-1000;
+    @apply opacity-0 transform translate-y-10 transition-all duration-1000;
   }
 
   .scroll-item.animate {
     @apply opacity-100 translate-y-0;
   }
 
-  /* Staggered animations */
+  /* Staggered animations - Enhanced */
   .stagger-item {
-    @apply opacity-0;
+    @apply opacity-0 translate-y-10;
   }
 
   .stagger-item.animate {
@@ -147,10 +146,10 @@
   @apply justify-center;
 }
 
-/* Apple-style reveals */
+/* Apple-style reveals - Enhanced */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -160,10 +159,10 @@
   transform: translateY(0);
 }
 
-/* Staggered reveal for multiple elements */
+/* Staggered reveal for multiple elements - Enhanced */
 .stagger-reveal > * {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
 }
 
 .stagger-reveal.is-visible > * {
@@ -177,3 +176,9 @@
 .stagger-reveal.is-visible > *:nth-child(4) { transition-delay: 300ms; }
 .stagger-reveal.is-visible > *:nth-child(5) { transition-delay: 400ms; }
 .stagger-reveal.is-visible > *:nth-child(6) { transition-delay: 500ms; }
+
+/* Force animation visibility debugging helper */
+.force-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}

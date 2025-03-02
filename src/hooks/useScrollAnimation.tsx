@@ -14,7 +14,7 @@ interface UseScrollAnimationOptions {
 export const useScrollAnimation = <T extends HTMLElement>({
   threshold = 0.1,
   rootMargin = '0px',
-  animationClass = 'animate-fade-in opacity-0'
+  animationClass = 'animate-fade-in opacity-0 translate-y-10'
 }: UseScrollAnimationOptions = {}): RefObject<T> => {
   const ref = useRef<T>(null);
 
@@ -22,7 +22,7 @@ export const useScrollAnimation = <T extends HTMLElement>({
     const currentRef = ref.current;
     if (!currentRef) return;
 
-    // Add the animation class that sets initial state (opacity 0)
+    // Add the initial animation classes that set initial state
     const classes = animationClass.split(' ');
     classes.forEach(cls => {
       if (cls) currentRef.classList.add(cls);
@@ -33,11 +33,12 @@ export const useScrollAnimation = <T extends HTMLElement>({
         entries.forEach((entry) => {
           // When element enters viewport
           if (entry.isIntersecting) {
-            // Remove opacity-0 to make it visible
+            // Remove opacity-0 and translate-y-10 to make it visible
             currentRef.classList.remove('opacity-0');
+            currentRef.classList.remove('translate-y-10');
             
             // If animation class is set, wait for animation to complete before removing observer
-            const animationDuration = 1000; // Based on our updated animation duration
+            const animationDuration = 1000; // 1 second animation duration
             setTimeout(() => {
               observer.unobserve(currentRef);
             }, animationDuration);

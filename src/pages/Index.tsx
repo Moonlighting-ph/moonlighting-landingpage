@@ -14,25 +14,37 @@ import { servicesForProfessionals } from '@/data/serviceData';
 import { sampleJobs } from '@/data/jobListingsData';
 
 const Index = () => {
-  // Initialize scroll animations
+  // Initialize scroll animations - improved method
   useEffect(() => {
-    // Force re-evaluation of scroll positions on page load
+    // Force re-evaluation of scroll positions immediately and after load
     const checkVisibility = () => {
+      console.log("Checking visibility and triggering scroll events");
       window.dispatchEvent(new CustomEvent('scroll'));
     };
     
-    // Check once on load
+    // Check on mount
     checkVisibility();
     
-    // Check again after a short delay to catch any late-loading elements
+    // Check after a short delay for late-loading elements
     const timeoutId = setTimeout(checkVisibility, 100);
     
-    // Check periodically for when user scrolls
-    const intervalId = setInterval(checkVisibility, 1000);
+    // Also check after images and other resources might have loaded
+    window.addEventListener('load', checkVisibility);
+    
+    // Set a more frequent interval for checking during scrolling
+    const intervalId = setInterval(checkVisibility, 200);
+    
+    // Add a scroll event listener to check on actual scroll
+    const scrollHandler = () => {
+      console.log("User scrolled - triggering IntersectionObserver checks");
+    };
+    window.addEventListener('scroll', scrollHandler, { passive: true });
     
     return () => {
       clearTimeout(timeoutId);
       clearInterval(intervalId);
+      window.removeEventListener('load', checkVisibility);
+      window.removeEventListener('scroll', scrollHandler);
     };
   }, []);
   
