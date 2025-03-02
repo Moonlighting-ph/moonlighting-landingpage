@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import PageTransition from '@/components/PageTransition';
 import HeroSection from '@/components/sections/HeroSection';
@@ -14,6 +14,22 @@ import { servicesForProfessionals } from '@/data/serviceData';
 import { sampleJobs } from '@/data/jobListingsData';
 
 const Index = () => {
+  // Initialize scroll animations
+  useEffect(() => {
+    // Force re-evaluation of scroll positions on page load
+    const checkVisibility = () => {
+      window.dispatchEvent(new CustomEvent('scroll'));
+    };
+    
+    // Check once on load
+    checkVisibility();
+    
+    // Check again after a short delay to catch any late-loading elements
+    const timeoutId = setTimeout(checkVisibility, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, []);
+  
   return (
     <div className="min-h-screen bg-background">
       <PageTransition />
