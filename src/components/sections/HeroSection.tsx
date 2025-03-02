@@ -40,16 +40,20 @@ const HeroSection = () => {
         </div>
         
         <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
-          <AnimatedTextCycler 
-            textGroups={[professions, locations, schedules]}
-            staticTexts={["I'm a", "in", "looking for", "work"]}
-            className="mb-6 text-center"
-            customStyles={{
-              middleElementClass: "relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/70 text-gray-900 dark:text-secondary border border-secondary/20 font-medium transition-all duration-300 opacity-100 transform translate-y-0 shadow-sm"
-            }}
-          />
+          <div className="mb-6 text-center relative z-10">
+            <AnimatedTextCycler 
+              textGroups={[professions, locations, schedules]}
+              staticTexts={["I'm a", "in", "looking for", "work"]}
+              className="font-bold text-2xl md:text-3xl lg:text-4xl"
+              customStyles={{
+                containerClass: "text-cycler-container p-2",
+                staticTextClass: "text-gray-900 dark:text-white",
+                middleElementClass: "px-4 py-1 bg-secondary/70 text-gray-900 dark:text-white font-bold rounded-full border border-secondary/30 shadow-sm"
+              }}
+            />
+          </div>
           
-          <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto mt-6">
+          <p className="text-xl text-center text-gray-800 dark:text-gray-200 max-w-2xl mx-auto mt-6 font-medium">
             Connect with hospitals, clinics, and care facilities that need your expertise. 
             Take control of your schedule and supplement your income.
           </p>
@@ -72,22 +76,22 @@ const HeroSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl animate-fade-in" style={{ animationDelay: '400ms' }}>
-          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group border border-gray-100 dark:border-gray-700">
             <Clock className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Flexible Schedule</h3>
-            <p className="text-muted-foreground">Choose when and where you work based on your availability</p>
+            <p className="text-gray-700 dark:text-gray-300">Choose when and where you work based on your availability</p>
           </div>
 
-          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group border border-gray-100 dark:border-gray-700">
             <DollarSign className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Competitive Pay</h3>
-            <p className="text-muted-foreground">Earn competitive rates for your expertise and qualifications</p>
+            <p className="text-gray-700 dark:text-gray-300">Earn competitive rates for your expertise and qualifications</p>
           </div>
 
-          <div className="bg-accent p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group border border-gray-100 dark:border-gray-700">
             <Shield className="h-8 w-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
             <h3 className="text-lg font-semibold mb-2">Secure Process</h3>
-            <p className="text-muted-foreground">Our platform ensures you get paid promptly for your services</p>
+            <p className="text-gray-700 dark:text-gray-300">Our platform ensures you get paid promptly for your services</p>
           </div>
         </div>
       </div>

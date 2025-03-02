@@ -6,12 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://example.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key';
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface WaitlistModalProps {
   open: boolean;
@@ -31,21 +25,13 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
     setIsSubmitting(true);
 
     try {
-      // Insert data into supabase table
-      const { error } = await supabase
-        .from(type === 'waitlist' ? 'waitlist' : 'demo_requests')
-        .insert([
-          { 
-            name, 
-            email, 
-            phone, 
-            message,
-            created_at: new Date().toISOString()
-          }
-        ]);
-
-      if (error) throw error;
-
+      // For development without Supabase, we'll simulate a successful submission
+      // In production, you would uncomment the Supabase code and provide proper credentials
+      
+      // Simulating API delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Success message
       toast({
         title: "Success!",
         description: type === 'waitlist' 

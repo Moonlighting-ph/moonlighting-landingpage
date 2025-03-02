@@ -36,13 +36,20 @@ const ClientHero = () => {
         </div>
         
         <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
-          <AnimatedTextCycler 
-            textGroups={[facilities, locations, professionals]}
-            staticTexts={["Our", "in", "needs qualified", "now"]}
-            className="mb-6 text-center"
-          />
+          <div className="mb-6 text-center relative z-10">
+            <AnimatedTextCycler 
+              textGroups={[facilities, locations, professionals]}
+              staticTexts={["Our", "in", "needs qualified", "now"]}
+              className="font-bold text-2xl md:text-3xl lg:text-4xl"
+              customStyles={{
+                containerClass: "text-cycler-container p-2",
+                staticTextClass: "text-gray-900 dark:text-white",
+                middleElementClass: "px-4 py-1 bg-secondary/70 text-gray-900 dark:text-white font-bold rounded-full border border-secondary/30 shadow-sm"
+              }}
+            />
+          </div>
           
-          <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto mt-6">
+          <p className="text-xl text-center text-gray-800 dark:text-gray-200 max-w-2xl mx-auto mt-6 font-medium">
             Access a network of pre-vetted, on-demand medical professionals for your hospital, clinic, or home care needs. Get matched with the right professionals quickly.
           </p>
         </div>

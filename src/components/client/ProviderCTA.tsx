@@ -29,7 +29,11 @@ const ProviderCTA = () => {
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
-            <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
+            <Button 
+              variant="outline" 
+              className="rounded-full px-8 py-6 font-semibold text-lg group"
+              onClick={() => window.location.href = "https://calendly.com/cessventures/product-demo-moonlighting-ph"}
+            >
               <span>Learn More</span>
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
