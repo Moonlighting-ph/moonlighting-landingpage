@@ -56,6 +56,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className="relative mx-2 inline-block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
         <span 
           className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          data-cycler-first-element
         >
           {textGroups[0][currentIndices[0]]}
         </span>
@@ -66,6 +67,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className={middleElementClass}>
         <span 
           className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          data-cycler-middle-element
         >
           {textGroups[1][currentIndices[1]]}
         </span>
@@ -76,6 +78,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
       <span className="relative mx-2 inline-block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
         <span 
           className={`absolute inset-0 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          data-cycler-last-element
         >
           {textGroups[2][currentIndices[2]]}
         </span>

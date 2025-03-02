@@ -251,6 +251,12 @@ html.dark {
   @apply bg-secondary/70 text-gray-900 dark:text-white px-4 py-1 rounded-full font-medium;
 }
 
+/* Make sure all spans inside AnimatedTextCycler are visible */
+[data-cycler-first-element],
+[data-cycler-last-element] {
+  @apply text-gray-900 dark:text-white;
+}
+
 /* Make sure all arrows are fully visible */
 [class*="group-hover:translate-x"] {
   @apply opacity-100;
