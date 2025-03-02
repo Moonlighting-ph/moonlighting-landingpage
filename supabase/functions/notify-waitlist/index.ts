@@ -71,7 +71,7 @@ serve(async (req) => {
 
     // Send email to user
     const { data: userEmailData, error: userEmailError } = await resend.emails.send({
-      from: "Moonlighting.ph <onboarding@resend.dev>",
+      from: "Moonlighting.ph <no-reply@moonlighting.ph>",
       to: [email],
       subject: "Welcome to Moonlighting.ph Waitlist!",
       html: `
@@ -89,6 +89,7 @@ serve(async (req) => {
               max-width: 600px;
               margin: 0 auto;
               padding: 20px;
+              background-color: #f5f7fa;
             }
             .container {
               background-color: #ffffff;
@@ -101,13 +102,20 @@ serve(async (req) => {
               margin-bottom: 30px;
             }
             .logo {
-              max-width: 150px;
-              margin-bottom: 20px;
+              margin-bottom: 15px;
+            }
+            .card {
+              padding: 20px;
+              background-color: #ffffff;
+              border-radius: 8px;
             }
             h1 {
-              color: #4f46e5;
+              color: #2563eb;
               margin-bottom: 15px;
               font-size: 24px;
+            }
+            h2 {
+              font-size: 22px;
             }
             .content {
               margin-bottom: 30px;
@@ -117,15 +125,44 @@ serve(async (req) => {
               border-radius: 8px;
               padding: 20px;
               margin: 20px 0;
-              border-left: 4px solid #4f46e5;
+              border-left: 4px solid #2563eb;
             }
             .credentials p {
               margin: 5px 0;
               font-size: 15px;
             }
             .highlight {
+              background-color: #f3f4f6;
+              border-radius: 8px;
+              padding: 15px;
+              margin: 20px 0;
+              border-left: 4px solid #2563eb;
+            }
+            .badge {
+              background-color: #2563eb;
+              color: white;
+              padding: 3px 8px;
+              border-radius: 12px;
+              font-size: 14px;
+              display: inline-block;
+            }
+            ul {
+              margin: 20px 0;
+              padding-left: 20px;
+            }
+            li {
+              margin-bottom: 10px;
+            }
+            .button {
+              display: inline-block;
+              background-color: #2563eb;
+              color: white;
+              padding: 12px 24px;
+              text-decoration: none;
+              border-radius: 5px;
               font-weight: bold;
-              color: #4f46e5;
+              margin: 20px 0;
+              text-align: center;
             }
             .footer {
               text-align: center;
@@ -135,45 +172,52 @@ serve(async (req) => {
               padding-top: 20px;
               border-top: 1px solid #e5e7eb;
             }
-            .button {
-              display: inline-block;
-              background-color: #4f46e5;
-              color: white;
-              padding: 12px 24px;
-              text-decoration: none;
-              border-radius: 5px;
-              font-weight: bold;
-              margin: 20px 0;
-              text-align: center;
-            }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h1>Welcome to Moonlighting.ph!</h1>
+              <div class="logo">
+                <!-- Logo would go here -->
+                <h2 style="color: #2563eb; margin: 0;">Moonlighting.ph</h2>
+              </div>
             </div>
-            <div class="content">
-              <p>Dear ${name},</p>
-              <p>Thank you for joining our waitlist! We're excited to have you as one of our first members.</p>
-              <p>Moonlighting.ph is designed to help medical professionals like you find opportunities that match your skills and availability across the Philippines.</p>
+            
+            <div class="card">
+              <h1>Welcome to Moonlighting.ph!</h1>
+              <p>Hello ${name},</p>
+              <p>Thank you for joining our waitlist. We're excited to have you as a <span class="badge">${profession || 'healthcare professional'}</span> interested in our platform.</p>
               
-              <p>Your profile information:</p>
+              <div class="highlight">
+                <p><strong>Moonlighting.ph</strong> is building a platform to help healthcare professionals like you find the perfect moonlighting opportunities that match your skills and schedule.</p>
+              </div>
+              
+              <p>We're working hard to create an exceptional experience for healthcare professionals in the Philippines. Here's what you can look forward to:</p>
+              
+              <ul>
+                <li>Access to a wide range of moonlighting opportunities</li>
+                <li>Flexible scheduling that works with your existing commitments</li>
+                <li>Competitive compensation rates</li>
+                <li>Simple application and onboarding process</li>
+                <li>Dedicated support team</li>
+              </ul>
+              
+              <p>We'll keep you updated as we get closer to launch, and you'll be among the first to know when we're ready to go live.</p>
+              
               <div class="credentials">
-                <p><span class="highlight">Name:</span> ${name}</p>
-                <p><span class="highlight">Email:</span> ${email}</p>
-                <p><span class="highlight">Profession:</span> ${formattedProfession}</p>
-                ${phone ? `<p><span class="highlight">Phone:</span> ${phone}</p>` : ''}
-                <p><span class="highlight">Your temporary login credentials:</span></p>
+                <p><strong>Your temporary login credentials:</strong></p>
                 <p>Username: ${email}</p>
                 <p>Password: ${temporaryPassword}</p>
                 <p><small>Please keep these credentials safe. You'll need them to log in once we launch.</small></p>
               </div>
               
-              <p>We're working hard to launch soon! We'll notify you as soon as the platform is ready for you to explore.</p>
+              <a href="https://moonlighting.ph" class="button">Visit Our Website</a>
               
-              <p>If you have any questions or feedback in the meantime, please don't hesitate to reply to this email.</p>
+              <p>If you have any questions in the meantime, feel free to reply to this email.</p>
+              
+              <p>Best regards,<br>The Moonlighting.ph Team</p>
             </div>
+            
             <div class="footer">
               <p>© 2024 Moonlighting.ph. All rights reserved.</p>
               <p>Philippines</p>
@@ -192,7 +236,7 @@ serve(async (req) => {
 
     // Send notification to admin
     const { data: adminEmailData, error: adminEmailError } = await resend.emails.send({
-      from: "Moonlighting.ph <onboarding@resend.dev>",
+      from: "Moonlighting.ph <no-reply@moonlighting.ph>",
       to: ["cess.ventures209@gmail.com"],
       subject: `New Waitlist Registration: ${name}`,
       html: `
