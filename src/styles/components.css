@@ -116,3 +116,13 @@
 .text-4xl.md\:text-5xl.lg\:text-6xl {
   @apply leading-relaxed md:leading-loose;
 }
+
+/* Fix the width of the hero section content */
+.hero-text-container {
+  @apply max-w-4xl mx-auto;
+}
+
+/* Make circular pills consistent in size */
+.text-4xl.md\:text-5xl.lg\:text-6xl span.relative.inline-block span {
+  @apply px-4 py-1;
+}

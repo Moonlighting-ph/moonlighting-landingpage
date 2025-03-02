@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Shield, Clock, Star, DollarSign, Briefcase, Stethoscope, ArrowRight } from 'lucide-react';
@@ -39,7 +40,7 @@ const HeroSection = () => {
           <span>For Healthcare Professionals</span>
         </div>
         
-        <div className="text-center max-w-4xl mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
+        <div className="text-center max-w-3xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <div className="mb-10 text-center relative z-10">
             <AnimatedTextCycler 
               textGroups={[professions, locations, schedules]}

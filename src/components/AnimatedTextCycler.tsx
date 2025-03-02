@@ -39,7 +39,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     return () => clearInterval(interval);
   }, [textGroups]);
 
-  // Different blue-ish colors for each animated element
+  // Different blue-ish colors for each animated element - all with similar sizes
   const professionClass = "bg-blue-600/90 dark:bg-blue-600/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-blue-400/30";
   const locationClass = "bg-indigo-500/90 dark:bg-indigo-500/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-indigo-400/30";
   const scheduleClass = "bg-cyan-600/90 dark:bg-cyan-600/90 text-white rounded-full px-4 py-1 font-semibold shadow-sm border border-cyan-500/30";
@@ -52,7 +52,7 @@ const AnimatedTextCycler: React.FC<AnimatedTextCyclerProps> = ({
     "text-gray-900 dark:text-white";
 
   return (
-    <div className={`flex flex-col md:flex-row flex-wrap gap-2 text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-tight ${className}`}>
+    <div className={`flex flex-col md:flex-row flex-wrap gap-2 text-4xl md:text-5xl lg:text-6xl font-bold text-center leading-relaxed md:leading-loose ${className} hero-text-container`}>
       <div className="flex items-center flex-wrap">
         <span className={firstElementClass}>{staticTexts[0]}</span>{' '}
         
