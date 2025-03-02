@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
@@ -109,6 +110,7 @@ const ClientHero = () => {
 
   return (
     <section className="relative min-h-screen pt-20 pb-32 overflow-hidden">
+      {/* Background effects */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-secondary/10 rounded-full filter blur-3xl animate-float delay-700"></div>
@@ -133,10 +135,16 @@ const ClientHero = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
-            <span>Book a Demo</span>
-            <ArrowRight className="ml-2 h-5 w-5 opacity-100 transition-transform group-hover:translate-x-1" />
-          </Button>
+          <a 
+            href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
+              <span>Book a Demo</span>
+              <ArrowRight className="ml-2 h-5 w-5 opacity-100 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </a>
           <Link to="/">
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>I'm a medical professional</span>
@@ -314,10 +322,16 @@ const ProviderCTA = () => {
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
-              <span>Book a Demo</span>
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <a 
+              href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
+                <span>Book a Demo</span>
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </a>
             <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg group">
               <span>Learn More</span>
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

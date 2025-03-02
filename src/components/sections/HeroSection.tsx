@@ -45,8 +45,7 @@ const HeroSection = () => {
             staticTexts={["I'm a", "in", "looking for", "work"]}
             className="mb-6 text-center"
             customStyles={{
-              // Make location text much darker for better visibility in light mode
-              middleElementClass: "relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/50 text-gray-800 dark:text-secondary font-medium transition-all duration-300 opacity-100 transform translate-y-0"
+              middleElementClass: "relative mx-2 inline-block rounded-full px-4 py-1 bg-secondary/70 text-gray-900 dark:text-secondary border border-secondary/20 font-medium transition-all duration-300 opacity-100 transform translate-y-0 shadow-sm"
             }}
           />
           
