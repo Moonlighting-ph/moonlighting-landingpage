@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -18,7 +18,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
+  const [profession, setProfession] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,7 +26,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
     setIsSubmitting(true);
 
     try {
-      console.log("Submitting form with data:", { name, email, phone, message, type });
+      console.log("Submitting form with data:", { name, email, phone, profession, type });
       
       // Submit data to Supabase
       const { error } = await supabase
@@ -36,7 +36,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
             name, 
             email, 
             phone, 
-            message, 
+            profession,
             type
           }
         ]);
@@ -50,7 +50,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       try {
         console.log("Invoking notify-waitlist function");
         const { error: functionError, data } = await supabase.functions.invoke('notify-waitlist', {
-          body: { email, name, type, phone, message }
+          body: { email, name, type, phone, profession }
         });
         
         console.log("Function response:", data);
@@ -76,7 +76,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       setName('');
       setEmail('');
       setPhone('');
-      setMessage('');
+      setProfession('');
       onOpenChange(false);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -160,14 +160,26 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="message">Message (Optional)</Label>
-                <Textarea 
-                  id="message" 
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Tell us about yourself and why you're interested in joining..."
-                  className="resize-none rounded-xl min-h-[100px]"
-                />
+                <Label htmlFor="profession">Profession</Label>
+                <Select 
+                  value={profession} 
+                  onValueChange={setProfession}
+                  required
+                >
+                  <SelectTrigger className="rounded-xl">
+                    <SelectValue placeholder="Select your profession" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="doctor">Doctor</SelectItem>
+                    <SelectItem value="nurse">Nurse</SelectItem>
+                    <SelectItem value="medtech">Medical Technologist</SelectItem>
+                    <SelectItem value="radiologist">Radiologist</SelectItem>
+                    <SelectItem value="therapist">Therapist</SelectItem>
+                    <SelectItem value="pharmacist">Pharmacist</SelectItem>
+                    <SelectItem value="dentist">Dentist</SelectItem>
+                    <SelectItem value="other">Other Healthcare Professional</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             
