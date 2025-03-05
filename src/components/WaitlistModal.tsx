@@ -29,7 +29,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       });
       
       if (emailExists) {
-        setEmailError('This email is already waitlisted. Check your email inbox for your credentials.');
+        setEmailError('This email is already on our waitlist. We\'ll notify you when we launch.');
         return;
       }
       
@@ -56,7 +56,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ open, onOpenChange, type 
       }
       
       if (exists) {
-        setEmailError('This email is already waitlisted. Check your email inbox for your credentials.');
+        setEmailError('This email is already on our waitlist. We\'ll notify you when we launch.');
       } else {
         setEmailError('');
       }

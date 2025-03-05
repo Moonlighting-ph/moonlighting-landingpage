@@ -9,6 +9,116 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      job_applications: {
+        Row: {
+          applicant_id: string
+          created_at: string
+          id: string
+          job_id: string
+          note: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          applicant_id: string
+          created_at?: string
+          id?: string
+          job_id: string
+          note?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          applicant_id?: string
+          created_at?: string
+          id?: string
+          job_id?: string
+          note?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_applicant_id_fkey"
+            columns: ["applicant_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          benefits: string[]
+          company: string
+          created_at: string
+          created_by: string
+          deadline: string
+          description: string
+          id: string
+          is_active: boolean
+          location: string
+          logo: string
+          qualifications: string[] | null
+          requirements: string[]
+          salary: string
+          title: string
+          type: string
+          urgent: boolean
+        }
+        Insert: {
+          benefits?: string[]
+          company: string
+          created_at?: string
+          created_by: string
+          deadline: string
+          description: string
+          id?: string
+          is_active?: boolean
+          location: string
+          logo: string
+          qualifications?: string[] | null
+          requirements?: string[]
+          salary: string
+          title: string
+          type: string
+          urgent?: boolean
+        }
+        Update: {
+          benefits?: string[]
+          company?: string
+          created_at?: string
+          created_by?: string
+          deadline?: string
+          description?: string
+          id?: string
+          is_active?: boolean
+          location?: string
+          logo?: string
+          qualifications?: string[] | null
+          requirements?: string[]
+          salary?: string
+          title?: string
+          type?: string
+          urgent?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -16,12 +126,19 @@ export type Database = {
           company: string | null
           contact_email: string | null
           created_at: string
-          full_name: string | null
+          document_verification_status: string | null
+          first_name: string | null
+          government_id: string | null
           id: string
+          last_name: string | null
           phone: string | null
+          prc_license: string | null
+          preferred_location: string | null
+          tin_number: string | null
           title: string | null
           updated_at: string
           user_type: string
+          work_experience: string | null
         }
         Insert: {
           avatar_url?: string | null
@@ -29,12 +146,19 @@ export type Database = {
           company?: string | null
           contact_email?: string | null
           created_at?: string
-          full_name?: string | null
+          document_verification_status?: string | null
+          first_name?: string | null
+          government_id?: string | null
           id: string
+          last_name?: string | null
           phone?: string | null
+          prc_license?: string | null
+          preferred_location?: string | null
+          tin_number?: string | null
           title?: string | null
           updated_at?: string
           user_type: string
+          work_experience?: string | null
         }
         Update: {
           avatar_url?: string | null
@@ -42,12 +166,19 @@ export type Database = {
           company?: string | null
           contact_email?: string | null
           created_at?: string
-          full_name?: string | null
+          document_verification_status?: string | null
+          first_name?: string | null
+          government_id?: string | null
           id?: string
+          last_name?: string | null
           phone?: string | null
+          prc_license?: string | null
+          preferred_location?: string | null
+          tin_number?: string | null
           title?: string | null
           updated_at?: string
           user_type?: string
+          work_experience?: string | null
         }
         Relationships: []
       }

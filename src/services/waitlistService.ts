@@ -155,7 +155,7 @@ export const waitlistService = {
     toast({
       title: "Success!",
       description: formData.type === 'waitlist' 
-        ? "You've been added to our waitlist. We'll contact you soon." 
+        ? "You've been added to our waitlist. We'll notify you when we launch." 
         : "Your demo request has been received. We'll be in touch shortly.",
     });
     
