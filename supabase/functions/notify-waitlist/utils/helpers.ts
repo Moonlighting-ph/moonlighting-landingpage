@@ -1,15 +1,4 @@
 
-// Generate a random password
-export function generateTemporaryPassword(length = 10) {
-  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-  let password = "";
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * charset.length);
-    password += charset[randomIndex];
-  }
-  return password;
-}
-
 // CORS headers for all responses
 export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

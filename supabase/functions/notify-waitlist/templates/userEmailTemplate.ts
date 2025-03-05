@@ -1,5 +1,5 @@
 
-export const getUserEmailTemplate = (name: string, email: string, temporaryPassword: string, profession: string | undefined) => {
+export const getUserEmailTemplate = (name: string, profession: string | undefined) => {
   const formattedProfession = profession || 'healthcare professional';
   
   return `
@@ -47,17 +47,6 @@ export const getUserEmailTemplate = (name: string, email: string, temporaryPassw
         }
         .content {
           margin-bottom: 30px;
-        }
-        .credentials {
-          background-color: #f3f4f6;
-          border-radius: 8px;
-          padding: 20px;
-          margin: 20px 0;
-          border-left: 4px solid #2563eb;
-        }
-        .credentials p {
-          margin: 5px 0;
-          font-size: 15px;
         }
         .highlight {
           background-color: #f3f4f6;
@@ -116,13 +105,6 @@ export const getUserEmailTemplate = (name: string, email: string, temporaryPassw
           <p>Hello ${name},</p>
           <p>Thank you for joining our waitlist. We're excited to have you as a <span class="badge">${formattedProfession}</span> interested in our platform.</p>
           
-          <div class="credentials">
-            <p><strong>Your temporary login credentials:</strong></p>
-            <p>Username: ${email}</p>
-            <p>Password: ${temporaryPassword}</p>
-            <p><small>Please keep these credentials safe. You'll need them to log in once we launch.</small></p>
-          </div>
-
           <div class="highlight">
             <p><strong>Moonlighting.ph</strong> is building a platform to help healthcare professionals like you find the perfect moonlighting opportunities that match your skills and schedule.</p>
           </div>

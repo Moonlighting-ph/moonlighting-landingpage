@@ -17,7 +17,7 @@ interface EmailResponse {
   adminEmailData: any;
 }
 
-export async function processWaitlistRegistration(request: WaitlistRequest, temporaryPassword: string): Promise<EmailResponse> {
+export async function processWaitlistRegistration(request: WaitlistRequest): Promise<EmailResponse> {
   const { email, name, type, phone, profession } = request;
   
   // Initialize Supabase and Resend clients
@@ -32,29 +32,12 @@ export async function processWaitlistRegistration(request: WaitlistRequest, temp
   const supabase = createClient(supabaseUrl, supabaseKey);
   const resend = new Resend(resendApiKey);
 
-  // Store credentials in the waitlist_credentials table
-  const { error: credentialsError } = await supabase
-    .from('waitlist_credentials')
-    .insert([
-      { 
-        email, 
-        password: temporaryPassword,
-        name,
-        profession
-      }
-    ]);
-
-  if (credentialsError) {
-    console.error('Error storing credentials:', credentialsError);
-    // Continue with the process even if storing credentials fails
-  }
-
   // Send email to user
   const { data: userEmailData, error: userEmailError } = await resend.emails.send({
     from: "Moonlighting.ph <no-reply@moonlighting.ph>",
     to: [email],
     subject: "Welcome to Moonlighting.ph Waitlist!",
-    html: getUserEmailTemplate(name, email, temporaryPassword, profession),
+    html: getUserEmailTemplate(name, profession),
     reply_to: "hello@moonlighting.ph",
   });
 
@@ -68,7 +51,7 @@ export async function processWaitlistRegistration(request: WaitlistRequest, temp
     from: "Moonlighting.ph <no-reply@moonlighting.ph>",
     to: ["cess.ventures209@gmail.com"],
     subject: `New Waitlist Registration: ${name}`,
-    html: getAdminEmailTemplate(name, email, temporaryPassword, profession, phone, type),
+    html: getAdminEmailTemplate(name, email, profession, phone, type),
     reply_to: email,
   });
 

@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { generateTemporaryPassword, corsHeaders, createErrorResponse, createSuccessResponse } from "./utils/helpers.ts";
+import { corsHeaders, createErrorResponse, createSuccessResponse } from "./utils/helpers.ts";
 import { processWaitlistRegistration } from "./services/waitlistService.ts";
 
 serve(async (req) => {
@@ -19,13 +19,9 @@ serve(async (req) => {
       throw new Error("Missing required fields");
     }
 
-    // Generate a temporary password
-    const temporaryPassword = generateTemporaryPassword();
-
     // Process the registration and send emails
     const { userEmailData, adminEmailData } = await processWaitlistRegistration(
-      { email, name, type, phone, profession },
-      temporaryPassword
+      { email, name, type, phone, profession }
     );
 
     // Return success response

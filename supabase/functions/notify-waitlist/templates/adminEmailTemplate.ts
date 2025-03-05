@@ -1,5 +1,5 @@
 
-export const getAdminEmailTemplate = (name: string, email: string, temporaryPassword: string, profession: string | undefined, phone: string | undefined, type: string) => {
+export const getAdminEmailTemplate = (name: string, email: string, profession: string | undefined, phone: string | undefined, type: string) => {
   const formattedProfession = profession ? profession.charAt(0).toUpperCase() + profession.slice(1) : "Not specified";
   
   return `
@@ -89,7 +89,6 @@ export const getAdminEmailTemplate = (name: string, email: string, temporaryPass
           ${phone ? `<p><span class="label">Phone:</span> ${phone}</p>` : ''}
           <p><span class="label">Registration Type:</span> ${type}</p>
           <p><span class="label">Timestamp:</span> ${new Date().toLocaleString()}</p>
-          <p><span class="label">Temporary Password:</span> ${temporaryPassword}</p>
         </div>
         
         <p>You can reply directly to this email to contact ${name}.</p>
