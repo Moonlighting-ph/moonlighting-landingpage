@@ -215,13 +215,12 @@ export type Database = {
         }
         Relationships: []
       }
-      waitlist_credentials: {
+      waitlist_users: {
         Row: {
           created_at: string
           email: string
           id: string
           name: string
-          password: string
           profession: string | null
         }
         Insert: {
@@ -229,7 +228,6 @@ export type Database = {
           email: string
           id?: string
           name: string
-          password: string
           profession?: string | null
         }
         Update: {
@@ -237,7 +235,6 @@ export type Database = {
           email?: string
           id?: string
           name?: string
-          password?: string
           profession?: string | null
         }
         Relationships: []
