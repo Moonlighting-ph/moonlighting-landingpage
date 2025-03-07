@@ -18,7 +18,7 @@ const FooterSection = () => {
               <span className="font-display font-bold text-lg sm:text-xl">moonlighting.ph</span>
             </Link>
             <p className="text-muted-foreground">
-              Connecting healthcare professionals with flexible work opportunities in the Philippines.
+              Seamlessly connects understaffed hospitals with pre-vetted, on-demand medical professionals
             </p>
           </div>
           
