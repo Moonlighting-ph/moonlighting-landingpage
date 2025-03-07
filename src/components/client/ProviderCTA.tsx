@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
+import { Link } from 'react-router-dom';
 
 const ProviderCTA = () => {
   return (
