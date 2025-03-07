@@ -52,12 +52,10 @@ const ClientHero = () => {
         
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: '300ms' }}>
           <a 
-            href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="mailto:hello@moonlighting.ph" 
           >
             <Button className="rounded-full px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg">
-              <span>Book a Demo</span>
+              <span>Contact Us</span>
             </Button>
           </a>
           <Link to="/">
