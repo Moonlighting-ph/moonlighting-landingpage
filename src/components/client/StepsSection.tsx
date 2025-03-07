@@ -2,6 +2,7 @@
 import React from 'react';
 import { UserCheck, Clipboard, Clock4, Clock } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
+import { Link } from 'react-router-dom';
 
 const StepsSection = () => {
   const steps = [
