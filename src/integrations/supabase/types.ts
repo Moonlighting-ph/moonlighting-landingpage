@@ -11,40 +11,36 @@ export type Database = {
     Tables: {
       job_applications: {
         Row: {
-          applicant_id: string
-          created_at: string
+          ai_match_score: number | null
+          applied_date: string | null
           id: string
-          job_id: string
-          note: string | null
+          job_id: string | null
+          moonlighter_id: string | null
+          notes: string | null
+          profile_info: Json | null
           status: string
-          updated_at: string
         }
         Insert: {
-          applicant_id: string
-          created_at?: string
+          ai_match_score?: number | null
+          applied_date?: string | null
           id?: string
-          job_id: string
-          note?: string | null
+          job_id?: string | null
+          moonlighter_id?: string | null
+          notes?: string | null
+          profile_info?: Json | null
           status?: string
-          updated_at?: string
         }
         Update: {
-          applicant_id?: string
-          created_at?: string
+          ai_match_score?: number | null
+          applied_date?: string | null
           id?: string
-          job_id?: string
-          note?: string | null
+          job_id?: string | null
+          moonlighter_id?: string | null
+          notes?: string | null
+          profile_info?: Json | null
           status?: string
-          updated_at?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "job_applications_applicant_id_fkey"
-            columns: ["applicant_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "job_applications_job_id_fkey"
             columns: ["job_id"]
@@ -56,129 +52,295 @@ export type Database = {
       }
       jobs: {
         Row: {
-          benefits: string[]
           company: string
-          created_at: string
-          created_by: string
-          deadline: string
+          deadline: string | null
           description: string
+          experience_level: string | null
           id: string
-          is_active: boolean
-          location: string
-          logo: string
-          qualifications: string[] | null
-          requirements: string[]
-          salary: string
+          is_urgent: boolean | null
+          location: string | null
+          posted_date: string | null
+          provider_id: string | null
+          requirements: Json | null
+          responsibilities: Json | null
+          salary: string | null
+          specialization: string | null
           title: string
           type: string
-          urgent: boolean
         }
         Insert: {
-          benefits?: string[]
           company: string
-          created_at?: string
-          created_by: string
-          deadline: string
+          deadline?: string | null
           description: string
+          experience_level?: string | null
           id?: string
-          is_active?: boolean
-          location: string
-          logo: string
-          qualifications?: string[] | null
-          requirements?: string[]
-          salary: string
+          is_urgent?: boolean | null
+          location?: string | null
+          posted_date?: string | null
+          provider_id?: string | null
+          requirements?: Json | null
+          responsibilities?: Json | null
+          salary?: string | null
+          specialization?: string | null
           title: string
           type: string
-          urgent?: boolean
         }
         Update: {
-          benefits?: string[]
           company?: string
-          created_at?: string
-          created_by?: string
-          deadline?: string
+          deadline?: string | null
           description?: string
+          experience_level?: string | null
           id?: string
-          is_active?: boolean
-          location?: string
-          logo?: string
-          qualifications?: string[] | null
-          requirements?: string[]
-          salary?: string
+          is_urgent?: boolean | null
+          location?: string | null
+          posted_date?: string | null
+          provider_id?: string | null
+          requirements?: Json | null
+          responsibilities?: Json | null
+          salary?: string | null
+          specialization?: string | null
           title?: string
           type?: string
-          urgent?: boolean
+        }
+        Relationships: []
+      }
+      manual_payments: {
+        Row: {
+          amount: number
+          application_id: string | null
+          created_at: string | null
+          id: string
+          job_id: string | null
+          moonlighter_id: string | null
+          notes: string | null
+          payment_details: string
+          payment_method_id: string | null
+          payment_method_type: string
+          provider_id: string | null
+          reference_number: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          application_id?: string | null
+          created_at?: string | null
+          id?: string
+          job_id?: string | null
+          moonlighter_id?: string | null
+          notes?: string | null
+          payment_details: string
+          payment_method_id?: string | null
+          payment_method_type: string
+          provider_id?: string | null
+          reference_number?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          application_id?: string | null
+          created_at?: string | null
+          id?: string
+          job_id?: string | null
+          moonlighter_id?: string | null
+          notes?: string | null
+          payment_details?: string
+          payment_method_id?: string | null
+          payment_method_type?: string
+          provider_id?: string | null
+          reference_number?: string | null
+          status?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "jobs_created_by_fkey"
-            columns: ["created_by"]
+            foreignKeyName: "manual_payments_application_id_fkey"
+            columns: ["application_id"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "job_applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "manual_payments_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "manual_payments_payment_method_id_fkey"
+            columns: ["payment_method_id"]
+            isOneToOne: false
+            referencedRelation: "payment_methods"
             referencedColumns: ["id"]
           },
         ]
       }
-      profiles: {
+      payment_methods: {
         Row: {
-          avatar_url: string | null
-          bio: string | null
-          company: string | null
-          contact_email: string | null
-          created_at: string
-          document_verification_status: string | null
-          first_name: string | null
-          government_id: string | null
+          created_at: string | null
+          details: string
           id: string
-          last_name: string | null
-          phone: string | null
-          prc_license: string | null
-          preferred_location: string | null
-          tin_number: string | null
-          title: string | null
-          updated_at: string
-          user_type: string
-          work_experience: string | null
+          is_default: boolean | null
+          method: string
+          user_id: string | null
         }
         Insert: {
-          avatar_url?: string | null
-          bio?: string | null
-          company?: string | null
-          contact_email?: string | null
-          created_at?: string
-          document_verification_status?: string | null
-          first_name?: string | null
-          government_id?: string | null
-          id: string
-          last_name?: string | null
-          phone?: string | null
-          prc_license?: string | null
-          preferred_location?: string | null
-          tin_number?: string | null
-          title?: string | null
-          updated_at?: string
-          user_type: string
-          work_experience?: string | null
+          created_at?: string | null
+          details: string
+          id?: string
+          is_default?: boolean | null
+          method: string
+          user_id?: string | null
         }
         Update: {
-          avatar_url?: string | null
-          bio?: string | null
-          company?: string | null
-          contact_email?: string | null
-          created_at?: string
-          document_verification_status?: string | null
-          first_name?: string | null
-          government_id?: string | null
+          created_at?: string | null
+          details?: string
           id?: string
-          last_name?: string | null
-          phone?: string | null
-          prc_license?: string | null
-          preferred_location?: string | null
-          tin_number?: string | null
-          title?: string | null
+          is_default?: boolean | null
+          method?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          application_id: string | null
+          created_at: string | null
+          currency: string
+          id: string
+          moonlighter_id: string | null
+          provider_id: string | null
+          status: string
+          stripe_payment_intent_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          application_id?: string | null
+          created_at?: string | null
+          currency?: string
+          id?: string
+          moonlighter_id?: string | null
+          provider_id?: string | null
+          status?: string
+          stripe_payment_intent_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          application_id?: string | null
+          created_at?: string | null
+          currency?: string
+          id?: string
+          moonlighter_id?: string | null
+          provider_id?: string | null
+          status?: string
+          stripe_payment_intent_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "job_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prc_licenses: {
+        Row: {
+          created_at: string
+          id: string
+          license_number: string
+          profession: string
+          status: string
+          updated_at: string
+          user_id: string
+          verification_date: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          license_number: string
+          profession: string
+          status?: string
           updated_at?: string
-          user_type?: string
-          work_experience?: string | null
+          user_id: string
+          verification_date?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          license_number?: string
+          profession?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          verification_date?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          bio: string | null
+          city: string | null
+          created_at: string
+          email: string
+          emergency_contact: string | null
+          emergency_phone: string | null
+          first_name: string
+          id: string
+          last_name: string
+          phone: string | null
+          postal_code: string | null
+          region: string | null
+          specialization: string | null
+          updated_at: string
+          user_type: Database["public"]["Enums"]["user_type"]
+          years_of_experience: number | null
+        }
+        Insert: {
+          address?: string | null
+          bio?: string | null
+          city?: string | null
+          created_at?: string
+          email: string
+          emergency_contact?: string | null
+          emergency_phone?: string | null
+          first_name: string
+          id: string
+          last_name: string
+          phone?: string | null
+          postal_code?: string | null
+          region?: string | null
+          specialization?: string | null
+          updated_at?: string
+          user_type: Database["public"]["Enums"]["user_type"]
+          years_of_experience?: number | null
+        }
+        Update: {
+          address?: string | null
+          bio?: string | null
+          city?: string | null
+          created_at?: string
+          email?: string
+          emergency_contact?: string | null
+          emergency_phone?: string | null
+          first_name?: string
+          id?: string
+          last_name?: string
+          phone?: string | null
+          postal_code?: string | null
+          region?: string | null
+          specialization?: string | null
+          updated_at?: string
+          user_type?: Database["public"]["Enums"]["user_type"]
+          years_of_experience?: number | null
         }
         Relationships: []
       }
@@ -187,7 +349,6 @@ export type Database = {
           created_at: string
           email: string
           id: string
-          message: string | null
           name: string
           phone: string | null
           profession: string | null
@@ -197,7 +358,6 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
-          message?: string | null
           name: string
           phone?: string | null
           profession?: string | null
@@ -207,7 +367,6 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
-          message?: string | null
           name?: string
           phone?: string | null
           profession?: string | null
@@ -215,39 +374,65 @@ export type Database = {
         }
         Relationships: []
       }
-      waitlist_users: {
+      verification_appeals: {
         Row: {
+          appeal_reason: string
           created_at: string
-          email: string
           id: string
-          name: string
-          profession: string | null
+          license_id: string
+          reviewed_by: string | null
+          reviewer_notes: string | null
+          status: string
+          supporting_documents: Json | null
+          updated_at: string
+          user_id: string
         }
         Insert: {
+          appeal_reason: string
           created_at?: string
-          email: string
           id?: string
-          name: string
-          profession?: string | null
+          license_id: string
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          status?: string
+          supporting_documents?: Json | null
+          updated_at?: string
+          user_id: string
         }
         Update: {
+          appeal_reason?: string
           created_at?: string
-          email?: string
           id?: string
-          name?: string
-          profession?: string | null
+          license_id?: string
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          status?: string
+          supporting_documents?: Json | null
+          updated_at?: string
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "verification_appeals_license_id_fkey"
+            columns: ["license_id"]
+            isOneToOne: false
+            referencedRelation: "prc_licenses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_profile_auth_id: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
-      [_ in never]: never
+      user_type: "provider" | "moonlighter" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
