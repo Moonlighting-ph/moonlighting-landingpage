@@ -23,26 +23,22 @@ const ProviderCTA = () => {
             </div>
             
             <Reveal delay={200} direction="up">
-              <div className="flex flex-col md:flex-row gap-6 justify-center">
+              <div className="flex flex-col md:flex-row gap-6 justify-center" style={{ animationDelay: '300ms' }}>
                 <a 
-                  href="https://calendly.com/cessventures/product-demo-moonlighting-ph" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href="mailto:hello@moonlighting.ph" 
                 >
                   <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg group">
-                    <span>Book a Demo</span>
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <span>Contact Us</span>
                   </Button>
                 </a>
-                <Button 
-                  variant="outline" 
-                  className="rounded-full px-8 py-6 font-semibold text-lg group"
-                  onClick={() => window.location.href = "https://calendly.com/cessventures/product-demo-moonlighting-ph"}
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <Link to="/">
+                  <Button variant="outline" className="rounded-full px-8 py-6 font-semibold text-lg border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200">
+                    <span>I'm a medical professional</span>
+                  </Button>
+                </Link>
               </div>
+
+              
             </Reveal>
           </div>
         </Reveal>
