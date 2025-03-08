@@ -24,12 +24,12 @@ const FooterSection = () => {
           
           {/* Quick Links Section */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-lg mb-4"></h4>
             <ul className="text-muted-foreground">
-              <li className="mb-2"><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li className="mb-2"><a href="#services" className="hover:text-primary transition-colors">Services</a></li>
-              <li className="mb-2"><a href="#jobs" className="hover:text-primary transition-colors">Job Listings</a></li>
-              <li><Link to="/client" className="hover:text-primary transition-colors">For Medical Providers</Link></li>
+              <li className="mb-2"><Link to="/" className="hover:text-primary transition-colors"></Link></li>
+              <li className="mb-2"><a href="#services" className="hover:text-primary transition-colors"></a></li>
+              <li className="mb-2"><a href="#jobs" className="hover:text-primary transition-colors"></a></li>
+              <li><Link to="/client" className="hover:text-primary transition-colors"></Link></li>
             </ul>
           </div>
           
@@ -38,6 +38,9 @@ const FooterSection = () => {
             <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
             <p className="text-muted-foreground">
               Email: <a href="mailto:hello@moonlighting.ph" className="hover:text-primary transition-colors">hello@moonlighting.ph</a>
+            </p>
+            <p className="text-muted-foreground">
+              Address: Metro Manila, Philippines
             </p>
           </div>
         </div>
