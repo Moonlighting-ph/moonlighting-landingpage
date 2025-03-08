@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <div className="hidden md:block">
-              <Button size="sm" asChild className="apple-button opacity-100">
+              <Button className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold text-lg">
                 <Link to={alternateRoute}>{buttonText}</Link>
               </Button>
             </div>
