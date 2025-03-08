@@ -39,6 +39,12 @@ const FooterSection = () => {
             <p className="text-muted-foreground">
               Email: <a href="mailto:hello@moonlighting.ph" className="hover:text-primary transition-colors">hello@moonlighting.ph</a>
             </p>
+            <p className="text-muted-foreground">
+              Phone: <a href="tel:+639123456789" className="hover:text-primary transition-colors">+63 912 345 6789</a>
+            </p>
+            <p className="text-muted-foreground">
+              Address: 123 Main Street, Metro Manila, Philippines
+            </p>
           </div>
         </div>
         

@@ -14,7 +14,7 @@ export default {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: '2rem',
+				DEFAULT: '1rem',
 				sm: '2rem',
 				lg: '3rem',
 				xl: '4rem',
@@ -87,8 +87,8 @@ export default {
 				},
 			},
 			fontFamily: {
-				sans: ['SF Pro Display', 'system-ui', 'sans-serif'],
-				mono: ['SF Mono', 'monospace'],
+				sans: ['Inter', 'sans-serif'],
+				display: ['Poppins', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
